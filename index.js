@@ -646,15 +646,90 @@
 // }
 
 //4.race
-function race(promises) {
-    if (promises.length === 0) return Promise.resolve()
-    return new Promise((resolve, reject) => {
-        promises.forEach((item) => {
-            Promise.resolve(item).then(res => {
-                resolve(res)
-            }, err => {
-                reject(err)
-            })
-        })
-    })
-}
+// function race(promises) {
+//     if (promises.length === 0) return Promise.resolve()
+//     return new Promise((resolve, reject) => {
+//         promises.forEach((item) => {
+//             Promise.resolve(item).then(res => {
+//                 resolve(res)
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+// function Person() {}
+
+// let person1 = new Person()
+// let person2 = new Person()
+// console.log(person1.__proto__ === person2.__proto__);
+
+// Object.getPrototypeOf()
+// Object.setPrototypeOf()
+// // hasOwnProperty  // 判断对象实例上是否有某个属性(不包含原型对象)
+// function Person() {}
+// Person.prototype = {
+//     name: 'jack'
+// };
+// var jack = new Person();
+// Person.prototype = {
+//     name: 'otherJack'
+// };
+// var otherJack = new Person();
+// console.log(jack.name);
+// console.log(otherJack.name);
+
+// function Test() {}
+// Object.prototype.printName = function () {
+//     console.log('Object');
+// }
+// Function.prototype.printName = function () {
+//     console.log('Function');
+// }
+// Test.printName();
+// var obj = new Test();
+// obj.printName();
+// async function async1() {
+//     console.log('async1 start'); //  2
+//     await async2(); // 微1
+//     console.log('async1 end'); // 6
+// }
+// async function async2() {
+//     console.log('async2'); // 3 
+// }
+// console.log('script start'); //  1
+// setTimeout(function () {
+//     console.log('setTimeout'); //8 宏2
+// }, 0)
+// async1();
+// new Promise(function (resolve) {
+//     console.log('promise1'); // 4  
+//     resolve();
+// }).then(function () {
+//     console.log('promise2'); // 7微2
+// });
+// console.log('script end'); // 5
+
+// Object Array Function
+// let obj = {
+//     name: 'obj',
+//     name2: this.name,
+//     say1: function () {
+//         console.log(this.name)
+//     },
+//     say2: function () {
+//         setTimeout(function () {
+//             console.log(this.name)
+//         }, 0)
+//     },
+//     say3: function () {
+//         setTimeout(() => {
+//             console.log(this.name)
+//         }, 0)
+//     }
+// }
+// obj.name2 //""
+// obj.say1() //obj
+// obj.say2() //undefined
+// obj.say3() //obj
