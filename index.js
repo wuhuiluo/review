@@ -732,4 +732,32 @@
 // obj.name2 //""
 // obj.say1() //obj
 // obj.say2() //undefined
-// obj.say3() //obj
+// obj.say3() //
+
+// var a = function () {
+//     this.b = 3;
+// }
+// var c = new a();
+// a.prototype.b = 9;
+// var b = 7;
+// console.log(b);
+// a();
+// console.log(b);
+// console.log(c.b);
+console.log('start') // 1
+setTimeout(() => { // 宏2
+    console.log('timer1') // 4
+    Promise.resolve().then(function () { // 微任务2
+        console.log('promise1') // 
+    })
+}, 0)
+setTimeout(() => { // 宏3
+    console.log('timer2') //
+    Promise.resolve().then(function () {
+        console.log('promise2') //
+    })
+}, 0)
+Promise.resolve().then(function () {
+    console.log('promise3') // 3 微任务1
+})
+console.log('end') // 2
