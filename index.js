@@ -744,20 +744,68 @@
 // a();
 // console.log(b);
 // console.log(c.b);
-console.log('start') // 1
-setTimeout(() => { // 宏2
-    console.log('timer1') // 4
-    Promise.resolve().then(function () { // 微任务2
-        console.log('promise1') // 
-    })
-}, 0)
-setTimeout(() => { // 宏3
-    console.log('timer2') //
-    Promise.resolve().then(function () {
-        console.log('promise2') //
-    })
-}, 0)
-Promise.resolve().then(function () {
-    console.log('promise3') // 3 微任务1
-})
-console.log('end') // 2
+// console.log('start') // 1
+// setTimeout(() => { // 宏2
+//     console.log('timer1') // 4
+//     Promise.resolve().then(function () { // 微任务2
+//         console.log('promise1') // 
+//     })
+// }, 0)
+// setTimeout(() => { // 宏3
+//     console.log('timer2') //
+//     Promise.resolve().then(function () {
+//         console.log('promise2') //
+//     })
+// }, 0)
+// Promise.resolve().then(function () {
+//     console.log('promise3') // 3 微任务1
+// })
+// console.log('end') // 2
+// 定义构造函数
+// function C() {}
+
+// function D() {}
+
+// var o = new C();
+
+
+// o instanceof C; // true，因为 Object.getPrototypeOf(o) === C.prototype
+
+
+// o instanceof D; // false，因为 D.prototype 不在 o 的原型链上
+
+// o instanceof Object; // true，因为 Object.prototype.isPrototypeOf(o) 返回 true
+// C.prototype instanceof Object // true，同上
+
+// C.prototype = {};
+// var o2 = new C();
+
+// console.log(o2.__proto__ === C.prototype); // true
+
+// o instanceof C; // false，C.prototype 指向了一个空对象,这个空对象不在 o 的原型链上.
+
+// D.prototype = new C(); // 继承
+// var o3 = new D();
+// o3 instanceof D; // true
+// o3 instanceof C; // true 因为 C.prototype 现在在 o3 的原型链上
+
+
+// function C() {}
+// var o2 = new C()
+// C.prototype = {}
+// var o1 = new C()
+// console.log(o1.__proto__);
+// console.log(o2.__proto__);
+
+// function MyInstaceof(L, R) {
+//     var O = R.prototype // 取R的显示原型
+//     L = L.__proto__
+//     while (true) {
+//         if (L === null) return false
+//         if (L === O) return true
+//         L = L.__proto__
+//     }
+// }
+
+// console.log(MyInstaceof(Object, Object));
+// console.log(MyInstaceof(Function, Function));
