@@ -809,3 +809,82 @@
 
 // console.log(MyInstaceof(Object, Object));
 // console.log(MyInstaceof(Function, Function));
+
+// function MyNew() {
+//     let obj = new Object()
+//     Constructor = [].shift.call(arguments)
+//     const F = function () {}
+//     F.prototype = Constructor.prototype
+//     obj = new F()
+//     let res = Constructor.apply(obj, arguments)
+//     return typeof res === 'object' ? res : obj
+// }
+
+// function Person(name, age) {
+//     this.name = name
+//     this.age = age
+//     this.sex = 'male'
+// }
+
+
+// Person.prototype.sayName = function () {
+//     console.log(`Hello , my name is ${this.name}`);
+// }
+
+// let boy = MyNew(Person, 'whl', 23)
+// console.log(boy.name);
+// console.log(boy.age);
+// console.log(boy.sex);
+// boy.sayName()
+
+// function Father() {
+//     this.test = [1, 2, 3, 4];
+// }
+
+// function Son(a, b) {
+//     this.a = a;
+//     this.b = b;
+// }
+// Son.prototype = new Father();
+// Son.prototype.constructor = Son
+// let instanceOne = new Son();
+// let instanceTwo = new Son();
+// instanceOne.test.push(5);
+// console.log(instanceTwo.test); // [1, 2, 3, 4, 5]
+
+// 1.原型链式法
+// 2.构造函数法
+// function staff() {
+//     // this.test = [1, 2, 3];
+// }
+// staff.prototype.companyName = function () {
+//     return this.test;
+// }
+
+// function Father() {
+//     this.test = [1, 2, 3]
+// }
+// Father.prototype.getTest = function () {
+//     console.log(this.test);
+// }
+
+// function Son(a, b) {
+//     Father.call(this)
+//     this.a = a
+//     this.b = b
+// }
+// // 不使用对象字面量方式创建原型方法，会重写原型链
+// Son.prototype.showTest = function () {
+//     console.log(this.a + this.b);
+// }
+// let Son1 = new Son(1, 2)
+// let Son2 = new Son(2, 3)
+// Son1.test.push(4)
+// console.log(Son1.test); // [1,2,3,4]
+// console.log(Son2.test); // [1,2,3]
+// // console.log(Son1.getTest()); // 报错
+// // // 通过 hasOwnProperty() 方法来确定自身属性与其原型属性
+// console.log(Son1.hasOwnProperty('test')); // true
+// // 通过 isPrototypeOf() 方法来确定原型和实例的关系
+// console.log(Father.prototype.isPrototypeOf(Son1)); // false
+// 3.组合式
