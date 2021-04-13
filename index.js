@@ -888,3 +888,29 @@
 // // 通过 isPrototypeOf() 方法来确定原型和实例的关系
 // console.log(Father.prototype.isPrototypeOf(Son1)); // false
 // 3.组合式
+// 4.原型式继承
+// function object(obj) {
+//     function F() {}
+//     F.prototype = obj
+//     return new F()
+// }
+// 5.寄生式继承
+// function obj(obj) {
+//     function F() {}
+//     F.prototype = obj
+//     return new F()
+// }
+// var book = {
+//     name: 'whl'
+// }
+
+// function createObj(origin) {
+//     const clone = new obj(origin)
+//     clone.getName = function () {
+//         console.log(this.name);
+//     }
+//     return clone
+// }
+
+// const book1 = createObj(book)
+// book1.getName();
