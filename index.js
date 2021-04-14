@@ -942,26 +942,70 @@
 // multiply(4, 5);
 // const double = multiply(2);
 // console.log(double(5));
-function showBiBao() {
-    for (var i = 0; i < 5; i++) {
-        setTimeout(() => {
-            console.log(i);
-        }, 1000);
-    }
-    console.log(i)
+// function showBiBao() {
+//     for (var i = 0; i < 5; i++) {
+//         setTimeout(() => {
+//             console.log(i);
+//         }, 1000);
+//     }
+//     console.log(i)
+// }
+
+// showBiBao()
+
+// function showListNumber() {
+//     for (var i = 0; i < 5; i++) {
+//         let ret = function (i) {
+//             setTimeout(function timerr() {
+//                 console.log(i)
+//             }, 1000)
+//         }
+//         ret(i)
+//     }
+//     console.log(i)
+// }
+// showListNumber()
+// var Yideng = (function () {
+//     var foo = 0
+
+//     function Yideng() {
+//         Yideng.prototype.bar = function bar() {
+//             return foo
+//         }
+//     }
+//     return Yideng
+// })()
+// var value = 1;
+
+// function foo() {
+//     console.log(value);
+// }
+
+// function bar() {
+//     var value = 2;
+//     foo();
+// }
+
+// bar();
+// // 词法作用域定义时的全局所用与
+// // 结果是 ??? 
+// 模拟私有属性
+function getGeneratorFunc() {
+    var _name = 'John';
+    var _age = 22;
+
+    return function () {
+        return {
+            getName: function () {
+                return _name;
+            },
+            getAge: function () {
+                return _age;
+            }
+        };
+    };
 }
 
-showBiBao()
-
-function showListNumber() {
-    for (var i = 0; i < 5; i++) {
-        let ret = function (i) {
-            setTimeout(function timerr() {
-                console.log(i)
-            }, 1000)
-        }
-        ret(i)
-    }
-    console.log(i)
-}
-showListNumber()
+var obj = getGeneratorFunc()();
+console.log(obj.getName()); // John
+console.log(obj.getAge()); // 22
