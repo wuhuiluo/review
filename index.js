@@ -914,3 +914,54 @@
 
 // const book1 = createObj(book)
 // book1.getName();
+
+// 1.水平居中使用margin
+
+// 1.原型链继承： 优点：父类的方法可以复用 缺点： 更改一个子类的引用属性，其他子类会受到影响,无法给父构造函数传参
+// 本质就是将父类的实例作为子类的原型
+// 2.构造函数继承 优点: 可以传递参数，不能继承父类对象原型的属性和方法
+// 缺点无法函数复用，每个对象都有父对象实例
+
+// function inheriP(Son, Father) {
+//     let p = Object.create(Father.prototype)
+//     p.constructor = Son
+//     Son.prototype = p
+// }
+
+// 全局执行上下文，函数执行上下文
+// function multiply(number1, number2) {
+//     if (number2 !== undefined) {
+//         return number1 * number2;
+//     }
+//     return function doMultiply(number2) {
+//         console.log(number1, number2);
+//         return number1 * number2;
+//     };
+// }
+
+// multiply(4, 5);
+// const double = multiply(2);
+// console.log(double(5));
+function showBiBao() {
+    for (var i = 0; i < 5; i++) {
+        setTimeout(() => {
+            console.log(i);
+        }, 1000);
+    }
+    console.log(i)
+}
+
+showBiBao()
+
+function showListNumber() {
+    for (var i = 0; i < 5; i++) {
+        let ret = function (i) {
+            setTimeout(function timerr() {
+                console.log(i)
+            }, 1000)
+        }
+        ret(i)
+    }
+    console.log(i)
+}
+showListNumber()
