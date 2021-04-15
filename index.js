@@ -990,22 +990,24 @@
 // // 词法作用域定义时的全局所用与
 // // 结果是 ??? 
 // 模拟私有属性
-function getGeneratorFunc() {
-    var _name = 'John';
-    var _age = 22;
+// function getGeneratorFunc() {
+//     var _name = 'John';
+//     var _age = 22;
 
-    return function () {
-        return {
-            getName: function () {
-                return _name;
-            },
-            getAge: function () {
-                return _age;
-            }
-        };
-    };
-}
+//     return function () {
+//         return {
+//             getName: function () {
+//                 return _name;
+//             },
+//             getAge: function () {
+//                 return _age;
+//             }
+//         };
+//     };
+// }
 
-var obj = getGeneratorFunc()();
-console.log(obj.getName()); // John
-console.log(obj.getAge()); // 22
+// var obj = getGeneratorFunc()();
+// console.log(obj.getName()); // John
+// console.log(obj.getAge()); // 22
+// 闭包：有权访问另一个函数作用域中的变量的函数
+// 立即执行函数
