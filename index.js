@@ -1011,3 +1011,38 @@
 // console.log(obj.getAge()); // 22
 // 闭包：有权访问另一个函数作用域中的变量的函数
 // 立即执行函数
+// var a = 2;
+// (function  () {
+//     console.log(a);
+// })()
+// for (var i = 1; i < 5; i++) {
+//     (function (j) {
+//         setTimeout(() => {
+//             console.log(j);
+//         }, 0)
+//     })(i)
+// }
+// console.log(i);
+// for (var i = 1; i < 5; i++) {
+//     setTimeout((j) => {
+//         console.log(j);
+//     }, 0, i)
+// }
+// for (let i = 1; i < 5; i++) {
+//     setTimeout(() => {
+//         console.log(i);
+//     })
+// }
+(function () {
+    var a = 10
+    var b = 20
+
+    function add(num1, num2) {
+        var num1 = num1
+        var num2 = num2
+        return num1 + num2
+    }
+    window.add = add
+})()
+
+console.log(add(10, 20));
