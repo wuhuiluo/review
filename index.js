@@ -1176,4 +1176,18 @@
 
 // let clone_obj = shallowClone(obj)
 
-// console.log(clone_obj);
+// console.log(clone_obj);作者：牛背上的我
+console.log(str, num);
+var str = "sfd";
+var num = "123"
+
+function fn2() {
+    console.log(str, num);
+    str = "dfdg";
+    var num = "345";
+    num = "098";
+    str = "candy";
+    console.log(str, num);
+}
+fn2();
+console.log(str, num);
