@@ -1094,4 +1094,86 @@
 // a[1] = '99'
 // console.log(a);
 
-// 不能序列化函数
+// let demo = {
+//     name: 'dayday',
+//     book: {
+//         title: 'Do you really Know JS',
+//         price: "45"
+//     }
+// }
+
+// let clone_demo = JSON.parse(JSON.stringify(demo))
+// console.log(clone_demo);
+// demo.name = 'new name'
+// demo.book.price = '100'
+// console.log(clone_demo.name, clone_demo.book.price);
+
+
+// 1.会忽略undeifned、Symbol
+// 2.不能序列化函数
+// 3.不能解决循环引用对象
+// 4.不能处理 new Date()
+// 5.不能处理正则
+
+
+// let demo = {
+//     name: 'dayday',
+//     h1: undefined,
+//     h2: Symbol('dayday'),
+//     h3: function () {},
+// }
+// let clone_demo = JSON.parse(JSON.stringify(demo))
+// console.dir(clone_demo)
+// // { name : 'dayday' }
+
+// let shallowClone = source => {
+//     let target = {}
+//     for (let key in source) {
+//         if (Object.prototype.hasOwnProperty.call(source, key)) {
+//             target[key] = typeof source[key] === 'object' ? shallowClone(source[key]) : source[key]
+//         }
+//     }
+//     return target
+// }
+// let demo = {
+//     name: 'dayday',
+//     book: {
+//         title: 'Do you really Know JS',
+//         price: "45"
+//     }
+// }
+// let clone_demo = shallowClone(demo);
+// console.log(clone_demo);
+// demo.name = 'new name'
+// demo.book.price = '100'
+// console.log(clone_demo.name, clone_demo.book.price)
+
+// let isObject = obj => typeof obj === 'object' && obj !== null
+
+// let shallowClone = (source, hash = new WeakMap()) => {
+//     if (!isObject(source)) return source // 非对象返回自身
+//     if (hash.has(source)) return hash.get(source) // 新增检测，查哈希表
+//     let target = Array.isArray(source) ? [] : {}
+//     hash.set(source, target) // 设置哈希表值
+//     for (let key in source) {
+//         if (Object.prototype.hasOwnProperty.call(source, key)) {
+//             target[key] = isObject(source[key]) ? shallowClone(source[key], hash) : source[key]
+//         }
+//     }
+//     return target
+// }
+
+// let obj = {
+//     a: 1,
+//     b: {
+//         c: 2,
+//         d: 3
+//     }
+// }
+
+// obj.a = obj.b
+// obj.b.c = obj.a
+
+// let clone_obj = shallowClone(obj)
+
+// console.log(clone_obj);
