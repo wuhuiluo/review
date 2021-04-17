@@ -1046,3 +1046,28 @@
 // })()
 
 // console.log(add(10, 20));
+
+let shallowClone = function (source) {
+    let target = {}
+    for (let key in source) {
+        if (source.hasOwnProperty(key)) {
+            target[key] = source[key]
+        }
+    }
+    return target
+}
+
+let demo = {
+    b: {
+        c: {
+
+        }
+    }
+}
+
+let demo2 = shallowClone(demo)
+let demo3 = demo;
+console.log(demo3 === demo) // true
+console.log(demo2.b.c === demo.b.c) // true
+console.log(demo2.b === demo.b) // true
+console.log(demo2 === demo) // false
