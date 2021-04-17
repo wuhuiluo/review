@@ -1047,27 +1047,51 @@
 
 // console.log(add(10, 20));
 
-let shallowClone = function (source) {
-    let target = {}
-    for (let key in source) {
-        if (source.hasOwnProperty(key)) {
-            target[key] = source[key]
-        }
-    }
-    return target
-}
+// let shallowClone = function (source) {
+//     let target = {}
+//     for (let key in source) {
+//         if (source.hasOwnProperty(key)) {
+//             target[key] = source[key]
+//         }
+//     }
+//     return target
+// }
 
-let demo = {
-    b: {
-        c: {
+// let demo = {
+//     b: {
+//         c: {
 
-        }
-    }
-}
+//         }
+//     }
+// }
 
-let demo2 = shallowClone(demo)
-let demo3 = demo;
-console.log(demo3 === demo) // true
-console.log(demo2.b.c === demo.b.c) // true
-console.log(demo2.b === demo.b) // true
-console.log(demo2 === demo) // false
+// let demo2 = shallowClone(demo)
+// let demo3 = demo;
+// console.log(demo3 === demo) // true
+// console.log(demo2.b.c === demo.b.c) // true
+// console.log(demo2.b === demo.b) // true
+// console.log(demo2 === demo) // false
+
+// let demo = {
+//     name: 'dayday',
+//     book: {
+//         title: 'Do you really Know JS',
+//         price: "45"
+//     }
+// }
+
+// let clone_demo = {
+//     ...demo
+// }
+// console.log(clone_demo);
+// demo.name = 'new name'
+// demo.book.price = '100'
+// console.log(clone_demo.name, clone_demo.book.price);
+
+// let a = [0, "1", [2, 3]];
+// let b = a.slice(1)
+// console.log(b);
+// a[1] = '99'
+// console.log(a);
+
+// 不能序列化函数
