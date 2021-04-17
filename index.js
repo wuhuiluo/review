@@ -1033,16 +1033,16 @@
 //         console.log(i);
 //     })
 // }
-(function () {
-    var a = 10
-    var b = 20
+// (function () {
+//     var a = 10
+//     var b = 20
 
-    function add(num1, num2) {
-        var num1 = num1
-        var num2 = num2
-        return num1 + num2
-    }
-    window.add = add
-})()
+//     function add(num1, num2) {
+//         var num1 = num1
+//         var num2 = num2
+//         return num1 + num2
+//     }
+//     window.add = add
+// })()
 
-console.log(add(10, 20));
+// console.log(add(10, 20));
