@@ -1177,17 +1177,69 @@
 // let clone_obj = shallowClone(obj)
 
 // console.log(clone_obj);作者：牛背上的我
-console.log(str, num);
-var str = "sfd";
-var num = "123"
+// console.log(str, num);
+// var str = "sfd";
+// var num = "123"
 
-function fn2() {
-    console.log(str, num);
-    str = "dfdg";
-    var num = "345";
-    num = "098";
-    str = "candy";
-    console.log(str, num);
+// function fn2() {
+//     console.log(str, num);
+//     str = "dfdg";
+//     var num = "345";
+//     num = "098";
+//     str = "candy";
+//     console.log(str, num);
+// }
+// fn2();
+// console.log(str, num);
+
+// function debounce(fn, wait) {
+//     let timer
+//     return function () {
+//         let context = this
+//         let args = arguments
+//         clearTimeout(timer)
+//         timer = setTimeout(function () {
+//             fn.apply(context, args)
+//         }, wait)
+//     }
+// }
+
+// function debounce(fn, wait, immediate) {
+//     let timer, result
+//     let debounced = function () {
+//         let context = this
+//         let args = arguments
+//         if (tiemr) clearTimeout(timer)
+//         if (immediate) {
+//             // 如果已经执行过，不在执行
+//             let callNow = !timer
+//             timer = setTimeout(function () {
+//                 timer = null
+//             }, wait)
+//             if (callNow) result = fn.call(context, args)
+//         } else {
+//             timer = setTimeout(function () {
+//                 fn.apply(context, args)
+//             }, wait)
+//         }
+//         return result
+//     }
+//     debounced.cancel = function () {
+//         clearTimeout(timer)
+//         timer = null
+//     }
+//     return debounced
+// }
+
+function throttle(fn, wait) {
+    let previous = 0
+    return function () {
+        let context = this
+        let args = arguments
+        let now = +new Date()
+        if (now - previous > 0) {
+            fn.apply(context, args)
+            previous = now
+        }
+    }
 }
-fn2();
-console.log(str, num);
