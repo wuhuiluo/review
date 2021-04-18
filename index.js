@@ -1302,27 +1302,72 @@
 
 // foo.myApply(obj, [])
 
-Function.prototype.myBind = function (objThis, ...params) {
-    const thisFn = this // 存储源函数
-    let fTobind = function (...secondParmas) {
-        const isNew = this instanceof fTobind
-        const context = isNew ? this : Object(objThis)
-        return thisFn.call(context, ...params, ...secondParmas)
-    }
-    if (thisFn.prototype) {
-        fTobind.prototype = Object.create(thisFn.prototype)
-    }
-    return fTobind
-}
+// Function.prototype.myBind = function (objThis, ...params) {
+//     const thisFn = this // 存储源函数
+//     let fTobind = function (...secondParmas) {
+//         const isNew = this instanceof fTobind
+//         const context = isNew ? this : Object(objThis)
+//         return thisFn.call(context, ...params, ...secondParmas)
+//     }
+//     if (thisFn.prototype) {
+//         fTobind.prototype = Object.create(thisFn.prototype)
+//     }
+//     return fTobind
+// }
 
-//测试
-const obj = {
-    name: '写代码像蔡徐抻'
-}
+// //测试
+// const obj = {
+//     name: '写代码像蔡徐抻'
+// }
 
-function foo() {
-    console.log(this.name)
-    console.log(arguments)
-}
+// function foo() {
+//     console.log(this.name)
+//     console.log(arguments)
+// }
 
-foo.myBind(obj, 'a', 'b', 'c')() //输出写代码像蔡徐抻 ['a', 'b', 'c']
+// foo.myBind(obj, 'a', 'b', 'c')() //输出写代码像蔡徐抻 ['a', 'b', 'c']
+
+// for (let i = 0; i < 10; i++) {
+//     console.log(i);
+// }
+// console.log(i);
+
+const arr = [1, [2, [3, [4, [5]]]]];
+
+function flat(arr) {
+    return arr.reduce((prev, cur) => {
+        return prev.concat(Array.isArray(cur) ? flat(cur) : cur)
+    }, [])
+}
+console.log(flat(arr));
+// function fn(arr) {
+//     let a = []
+//     for (let i = 0; i < arr.length; i++) {
+//         if (Array.isArray(arr[i])) {
+//             a = a.concat(fn(arr[i]))
+//         } else {
+//             a.push(arr[i])
+//         }
+//     }
+//     return a
+// }
+
+// console.log(fn(arr));
+
+// function flatten(arr) {
+//     while (arr.some(item => Array.isArray(item))) {
+//         arr = [].concat(...arr)
+//     }
+//     return arr
+// }
+
+// console.log(flatten(arr));
+// function flatten(arr) {
+//     return arr.toString().split(',').map(item => {
+//         return +item
+//     })
+// }
+
+// console.log(flatten(arr));
+// let arr1 = arr.flat(Infinity)
+// console.log(arr1);
