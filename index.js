@@ -1258,23 +1258,71 @@
 //     }
 // }
 
-Function.prototype.myCall = function (thisArg, ...args) {
-    const fn = Symbol('fn') // 声明一个独有的Symbol属性, 防止fn覆盖已有属性 
-    thisArg = thisArg || window // 若没有传入this, 默认绑定window对象
-    thisArg[fn] = this // this指向调用call的对象,即我们要改变this指向的函数
-    const result = thisArg[fn](...args) // 执行当前函数
-    delete thisArg[fn] // 删除我们声明的fn属性
-    return result // 返回函数执行结果
+// Function.prototype.myCall = function (thisArg, ...args) {
+//     const fn = Symbol('fn') // 声明一个独有的Symbol属性, 防止fn覆盖已有属性 
+//     thisArg = thisArg || window // 若没有传入this, 默认绑定window对象
+//     thisArg[fn] = this // this指向调用call的对象,即我们要改变this指向的函数
+//     const result = thisArg[fn](...args) // 执行当前函数
+//     delete thisArg[fn] // 删除我们声明的fn属性
+//     return result // 返回函数执行结果
+// }
+
+// //变更函数调用者示例
+// function foo() {
+//     console.log(this.name)
+// }
+
+// // 测试
+// const obj = {
+//     name: '写代码像蔡徐抻'
+// }
+// // obj.foo = foo // 变更foo的调用者
+// // console.log(obj);
+// // obj.foo() // '写代码像蔡徐抻'
+
+// foo.myCall(obj)
+
+// Function.prototype.myApply = function (thisArg, args) {
+//     const fn = Symbol('fn')
+//     thisArg = thisArg || window
+//     thisArg[fn] = this
+//     const result = thisArg[fn](...args)
+//     delete thisArg[fn]
+//     return result
+// }
+
+// function foo() {
+//     console.log(this.name);
+//     console.log(arguments);
+// }
+
+// const obj = {
+//     name: 'whl'
+// }
+
+// foo.myApply(obj, [])
+
+Function.prototype.myBind = function (objThis, ...params) {
+    const thisFn = this // 存储源函数
+    let fTobind = function (...secondParmas) {
+        const isNew = this instanceof fTobind
+        const context = isNew ? this : Object(objThis)
+        return thisFn.call(context, ...params, ...secondParmas)
+    }
+    if (thisFn.prototype) {
+        fTobind.prototype = Object.create(thisFn.prototype)
+    }
+    return fTobind
 }
 
-//变更函数调用者示例
-function foo() {
-    console.log(this.name)
-}
-
-// 测试
+//测试
 const obj = {
     name: '写代码像蔡徐抻'
 }
-obj.foo = foo // 变更foo的调用者
-obj.foo() // '写代码像蔡徐抻'
+
+function foo() {
+    console.log(this.name)
+    console.log(arguments)
+}
+
+foo.myBind(obj, 'a', 'b', 'c')() //输出写代码像蔡徐抻 ['a', 'b', 'c']
