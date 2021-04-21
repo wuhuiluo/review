@@ -1467,3 +1467,51 @@
 //     name: 'frog'
 // }
 // console.log(dog.getDetail.MyBind(bird, 5)());
+// 浅拷贝
+// let obj1 = {
+//     name: 'whl',
+//     arr: [12, 4],
+// };
+// let obj3 = shallowClone(obj1)
+// obj3.name = "qwe";
+// obj3.arr[1] = 1
+
+// function shallowClone(source) {
+//     let target = {}
+//     for (let i in source) {
+//         if (source.hasOwnProperty(i)) {
+//             target[i] = source[i]
+//         }
+//     }
+//     return target
+// }
+// console.log('obj1', obj1) // obj1 { name: 'whl', arr: [ 1, [ 5, 6, 7 ], 4 ] }
+// console.log('obj3', obj3) // obj3 { name: 'qwe', arr: [ 1, [ 5, 6, 7 ], 4 ] }
+// Object.assign()//浅拷贝
+// 展开运算符
+// let isObject = obj => typeof obj === 'object' && obj !== null
+
+// let DeepClone = (source, hash = new WeakMap()) => {
+//     if (!isObject(source)) return source
+//     if (hash.has(source)) return hash.get(source)
+//     let target = Array.isArray(source) ? [] : {}
+//     hash.set(source, target)
+//     for (let key in source) {
+//         if (Object.prototype.hasOwnProperty.call(source, key)) {
+//             target[key] = isObject(source[key]) ? DeepClone(source[key], hash) : source[key]
+//         }
+//     }
+//     return target
+// }
+// let obj = {
+//     a: 1,
+//     b: {
+//         c: 2,
+//         d: 3
+//     }
+// }
+// obj.a = obj.b;
+// obj.b.c = obj.a;
+// let clone_obj = DeepClone(obj)
+// console.log(clone_obj)
+
