@@ -1332,14 +1332,14 @@
 // }
 // console.log(i);
 
-const arr = [1, [2, [3, [4, [5]]]]];
+// const arr = [1, [2, [3, [4, [5]]]]];
 
-function flat(arr) {
-    return arr.reduce((prev, cur) => {
-        return prev.concat(Array.isArray(cur) ? flat(cur) : cur)
-    }, [])
-}
-console.log(flat(arr));
+// function flat(arr) {
+//     return arr.reduce((prev, cur) => {
+//         return prev.concat(Array.isArray(cur) ? flat(cur) : cur)
+//     }, [])
+// }
+// console.log(flat(arr));
 // function fn(arr) {
 //     let a = []
 //     for (let i = 0; i < arr.length; i++) {
@@ -1371,3 +1371,13 @@ console.log(flat(arr));
 // console.log(flatten(arr));
 // let arr1 = arr.flat(Infinity)
 // console.log(arr1);
+
+// function sum(n) {
+//     if (n === 1) {
+//         return 1
+//     } else {
+//         return n + sum(n - 1)
+//     }
+// }
+
+// console.log(sum(100));
