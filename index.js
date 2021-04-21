@@ -1381,3 +1381,89 @@
 // }
 
 // console.log(sum(100));
+// 改变this指向的几种方法
+
+// 1.使用ES6中的箭头函数
+// 2.在函数内部使用_this = this
+// 3.使用apply、call、bind
+// 4.new实例化一个对象
+// function foo() {
+//     return () => {
+//         return () => {
+//             console.log(this);
+//             console.log(this.a);
+//         };
+//     };
+// }
+// var a = 2;
+// console.log(foo()()()); // 2
+// var name = 'global name'
+// var obj = {
+//     name: 'obj name',
+//     fn1: function () {
+//         console.log(this.name);
+//     },
+//     fn2: function () {
+//         var _this = this
+//         console.log(_this);
+//         setTimeout(function () {
+//             _this.fn1()
+//         }, 1000)
+//     }
+// }
+
+// obj.fn2()
+
+// 改变函数fn的this指向
+
+// Function.prototype.MyApply = function (context, args) {
+//     if (context === null || context === undefined) {
+//         context = window
+//     } else {
+//         context = Object(context)
+//     }
+//     let fn = Symbol()
+//     context[fn] = this
+//     let result = context[fn](...args)
+//     delete context[fn]
+//     return result
+// }
+// Function.prototype.MyCall = function (context, ...args) {
+//     if (context === null || null === undefined) {
+//         context = window
+//     } else {
+//         context = Object(context)
+//     }
+//     let fn = Symbol()
+//     context[fn] = this
+//     let result = context[fn](...args)
+//     delete context[fn]
+// //     return result
+// // }
+// Function.prototype.MyBind = function (objThis, ...params) {
+//     const thisFn = this
+//     let fToBind = function (...secondParams) {
+//         const isNew = this instanceof fToBind
+//         const context = isNew ? this : Object(objThis)
+//         return thisFn.call(context, ...params, ...secondParams)
+//     }
+//     if (thisFn.prototype) {
+//         fToBind.prototype = Object.create(thisFn.prototype)
+//     }
+//     return fToBind
+// }
+
+// let dog = {
+//     name: 'dog',
+//     getDetail: function (count) {
+//         return `${this.name} has ${count} legs`
+//     }
+// }
+
+// let bird = {
+//     name: 'bird'
+// }
+// let frog = {
+//     name: 'frog'
+// }
+// console.log(dog.getDetail.MyBind(bird, 5)());
