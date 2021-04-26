@@ -1515,3 +1515,114 @@
 // let clone_obj = DeepClone(obj)
 // console.log(clone_obj)
 
+// function someFunction() {
+//     let a = 0
+//     return function () {
+//         return a++
+//     }
+// }
+
+// let f1 = someFunction()
+// let f2 = someFunction()
+// console.log(f1);
+// console.log(f2);
+// console.log(f1()); // 1
+// console.log(f2()); // 2
+
+
+// let f = someFunction()
+// console.log(f());
+// console.log(f());
+
+// function ClassA() {
+//     this.x = 'hello'
+// }
+
+// ClassA.prototype.x = 'world'
+
+// var a = new ClassA()
+// a.x = 'whal'
+// console.log(a.x); // 'whal
+// delete a.x
+// console.log(a.x); // 'hello'
+// delete a.x
+// console.log(a.x); // world
+// a.x = undefined
+// console.log(a.x); // 'undefiend'
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1); // 1
+//     resolve(); // 已经resolve
+//     setTimeout(() => { // 宏2
+//         console.log(2);
+//     })
+//     reject('error');
+// })
+// promise.then(() => {
+//     console.log(3); // 微1
+// }).then(() => {
+//     console.log(5)
+// }).catch(e => console.log(e))
+// console.log(4);
+
+// Generator
+
+
+// class Promise {
+//     constructor() {
+//         this.status = 'PENDING'
+//         this.value = undefined;
+//         this.reason = undefined;
+//     }
+// }
+
+// 基本数据类型: Number String Boolean Null Undefined Symbol bigint
+// 引用数据类型: Object Array Function
+// 基本数据类型存储在栈中，引用数据类型地址存栈中，实际内容存储在堆中
+// pending fulfilled rejected 状态一旦改变就不会再次改变
+
+// function promiseFirst(executor) {
+//     let that = this
+//     this.status = 'pending'
+//     this.value = null
+// }
+function promiseFirst(executor) {
+    let that = this
+    this.status = 'pending'
+    this.value = null
+    this.reason = null
+
+    function resolve(value) {
+        if (that.status === 'pending') {
+            that.status = 'success'
+            that.value = value
+        }
+    }
+
+    function reject(value) {
+        if (that.status === 'pending') {
+            that.status = 'success'
+            that.reason = value
+        }
+    }
+    executor(resolve, reject)
+}
+
+
+promiseFirst.prototype.then = function (onFulfilled, onRejected) {
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : data => data
+    onRejected = typeof onRejected === 'funciton' ? onRejected : error => {
+        throw error
+    }
+    if (this.status === 'success') {
+        onFulfilled(this.value)
+    } else {
+        onRejected(this.reason)
+    }
+}
+
+new promiseFirst((resolve, _) => {
+    setTimeout(() => {
+        resolve('whl')
+    }, 0)
+}).then(res => console.log(res))
