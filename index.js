@@ -1586,43 +1586,91 @@
 //     this.status = 'pending'
 //     this.value = null
 // }
-function promiseFirst(executor) {
-    let that = this
-    this.status = 'pending'
-    this.value = null
-    this.reason = null
+// function promiseFirst(executor) {
+//     let that = this
+//     this.status = 'pending'
+//     this.value = null
+//     this.reason = null
+//     this.onSuccessCallback = []
+//     this.onRejectCallback = []
 
-    function resolve(value) {
-        if (that.status === 'pending') {
-            that.status = 'success'
-            that.value = value
-        }
-    }
+//     function resolve(value) {
+//         if (that.status === 'pending') {
+//             that.status = 'success'
+//             that.value = value
+//             that.onSuccessCallback.forEach(item => {
+//                 item(value)
+//             })
+//         }
+//     }
 
-    function reject(value) {
-        if (that.status === 'pending') {
-            that.status = 'success'
-            that.reason = value
-        }
-    }
-    executor(resolve, reject)
-}
+//     function reject(value) {
+//         if (that.status === 'pending') {
+//             that.status = 'success'
+//             that.reason = value
+//             that.onRejectCallback.forEach(item => {
+//                 item(value)
+//             })
+//         }
+//     }
+//     executor(resolve, reject)
+// }
 
 
-promiseFirst.prototype.then = function (onFulfilled, onRejected) {
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : data => data
-    onRejected = typeof onRejected === 'funciton' ? onRejected : error => {
-        throw error
-    }
-    if (this.status === 'success') {
-        onFulfilled(this.value)
-    } else {
-        onRejected(this.reason)
-    }
-}
+// promiseFirst.prototype.then = function (onFulfilled, onRejected) {
+//     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : data => data
+//     onRejected = typeof onRejected === 'funciton' ? onRejected : error => {
+//         throw error
+//     }
+//     if (this.status === 'success') {
+//         onFulfilled(this.value)
+//     } else if (this.status === 'reject') {
+//         onRejected(this.reason)
+//     } else if (this.status === 'pending') {
+//         this.onSuccessCallback.push(onFulfilled)
+//         this.onRejectCallback.push(onRejected)
+//     }
+// }
 
-new promiseFirst((resolve, _) => {
-    setTimeout(() => {
-        resolve('whl')
-    }, 0)
-}).then(res => console.log(res))
+// new promiseFirst((resolve, _) => {
+//     setTimeout(() => {
+//         resolve('whl')
+//     }, 0)
+// }).then(res => console.log(res))
+// new Promise((resolve, _) => {
+//     resolve('hello JS')
+// }).then().then().then(data => console.log(data))
+
+// 1.普通值
+// 2.抛出异常
+// 3.是一个promsie
+
+// Promise是一种异步的解决方案，将写法复杂的传统回到函数和事件监听的异步操作勇同步代码表示出来
+
+// cookie 浏览器和server端通讯 document.cookie 可以做本地存储 存储大小4KB
+
+// 1.Promise.all方法
+
+// function all(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 result[index] = res
+//                 num++
+//                 check()
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+// 2.Promise.allSettled
