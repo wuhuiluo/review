@@ -1674,3 +1674,69 @@
 // }
 
 // 2.Promise.allSettled
+// function allSettled(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 result[index] = {
+//                     status: 'fulfilled',
+//                     value: res
+//                 }
+//                 num++
+//                 check()
+//             }, err => {
+//                 result[index] = {
+//                     status: 'rejected',
+//                     value: err
+//                 }
+//                 num++
+//                 check()
+//             })
+//         })
+//     })
+// }
+
+function any(promises) {
+    if (promises.length === 0) {
+        reject(new AggregateError('No Promise in Promise.any was resolved'))
+    }
+    return new Promise((resolve, reject) => {
+        let result = []
+        let num = 0
+        const check = () => {
+            reject(reject(new AggregateError('No Promise in Promise.any was resolved')))
+        }
+        promises.forEach((item, index) => {
+            Promise.resolve(item).then(res => {
+                resolve(res)
+            }, err => {
+                result[index] = err
+                num++
+                check()
+            })
+        })
+    })
+}
+
+// race
+
+function race(promises) {
+    if (promises.length === 0) return Promise.resolve()
+    return new Promise((resolve, reject) => {
+        promises.forEach((item, index) => {
+            Promise.resolve(item).then(res => {
+                resolve
+            })
+        }, err => {
+            reject(err)
+        })
+    })
+}
