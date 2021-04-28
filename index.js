@@ -1728,15 +1728,77 @@ function any(promises) {
 
 // race
 
-function race(promises) {
-    if (promises.length === 0) return Promise.resolve()
-    return new Promise((resolve, reject) => {
-        promises.forEach((item, index) => {
-            Promise.resolve(item).then(res => {
-                resolve
-            })
-        }, err => {
-            reject(err)
-        })
-    })
+// function race(promises) {
+//     if (promises.length === 0) return Promise.resolve()
+//     return new Promise((resolve, reject) => {
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 resolve
+//             })
+//         }, err => {
+//             reject(err)
+//         })
+//     })
+// }
+
+// 暂时性死区 let const 意思是不能在声明前就使用这些变量，否则会报错
+// 地址是存储在栈中的，数据存储在堆中
+// 浅拷贝：前后对象的基本数据类型不受影响，但是对象的引用类型会互相影响
+// 检测数组
+// Array.isArray
+// Array.of(1, 2, 3)
+// let colors = ['red', 'yellow', 'blue'];
+// console.log(colors.toString()) // red,blue,green
+// console.log(colors.toLocaleString()) // red,blue,green
+// ['a', 'b', 'c'].fill(7)
+// // [7, 7, 7]
+// new Array(3).fill(7)
+// // [7, 7, 7]
+// var obj = {
+//     "name": "tom",
+//     "sex": "male"
+// }
+
+// Object.defineProperty(obj, "age", {
+//     value: "18",
+//     enumerable: false
+// })
+// //增加不可枚举的属性age
+
+// Object.prototype.protoPer1 = function () {
+//     console.log("name is tom");
+// }
+// //通过原型链增加属性，为一个函数
+
+// Object.prototype.protoPer2 = 2 //通过原型链增加属性，为一个整型值2
+
+// for (var a in obj) {
+//     console.log(a)
+//     console.log(obj[a])
+// }
+// //	示例中的属性age为不可可枚举，所以没有输出
+
+
+// function print(fn) {
+//     const a = 200
+//     fn()
+// }
+
+// const a = 100
+
+// function fn() {
+//     console.log(a);
+// }
+
+// print(fn)
+
+function create() {
+    const a = 100
+    return function () {
+        console.log(a);
+    }
 }
+
+const fn = create()
+const a = 200
+fn()
