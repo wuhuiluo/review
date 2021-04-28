@@ -1792,13 +1792,109 @@ function any(promises) {
 
 // print(fn)
 
-function create() {
-    const a = 100
-    return function () {
-        console.log(a);
-    }
+// function create() {
+//     const a = 100
+//     return function () {
+//         console.log(a);
+//     }
+// }
+
+// const fn = create()
+// const a = 200
+// fn()
+
+
+// function fn1() {
+//     console.log(this);
+// }
+// fn1()
+
+// fn1.call({
+//     x: 100
+// }) //  立即执行函数
+
+// const fn2 = fn1.bind({
+//     x: 200
+// })
+// fn2() // bind返回一个函数后需要()执行函数
+
+// const zhangsan = {
+//     name: '张三',
+//     sayHi() {
+//         console.log(this);
+//     },
+//     wait() {
+//         setTimeout(() => {
+//             console.log(this);
+//         })
+//     }
+// }
+
+// zhangsan.sayHi()
+// zhangsan.wait()
+
+// class People {
+//     constructor(name, age) {
+//         this.name = name
+//         this.age = age
+//     }
+//     sayHi() {
+//         console.log(this);
+//     }
+// }
+
+// const zhangsan = new People('张三')
+// zhangsan.sayHi()
+
+// let i
+// for (i = 0; i <= 3; i++) {
+//     setTimeout(() => {
+//         console.log(i);
+//     },0)
+// }
+// let a = 100
+
+// function test() {
+//     alert(a)
+//     a = 10
+//     alert(a)
+// }
+// test()
+// console.log(a);
+
+// 闭包：能够读取其他函数内部变量的函数
+
+// 200 请求处理成功
+// 204 请求处理成功，但无资源返回
+// 206 对范围请求的成功处理
+// 301 永久性重定向
+// 302 临时性重定向
+// 303 临时重定向，并明确表示客户端要用GET方法请求资源
+
+async function async1() {
+    console.log('async1 start') // 2
+    await async2() // 异步等待
+    console.log('async1 end') // 微1 6
 }
 
-const fn = create()
-const a = 200
-fn()
+async function async2() {
+    console.log('async2') // 3
+}
+
+
+console.log('script start') // 1
+
+setTimeout(function () {
+    console.log('setTimeout') //8
+}, 0)
+
+async1()
+
+new Promise(function (resolve) {
+    console.log('promise1') // 4
+    resolve()
+}).then(function () {
+    console.log('promise2') // 微任务2 7
+})
+
+console.log('script end') // 5
