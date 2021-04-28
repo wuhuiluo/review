@@ -1871,30 +1871,44 @@ function any(promises) {
 // 302 临时性重定向
 // 303 临时重定向，并明确表示客户端要用GET方法请求资源
 
-async function async1() {
-    console.log('async1 start') // 2
-    await async2() // 异步等待
-    console.log('async1 end') // 微1 6
-}
+// async function async1() {
+//     console.log('async1 start') // 2
+//     await async2() // 异步等待
+//     console.log('async1 end') // 微1 6
+// }
 
-async function async2() {
-    console.log('async2') // 3
-}
+// async function async2() {
+//     console.log('async2') // 3
+// }
 
 
-console.log('script start') // 1
+// console.log('script start') // 1
 
-setTimeout(function () {
-    console.log('setTimeout') //8
-}, 0)
+// setTimeout(function () {
+//     console.log('setTimeout') //8
+// }, 0)
 
-async1()
+// async1()
 
-new Promise(function (resolve) {
-    console.log('promise1') // 4
-    resolve()
-}).then(function () {
-    console.log('promise2') // 微任务2 7
-})
+// new Promise(function (resolve) {
+//     console.log('promise1') // 4
+//     resolve()
+// }).then(function () {
+//     console.log('promise2') // 微任务2 7
+// })
 
-console.log('script end') // 5
+// console.log('script end') // 5
+
+// 1.让人更容易读懂增加代码的可读性
+// 2.让搜索引擎更容易读懂
+// 3.正确的标签做正确的事情
+// 4.页面内容结构化
+
+// 行内元素 span img button input i label a
+
+// 手写clearfix
+// clearfix: after {
+//     conten: ' '
+//     display: table
+//     clear: both
+// }
