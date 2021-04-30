@@ -25,22 +25,53 @@
             reader.readAsDataURL(file)
         }
 
-        function compress(base64Image) {
+        function uploadToServer(compressImage) {
+            console.log('upload to server', compressImage);
+        }
+
+        function compress(base64Image, callback) {
             let maxW = 1024
             let maxH = 1024
-            let ratio // 图片的压缩比例
-            let needCompress = false // 是否需要压缩
+            let needCompress = false
+            let ratio
             const image = new Image()
+            image.addEventListener('load', function (e) {
+                if (image.naturalWidth > maxW) {
+                    needCompress = true
+                    ratio = image.naturalWidth / maxW
+                    // console.log(ratio);
+                    maxH = image.naturalHeight / ratio
+                    console.log(ratio);
+                    // console.log(maxH);
+                } // 经过处理后，实际图片的尺寸为 1024 * 640
+                if (image.naturalHeight > maxH) {
+                    needCompress = true
+                    ratio = image.naturalHeight / maxH
+                    maxW = image.naturalWidth / ratio
+                }
+                if (!needCompress) {
+                    maxW = image.naturalWidth
+                    maxH = image.naturalHeight
+                } // 如果不需要压缩，需要获取图片的实际尺寸
+                // console.log(maxW, maxH);
+                const canvas = document.createElement('canvas')
+                canvas.setAttribute('id', '__compress__')
+                canvas.width = maxW
+                canvas.height = maxH
+                canvas.style.visibility = 'visible'
+                document.body.appendChild(canvas)
+                const ctx = canvas.getContext('2d')
+                ctx.clearRect(0, 0, maxW, maxH)
+                ctx.drawImage(image, 0, 0, maxW, maxH)
+                const compressImage = canvas.toDataURL('image/jpeg', 0.9)
+                callback && callback(compressImage)
+                // const _image = new Image()
+                // _image.src = compressImage
+                // document.body.append(_image)
+                canvas.remove()
+            })
             image.src = base64Image
-            // console.log(image.naturalHeight, image.naturalWidth);
-            if (image.naturalWidth > maxW) {
-                needCompress = true
-                ratio = image.naturalWidth / maxW
-                console.log(ratio);
-                maxH = image.naturalHeight / ratio
-                console.log(maxH);
-            }
-            document.body.appendChild(image)
+            // document.body.appendChild(image)
         }
         const upload = document.getElementById('upload')
         upload.addEventListener('change', function (e) {
@@ -63,7 +94,7 @@
                 return
             } // 图片容量检查
             // 压缩图片
-            convertImageToBase64(file, compress)
+            convertImageToBase64(file, (base64Image) => compress(base64Image, uploadToServer))
         })
     </script>
 </body>
