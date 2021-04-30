@@ -13,6 +13,35 @@
     <script>
         const ACCEPT = ['image/jpg', 'image/png', 'image/jpeg']
         const MAXSiZE = 1024 * 1024
+        const MAXSIZE_STR = '1MB'
+
+        function convertImageToBase64(file, callback) {
+            let reader = new FileReader()
+            reader.addEventListener('load', function (e) {
+                const base64Image = e.target.result
+                callback && callback(base64Image)
+                reader = null
+            })
+            reader.readAsDataURL(file)
+        }
+
+        function compress(base64Image) {
+            let maxW = 1024
+            let maxH = 1024
+            let ratio // 图片的压缩比例
+            let needCompress = false // 是否需要压缩
+            const image = new Image()
+            image.src = base64Image
+            // console.log(image.naturalHeight, image.naturalWidth);
+            if (image.naturalWidth > maxW) {
+                needCompress = true
+                ratio = image.naturalWidth / maxW
+                console.log(ratio);
+                maxH = image.naturalHeight / ratio
+                console.log(maxH);
+            }
+            document.body.appendChild(image)
+        }
         const upload = document.getElementById('upload')
         upload.addEventListener('change', function (e) {
             const [file] = e.target.files
@@ -25,8 +54,16 @@
             } = file
             if (!ACCEPT.includes(fileType)) {
                 alert(`不支持[${fileType}]文件类型!`)
+                upload.value = ''
                 return
-            }
+            } // 图片类型检查
+            if (fileSize > MAXSiZE) {
+                alert(`文件超出${MAXSIZE_STR}!`)
+                upload.value = ''
+                return
+            } // 图片容量检查
+            // 压缩图片
+            convertImageToBase64(file, compress)
         })
     </script>
 </body>
