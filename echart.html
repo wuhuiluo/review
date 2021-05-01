@@ -47,6 +47,18 @@
                     }
                 }, '折线图', '柱状图']
             },
+            toolbox: {
+                feature: {
+                    dataZoom: {},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            dataZoom: [{
+                show: true,
+                start: 0,
+                end: 100
+            }],
             series: [{
                 name: '分类',
                 type: 'pie',
