@@ -10,6 +10,7 @@
     <script src="https://mapv.baidu.com/gl/examples/static/common.js"></script>
     <script src="https://mapv.baidu.com/build/mapv.js"></script>
     <script src="https://code.bdstatic.com/npm/mapvgl@1.0.0-beta.54/dist/mapvgl.min.js"></script>
+    <script src="https://code.bdstatic.com/npm/mapvgl@1.0.0-beta.54/dist/mapvgl.threelayers.min.js"></script>
     <style>
         html,
         body,
@@ -31,20 +32,32 @@
     <div id="map_container">
     </div>
     <script>
-        var cities = ['上海']
-        var cityCenter = mapv.utilCityCenter.getCenterByCityName(cities[0])
+        var cityCenter = mapv.utilCityCenter.getCenterByCityName('上海')
         var map = initMap({
-            tilt: 0,
+            tilt: 10,
             center: [cityCenter.lng, cityCenter.lat],
-            zoom: 10,
-            style: snowStyle
+            zoom: 7,
+            style: purpleStyle
         })
+
         // 准备数据源
         var data = []
+        // 1.生成贝塞尔曲线对象
+        var curve = new mapvgl.BezierCurve()
+        // 2.设置起点和终点
+        var start = mapv.utilCityCenter.getCenterByCityName('上海')
+        var end = mapv.utilCityCenter.getCenterByCityName('厦门')
+        curve.setOptions({
+            start: [start.lng, start.lat],
+            end: [end.lng, start.lat]
+        })
+        // 3.生成贝塞尔曲线坐标集
+        var curveData = curve.getPoints();
+        // console.log(curveData);
         data.push({
             geometry: {
-                type: 'Point',
-                coordiantes: [cityCenter.lng, cityCenter.lat]
+                type: 'LineString',
+                coordinates: curveData
             }
         })
         // 绘制数据源
@@ -53,11 +66,17 @@
             map
         })
         // 2.初始化mapvgl 的 PointLayer 对象
-        var pointLayer = new mapvgl.PointLayer({})
+        var flyLine = new mapvgl.FlyLineLayer({
+            style: 'chaos',
+            color: 'red',
+            textureColor: 'blue',
+            textureWidth: 20,
+            textureLength: 80
+        })
         // 3.将Point对象加入View中
-        view.addLayer(pointLayer)
+        view.addLayer(flyLine)
         // 4.将data与PointLayer与data进行绑定
-        pointLayer.setData(data)
+        flyLine.setData(data)
     </script>
 </body>
 
