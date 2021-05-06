@@ -7,10 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=G1LFyjrNGIkns5OfpZnrCGAKxpycPLwb"></script>
+    <script src="https://mapv.baidu.com/gl/examples/static/common.js"></script>
+    <script src="https://mapv.baidu.com/build/mapv.js"></script>
+    <script src="https://code.bdstatic.com/npm/mapvgl@1.0.0-beta.54/dist/mapvgl.min.js"></script>
     <style>
         html,
         body,
-        #map {
+        #map_container {
             width: 100%;
             height: 100%;
             padding: 0;
@@ -25,15 +28,37 @@
 </head>
 
 <body>
-    <div id="map">
+    <div id="map_container">
     </div>
     <script>
-        const map = new BMapGL.Map('map')
-        const point = new BMapGL.Point(121.477091, 31.23825)
-        map.centerAndZoom(point, 10)
-        map.enableScrollWheelZoom(true)
+        var cities = ['上海']
+        var cityCenter = mapv.utilCityCenter.getCenterByCityName(cities[0])
+        var map = initMap({
+            tilt: 0,
+            center: [cityCenter.lng, cityCenter.lat],
+            zoom: 10,
+            style: snowStyle
+        })
+        // 准备数据源
+        var data = []
+        data.push({
+            geometry: {
+                type: 'Point',
+                coordiantes: [cityCenter.lng, cityCenter.lat]
+            }
+        })
+        // 绘制数据源
+        // 1.生成 mapvgl 试图 View
+        var view = new mapvgl.View({
+            map
+        })
+        // 2.初始化mapvgl 的 PointLayer 对象
+        var pointLayer = new mapvgl.PointLayer({})
+        // 3.将Point对象加入View中
+        view.addLayer(pointLayer)
+        // 4.将data与PointLayer与data进行绑定
+        pointLayer.setData(data)
     </script>
 </body>
 
 </html>
-7-9 6:49
