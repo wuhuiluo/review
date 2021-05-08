@@ -1704,27 +1704,27 @@
 //     })
 // }
 
-function any(promises) {
-    if (promises.length === 0) {
-        reject(new AggregateError('No Promise in Promise.any was resolved'))
-    }
-    return new Promise((resolve, reject) => {
-        let result = []
-        let num = 0
-        const check = () => {
-            reject(reject(new AggregateError('No Promise in Promise.any was resolved')))
-        }
-        promises.forEach((item, index) => {
-            Promise.resolve(item).then(res => {
-                resolve(res)
-            }, err => {
-                result[index] = err
-                num++
-                check()
-            })
-        })
-    })
-}
+// function any(promises) {
+//     if (promises.length === 0) {
+//         reject(new AggregateError('No Promise in Promise.any was resolved'))
+//     }
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             reject(reject(new AggregateError('No Promise in Promise.any was resolved')))
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 resolve(res)
+//             }, err => {
+//                 result[index] = err
+//                 num++
+//                 check()
+//             })
+//         })
+//     })
+// }
 
 // race
 
@@ -1923,3 +1923,65 @@ function any(promises) {
 // for (let i in object) {
 //     console.log(i);
 // }
+
+
+// function test(a, b) {
+//     console.log(a);
+//     c = 0;
+//     var c;
+//     a = 5;
+//     b = 6;
+//     console.log(b);
+
+//     function b() {}
+
+//     function d() {}
+//     console.log(b)
+// }
+// test(1)
+
+// AO: {
+
+// }   
+
+// GO: 先找变量声明后找函数声明
+
+
+// console.log(a)
+
+// function a(a) {
+//     var a = 10;
+//     var a = function () {
+
+//     }
+// }
+// var a = 1;
+
+// a: undefined -> function a() {} ->
+
+
+var b = 3;
+console.log(a);
+
+function a(a) {
+    console.log(a); // function a() {}
+    var a = 2;
+    console.log(a); // 2
+
+    function a() {
+        var b = 5;
+        console.log(b);
+    }
+}
+a(1);
+
+AO: {
+    a: udefined - > 1 - > function a() {}
+    b: undefined - > 5
+}
+
+
+GO: {
+    a: undefined - > function a() {}
+    b: undefined - > 3
+}
