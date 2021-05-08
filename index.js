@@ -1916,10 +1916,10 @@ function any(promises) {
 // for...in  循环出来的是index索引字符串类型的数字 适合遍历对象，不适合遍历数组
 // for...of 循环出来的是value
 
-let object = [3, 5, 7]
+// let object = [3, 5, 7]
 
-object.foo = 'hello'
+// object.foo = 'hello'
 
-for (let i in object) {
-    console.log(i);
-}
+// for (let i in object) {
+//     console.log(i);
+// }
