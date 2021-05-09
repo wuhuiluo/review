@@ -1960,28 +1960,137 @@
 // a: undefined -> function a() {} ->
 
 
-var b = 3;
-console.log(a);
+// var b = 3;
+// console.log(a);
 
-function a(a) {
-    console.log(a); // function a() {}
-    var a = 2;
-    console.log(a); // 2
+// function a(a) {
+//     console.log(a); // function a() {}
+//     var a = 2;
+//     console.log(a); // 2
 
-    function a() {
-        var b = 5;
-        console.log(b);
-    }
+//     function a() {
+//         var b = 5;
+//         console.log(b);
+//     }
+// }
+// a(1);
+
+// AO: {
+//     a: udefined - > 1 - > function a() {}
+//     b: undefined - > 5
+// }
+
+
+// GO: {
+//     a: undefined - > function a() {}
+//     b: undefined - > 3
+// }
+
+// a = 1;
+
+// function test() {
+//     console.log(a); // undefined
+//     a = 2;
+//     console.log(a); // 2
+//     var a = 3;
+//     console.log(a); // 3
+// }
+// test();
+// var a;
+
+// AO: {
+//     a: undefined - > 3
+// }
+
+// GO: {
+//     a: undefined - > 1
+//     test: undefined - > function test() {}
+// }
+
+// function test() {
+//     console.log(b);
+//     if (a) {
+//         var b = 2;
+//     }
+//     c = 3;
+//     console.log(c);
+// }
+// var a;
+// test();
+// a = 1;
+// console.log(a);
+
+// let a = 'abc'
+// a.split(a)
+// console.log(a === 'abc');
+
+
+// a = 1;
+
+// function test(e) {
+//     function e() {}
+//     arguments[0] = 2;
+//     console.log(e); function e {}
+//     if (a) {
+//         var b = 3;
+//     }
+//     var c;
+//     a = 4;
+//     var a;
+//     console.log(b); // 
+//     f = 5;
+//     console.log(c); // uefined
+//     console.log(a); // 4
+// }
+// var a;
+// test(1);
+// console.log(a); // 1
+// console.log(f); // 
+
+
+
+// 1.new
+
+// -创建一个空对象
+// -创建的对象的__proto__指向构造函数的原型对象
+// -执行这个函数，并将创建的对象作为this的上下文
+// -如果该构造函数没有返回对象则返回this
+
+// function myNew(fn, ...args) {
+//     const obj = Object.create(null)
+//     obj.__proto__ = fn.prototype
+//     const result = fn.apply(obj, args)
+//     const isObject = typeof result === 'obejct' && result !== null
+//     const isFunction = typeof result === 'function'
+//     if (isObject || isFunction) return result
+//     return obj
+// }
+// function myNew(fn, ...args) {
+//     const obj = Object.create(null)
+//     obj.__proto__ = fn.prototype
+//     const result = fn.apply(obj, args)
+//     const isObject = typeof result === 'object' && result !== null
+//     const isFunction = typeof result === 'function'
+//     if (isObject || isFunction) return result
+//     return obj
+// }
+
+
+// function P() {
+//     const args = Array.prototype.slice.call(arguments, 0)
+//     console.log(args)
+// }
+// var p = myNew(P, 1, 2, 3)
+// var p2 = new p(1, 2, 3)
+
+// typeof可以识别 undefined boolean number string symbol function
+
+// Object.prototype.toString
+
+function typeOf(obj) {
+    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
 }
-a(1);
 
-AO: {
-    a: udefined - > 1 - > function a() {}
-    b: undefined - > 5
-}
-
-
-GO: {
-    a: undefined - > function a() {}
-    b: undefined - > 3
-}
+console.log(typeOf([]));
+console.log(typeOf({}));
+console.log(typeOf(new Date));
