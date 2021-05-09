@@ -2171,3 +2171,49 @@
 // }
 
 // 数组去重
+// const arr = [1, 2, 3, 4, 1]
+// // indexOf: 找到第一个返回其下标的值，找不到就返回-1
+// // function unique(arr) {
+// //     var res = arr.filter((item, index, array) => {
+// //         return array.indexOf(item) === index
+// //     })
+// //     return res
+// // }
+
+// // console.log(unique(arr));
+
+// const unique = arr => [...new Set(arr)]
+
+// console.log(unique(arr));
+
+// 数组扁平化
+
+const arr = [1, [2, [3]]]
+
+// function flatten(arr) {
+//     var result = []
+//     for (var i = 0; i < arr.length; i++) {
+//         if (Array.isArray(arr[i])) {
+//             result = result.concat(flatten(arr[i]))
+//         } else {
+//             result.push(arr[i])
+//         }
+//     }
+//     return result
+// }
+
+// console.log(flatten(arr));
+// function flatten(arr) {
+//     while (arr.some(item => Array.isArray(item))) {
+//         arr = [].concat(...arr)
+//     }
+//     return arr
+// }
+
+// console.log(flatten(arr));
+
+// 函数防抖
+
+function debounce(fn, wait) {
+    
+}
