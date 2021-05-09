@@ -2087,10 +2087,87 @@
 
 // Object.prototype.toString
 
-function typeOf(obj) {
-    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
-}
+// function typeOf(obj) {
+//     return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
+// }
 
-console.log(typeOf([]));
-console.log(typeOf({}));
-console.log(typeOf(new Date));
+// console.log(typeOf([]));
+// console.log(typeOf({}));
+// console.log(typeOf(new Date));
+// 1.原型链继承
+
+// function Animal() {
+//     this.colors = ['black', 'white']
+// }
+
+// Animal.prototype.getColor = function () {
+//     return this.colors
+// }
+
+// function Dog() {}
+// Dog.prototype = new Animal()
+
+// let dog1 = new Dog()
+
+// dog1.colors.push('brwon')
+// let dog2 = new Dog()
+// console.log(dog2.colors);
+
+// 问题: 原型中包含的引用类型属性将被所有的实例共享
+// 问题: 子类在实例化的时候不能给父类构造函数传参
+
+// 组合继承
+// function Animal(name) {
+//     this.name = name
+//     this.colors = ['black', 'white']
+// }
+
+// Animal.prototype.getName = function () {
+//     return this.name
+// }
+
+// function Dog(name, age) {
+//     Animal.call(this, name)
+//     this.age = age
+// }
+// Dog.prototype = new Animal()
+// Dog.prototype.constructor = Dog
+
+// let dog = new Dog('内息', 2)
+// dog.colors.push('brown')
+// let dog1 = new Dog('whl', 1)
+// console.log(dog1);
+
+// 原型式继承
+
+// function object(obj) {
+//     function F() {}
+//     F.prototype = obj
+//     return new F()
+// }
+
+// function inheritPrototype(Son, Father) {
+//     const prototype = object.create(Father.prototype)
+//     prototype.construcotr = Son
+//     Son.prototype = prototype
+// }
+
+// class实现继承
+
+// class Animal {
+//     constructor(name) {
+//         this.name = name
+//     }
+//     getName() {
+//         return this.name
+//     }
+// }
+
+// class Dog extends Animal {
+//     constructor(name, age) {
+//         super(name)
+//         this.age = age
+//     }
+// }
+
+// 数组去重
