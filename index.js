@@ -2350,3 +2350,42 @@ const arr = [1, [2, [3]]]
 // console.log(Object.__proto__ === Function.prototype)
 // console.log(Object.prototype.__proto__ === null)
 
+// function Dog() {
+//     this.name = 'puppy'
+// }
+
+// Dog.prototype.back = () => {
+//     console.log('woofwoof');
+// }
+// const dog = new Dog()
+// console.log(Dog.prototype.construcotr === Dog && dog.constructor === Dog && dog instanceof Dog);
+
+// // instanceof 检测的是类型是否在实例的原型链上
+
+// function Dog() {
+//     this.name = 'puppy'
+// }
+// Dog.prototype.bark = () => {
+//     console.log('woof!woof!')
+// }
+
+// function BigDog() {}
+// BigDog.prototype = new Dog()
+// Object.defineProperty(BigDog.prototype, "constructor", {
+//     value: BigDog,
+//     enumerable: false
+// })
+// const bigDog = new BigDog()
+// console.log(bigDog.constructor === BigDog) // true
+
+// 如何阻止事件冒泡
+
+// event.stopPropgation()
+// event.cancelBubble = true
+
+// 事件委托
+
+// focus、blur没有事件委托
+
+// 微任务: promise的回调、node中的process.nextTick、对DOM变化监听的MutationObserver
+// 宏任务: script脚本执行，setTimeout，setInterval、setImmediate、I/O操作、UI渲染等
