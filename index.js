@@ -2304,15 +2304,49 @@ const arr = [1, [2, [3]]]
 // Vue中的hash模式和history模式的区别
 
 // 原型修改、重写
-function Person(name) {
-    this.name = name
-}
+// function Person(name) {
+//     this.name = name
+// }
 
-Person.prototype.getName = function () {
+// Person.prototype.getName = function () {
 
-}
+// }
 
-var p = new Person('whl')
+// var p = new Person('whl')
 
-console.log(p.__proto__ === Person.prototype);
-console.log(p.__proto__ === p.constructor.prototype);
+// console.log(p.__proto__ === Person.prototype);
+// console.log(p.__proto__ === p.constructor.prototype);
+
+// hasOwnProperty
+
+// function iterate(obj) {
+//     var res = []
+//     for (var key in obj) {
+//         if (obj.hasOwnProperty(key)) {
+//             res.push(`${key}:${obj[key]}`)
+//         }
+//     }
+// }
+
+// function Person(name) {
+//     this.name = name
+// }
+
+// var p2 = new Person('whl')
+// console.log(p2.__proto__ === Person.prototype);
+// console.log(p2.__proto__.__proto__ === Object.prototype);
+// console.log(p2.__proto__.__proto__.__proto__ === null)
+// // console.log(p2.__proto__.__proto__.__proto__.__proto__) // 报错
+// // console.log(p2.__proto__.__proto__.__proto__.__proto__.__proto__) // 报错
+// console.log(p2.constructor === Person)
+// console.log(p2.prototype) // undefined p2是实例，没有prototype属性
+// console.log(Person.constructor === Function)
+// console.log(Person.prototype) // 打印出Person.prototype这个对象里面的所有方法和属性
+// console.log(Person.prototype.constructor === Person)
+// console.log(Person.prototype.__proto__ === Object.prototype)
+// console.log(Person.__proto__) // Function.prototype
+// console.log(Function.prototype.__proto__ === Object.prototype)
+// console.log(Function.__proto__ === Function.prototype)
+// console.log(Object.__proto__ === Function.prototype)
+// console.log(Object.prototype.__proto__ === null)
+
