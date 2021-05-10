@@ -2212,8 +2212,107 @@ const arr = [1, [2, [3]]]
 
 // console.log(flatten(arr));
 
-// 函数防抖
+// let a = 20
+// let tomAge = a
 
-function debounce(fn, wait) {
-    
+// let obj = {}
+// let tomObj = obj
+// obj.name = "tom"
+// console.log(tomObj.name);
+
+// 什么是作用域
+// -当前上下文可以访问到的变量的集合
+
+// 什么是作用域链查找由内到外进行查找
+
+// -各种上下文代码在访问变量和函数时的顺序
+
+// var name = "神奇的程序员";
+
+// function changeName() {
+//     let insideName = "大白";
+
+//     function swapName() {
+//         let tempName = insideName;
+//         insideName = name;
+//         name = tempName;
+
+//         // 可以访问tempName、insideName、name
+//     }
+//     // 可以访问insideName、name
+//     swapName();
+// }
+// // 可以访问name
+// changeName();
+// console.log(name);
+
+// 全局上下文
+// 函数上下文
+
+// 未声明直接初始化
+
+// function foo() {
+//     console.log(this.a);
+// }
+
+// var obj = {
+//     a: 1,
+//     foo: foo
+// }
+// var bar = obj.foo
+// console.log(bar);
+
+// 参数传递造成的隐式绑定丢失
+// function foo() {
+//     console.log(this.a)
+// }
+// var obj = {
+//     a: 1,
+//     foo: foo // 即使换成 () => foo() 也没用
+// }
+
+// function doFoo(fn) {
+//     fn();
+// }
+// var a = 2;
+// doFoo(obj.foo)
+// 1.判断数组对象的类型 instanceof constructor Object.prototype.toString.call
+// let arr1 = [1, 2, 3]
+// let obj = {
+//     name: '大大',
+//     age: 1,
+//     1: 'name'
+// }
+
+// console.log(arr1 instanceof Array);
+// console.log(obj instanceof Array);
+// console.log(obj instanceof Object);
+
+// console.log(arr1.constructor === Array);
+// console.log(obj.constructor === Array);
+// console.log(obj.constructor === Object);
+
+// console.log(Object.prototype.toString.call(arr1) === '[object Array]');
+// console.log(Object.prototype.toString.call(obj) === '[object Array]');
+// console.log(Object.prototype.toString.call(obj) === '[object Object]');
+
+// vue-router中的mode的值 hash、history
+
+// 改变this指向的方法
+// this在执行环境决定，有call、apply、bind，在new对象的时候也会修改this的值
+
+// Vue中的hash模式和history模式的区别
+
+// 原型修改、重写
+function Person(name) {
+    this.name = name
 }
+
+Person.prototype.getName = function () {
+
+}
+
+var p = new Person('whl')
+
+console.log(p.__proto__ === Person.prototype);
+console.log(p.__proto__ === p.constructor.prototype);
