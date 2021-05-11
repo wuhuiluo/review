@@ -2389,3 +2389,67 @@ const arr = [1, [2, [3]]]
 
 // 微任务: promise的回调、node中的process.nextTick、对DOM变化监听的MutationObserver
 // 宏任务: script脚本执行，setTimeout，setInterval、setImmediate、I/O操作、UI渲染等
+
+// const保证的是内存地址不能改变
+// 箭头函数的this继承自己作用域上一层的this，箭头函数的this在它定义的时候就已经确定了,之后都不会改变
+
+// var id = 'GLOBAL';
+// var obj = {
+//     id: 'OBJ',
+//     a: function () {
+//         console.log(this.id);
+//     },
+//     b: () => {
+//         console.log(this.id);
+//     }
+// };
+// obj.a(); // 'OBJ'
+// obj.b(); // 'GLOBAL'
+// const b = new obj.a()
+
+// 箭头函数不能作为构造函数使用
+// 箭头函数不能用作Generator函数
+// 箭头函数不能使用yeild关键字
+
+// const obj = {
+//     getArrow() {
+//         return () => {
+//             console.log(this);
+//             console.log(this === obj);
+//         }
+//     }
+// }
+
+// obj.getArrow()()
+
+// 对象扩展运算符
+// let bar = {
+//     a: 1,
+//     b: 2
+// }
+
+// let baz = {
+//     ...bar
+// }
+// console.log(baz);
+// let bar = {
+//     a: 1,
+//     b: 2
+// }
+// let baz = { 扩展运算符对对象实例的拷贝属于一种浅拷贝
+//     ...bar,
+//     ...{
+//         a: 2,
+//         b: 4
+//     }
+// }
+// console.log(baz);
+// console.log(...[1, [2, 3, 4], 5]);
+
+function add(x, y) {
+    return x + y
+}
+
+let numbers = [1, 2]
+let a = add(...numbers)
+console.log(a);
