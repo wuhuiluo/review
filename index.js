@@ -2446,10 +2446,91 @@ const arr = [1, [2, [3]]]
 // console.log(baz);
 // console.log(...[1, [2, 3, 4], 5]);
 
-function add(x, y) {
-    return x + y
-}
+// function add(x, y) {
+//     return x + y
+// }
 
-let numbers = [1, 2]
-let a = add(...numbers)
-console.log(a);
+// let numbers = [1, 2]
+// let a = add(...numbers)
+// console.log(a);
+// const arr1 = [1, 2]
+// const arr2 = [...arr1]
+// console.log(arr2);
+// let arr1 = ['two', 'three']
+// let arr2 = ['one', ...arr1, 'four', 'five']
+// console.log(arr2);
+// console.log([...'hello']);
+// Array.prototype.slice.call(arguments)
+
+// 类数组转化为数组的方式有这几种
+
+// 1.Array.prototype.slice.call(ArrayLike)
+// Array.prototype.splice.call(ArrayLike,0)
+// Array.from(arrayLike)
+
+// Javascript中有哪些数据类型他们的区别
+
+// 1.undefined、null、boolean、number、string、Symbol、BigInt
+// console.log([] instanceof Array); 
+// console.log(function () {}
+//     instanceof Function);
+// console.log({}
+//     instanceof Object);
+
+// instanceof只能正确判断引用类型数据,不能判断基本类型数据
+// function fn() {}
+// fn.prototype = new Array()
+// fn.prototype.constructor = fn
+// var f = new fn()
+// console.log(f.constructor === fn);
+// console.log(f.constructor === Array);
+// var a = Object.prototype.toString;
+
+// console.log(a.call(2) === '[object Number]');
+// console.log(a.call(true));
+// console.log(a.call('str'));
+// console.log(a.call([]));
+// console.log(a.call(function () {}));
+// console.log(a.call({}));
+// console.log(a.call(undefined));
+// console.log(a.call(null));
+// console.log(Object.prototype.toString.call([]).slice(8, -1) === 'Array');
+// console.log([].__proto__ === Array.prototype);
+// console.log(Array.isArray([]));
+// console.log([] instanceof Array);
+// console.log(null == undefined);
+// instanceof操作符的原理: 用于判断构造函数的prototype属性是否出现在该对象原型链中的任何位置
+// function MyInstanceof(left, right) {
+//     let proto = Object.getPrototypeOf(left), // 获取对象的原型
+//         prototype = right.prototype // 获取构造函数的proototype对象
+//     while (true) {
+//         if (!proto) return false
+//         if (proto === prototype) return true
+//         proto = Object.getPrototypeOf(proto)
+//     }
+// }
+
+// console.log(MyInstanceof([], Array));
+// console.log(MyInstanceof({}, Object));
+
+// // 标记清楚，引用计数垃圾回收的两种方式
+
+class B {}
+B.prototype.a = 1;
+B.prototype.add = function() {
+   this.a++;
+};
+const b1 = new B();
+console.log(b1.a); // 1
+
+const b2 = new B();
+b2.add()
+console.log(b2.a);
+
+const obj = {
+    a: 1,
+};
+obj.add = () => {
+    console.log(this.a);
+};
+obj.add();
