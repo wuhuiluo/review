@@ -2706,3 +2706,38 @@ Animals.prototype.action = function () {
 // 减少内存的效果，节约效率
 
 // for in for of
+// 遍历课遍历对象的所有属性 一般用于遍历对象，值是他的键值
+// const arr2 = [5, 4, 3, 2, 1]
+// // arr2.name = 'whl'
+
+// for (let i of arr2) {
+//     console.log(i);
+// }
+// arr2.name = 'name'
+// for (let i in arr2) {
+//     console.log(i);
+// }
+const test = [
+    [1, 2, 2],
+    [3, 4, 5, 5],
+    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+]
+// for of不能遍历对象，对象没有迭代器对象,可以遍历数组/数组对象/字符串/map/set
+function flat(arr) {
+    let list = []
+    arr.forEach(item => {
+        if (Array.isArray(item)) {
+            // console.log(item);
+            // console.log(...flat(item));
+            list.push(...flat(item))
+        } else {
+            list.push(item)
+        }
+    })
+    return list
+}
+
+const res1 = [...new Set(flat(test))].sort((a, b) => a - b)
+console.log(res1);
+const res2 = [...new Set(test.flat(Infinity))].sort((a, b) => a - b)
+console.log(res2);
