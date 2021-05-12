@@ -2571,5 +2571,138 @@ Animals.prototype.action = function () {
 // const dog = create(Animals, 'dog', 'red')
 // console.log(dog);
 
-let arr2 = [12, 3, 4]
-console.log(...arr2);
+// 函数的柯里化
+
+// function curry() {
+//     const argList = [...arguments]
+//     console.log(argList);
+//     const fn = function () {
+//         argList.push(...arguments)
+//         return fn
+//     }
+//     fn.toString = function () {
+//         return argList.reduce((a, b) => a + b)
+//     }
+//     return fn
+// }
+
+// console.log(curry(1, 2)(3)(4, 5, 6));
+
+// function sum(a, b, c) {
+//     return a + b + c
+// }
+
+// function curry(fn) {
+//     const argsList = [...arguments].splice(1)
+//     // console.log(argsList);
+//     return function () {
+//         const newArgsList = argsList.concat([...arguments])
+//         if (newArgsList.length < fn.length) {
+//             return curry.apply(this, [fn, ...newArgsList])
+//         } else {
+//             return fn.apply(this, newArgsList)
+//         }
+//     }
+// }
+// const sumAll = curry(sum)
+// console.log(sumAll(1)(2)(3));
+// console.log(sumAll(1)(2, 3));
+
+// 重绘
+
+// 当元素样式发生改变，但不影响布局时，浏览器将使用重绘进行元素更新，由于此时只需要UI层面的绘制，因此损耗较小
+
+// 回流
+
+// 当元素尺寸、结构、或者触发某些属性的时候，浏览器会重新渲染页面，这叫回流，浏览器需要重新计算，重新进行页面布局，所以损耗较大
+
+// 1.页面初次渲染
+// 2.浏览器窗口大小发生改变
+// 3.元素尺寸、位置、内容发生改变
+// 4.元素字体大小发生改变
+// 5.添加或删除可见的DOM元素
+// 6.触发CSS伪类，如:hover
+// 7.查询某些属性或者调用某些方法
+// client offset scroll getComputedStyle getBoundingClinetRect ScrollTo()
+
+// 浏览器存储
+// cookie: 用户信息、登陆状态,自行设置过期事件，体积上线为4k
+// localStorage: 无限期存储，体积上线为4-5M
+// sessionStorage: 浏览器窗口关闭则删除，体积上线为4-5M
+
+// 网络请求方式post和get
+// get：会被浏览器缓存，请求长度受限，会被历史保存记录，浏览器回退时候是无害的，一般不带请求体，发送一个TCP数据包
+// post：更安全，更多编码类型，可以发送大数据，浏览器回退的时候会再次提交请求，一般带有请求体，发送两个TCP数据包
+
+// Function.prototype.myCall = function (context, ...args) {
+//     if (context === null || context === undefined) {
+//         context = window
+//     } else {
+//         context = Object(context)
+//     }
+//     // const args = [...arguments].slice(1) //将类数组转换为数组
+//     const key = Symbol('特殊属性Symbol')
+//     context[key] = this
+//     let result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+// function log() {
+//     console.log(this);
+//     console.log(this.name);
+//     console.log(arguments);
+// }
+// let obj = {
+//     name: 'whl'
+// }
+// // 必须是函数来调用
+// log.myCall(obj, 1, 2, 3)
+
+
+// Function.prototype.myApply = function (context, args) {
+//     if (context === null || context === undefined) {
+//         context = window
+//     } else {
+//         context = Object(context)
+//     }
+//     const key = Symbol('特殊属性Symbol')
+//     context[key] = this
+//     let result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+// function log() {
+//     console.log(this);
+//     console.log(this.name);
+//     console.log(arguments);
+// }
+// let obj = {
+//     name: 'whl'
+// }
+// // 必须是函数来调用
+// log.myApply(obj, [1, 2, 3])
+
+// Function.prototype.myBind = function (objThis, ...params) {
+//     const thisFn = this
+//     // 对返回的函数 secondParams 二次传参
+//     let fToBind = function (...secondParams) {
+//         const isNew = this instanceof fToBind
+//         const context = isNew ? this : Object(objThis)
+//         return thisFn.call(context, ...params, ...secondParams)
+//     }
+//     if (thisFn.prototype) {
+//         fToBind.prototype = Object.create(this.Fn.prototype)
+//     }
+//     return fTobind
+// }
+// 1.拷贝原函数
+// 2.返回拷贝的函数
+// 3.调用拷贝的函数
+
+// 事件委托、事件冒泡
+
+// 减少内存的效果，节约效率
+
+// for in for of
