@@ -2515,22 +2515,61 @@ const arr = [1, [2, [3]]]
 
 // // 标记清楚，引用计数垃圾回收的两种方式
 
-class B {}
-B.prototype.a = 1;
-B.prototype.add = function() {
-   this.a++;
-};
-const b1 = new B();
-console.log(b1.a); // 1
+// class B {}
+// B.prototype.a = 1;
+// B.prototype.add = function() {
+//    this.a++;
+// };
+// const b1 = new B();
+// console.log(b1.a); // 1
 
-const b2 = new B();
-b2.add()
-console.log(b2.a);
+// const b2 = new B();
+// b2.add()
+// console.log(b2.a);
 
-const obj = {
-    a: 1,
-};
-obj.add = () => {
-    console.log(this.a);
-};
-obj.add();
+// const obj = {
+//     a: 1,
+// };
+// obj.add = () => {
+//     console.log(this.a);
+// };
+// obj.add();
+
+// 1.模拟new的过程
+
+function Animals(name, color) {
+    this.name = name
+    this.color = color
+}
+Animals.prototype.action = function () {
+    console.log(this.name, 'walk');
+}
+
+
+// 1.创建一个新的对象
+// 2.连接到原型(新对象的原型指向要继承的构造函数的原型)，obj可以访问构造函数原型的属性
+// 3.绑定this实现继承，obj可以访问构造函数是的属性
+// 4.如果构造函数返回的是对象则返回他，如果不是则返回obj
+
+// function create(constructor, ...args) {
+//     const obj = new Object()
+//     obj.__proto__ = constructor.prototype
+//     // console.log(args);
+//     const res = constructor.apply(obj, args) // ...args将args转换为数组
+//     return res instanceof Object ? res : obj
+// }
+// const dog = create(Animals, 'dog', 'red')
+// console.log(dog);
+
+// Object.create
+
+// function create(constructor, ...args) {
+//     const obj = Object.create(constructor.prototype)
+//     const res = constructor.apply(obj, args)
+//     return res instanceof Object ? res : obj
+// }
+// const dog = create(Animals, 'dog', 'red')
+// console.log(dog);
+
+let arr2 = [12, 3, 4]
+console.log(...arr2);
