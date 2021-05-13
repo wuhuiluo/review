@@ -2723,21 +2723,56 @@ const test = [
     [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
 ]
 // for of不能遍历对象，对象没有迭代器对象,可以遍历数组/数组对象/字符串/map/set
-function flat(arr) {
-    let list = []
-    arr.forEach(item => {
-        if (Array.isArray(item)) {
-            // console.log(item);
-            // console.log(...flat(item));
-            list.push(...flat(item))
-        } else {
-            list.push(item)
-        }
-    })
-    return list
+// function flat(arr) {
+//     let list = []
+//     arr.forEach(item => {
+//         if (Array.isArray(item)) {
+//             // console.log(item);
+//             // console.log(...flat(item));
+//             list.push(...flat(item))
+//         } else {
+//             list.push(item)
+//         }
+//     })
+//     return list
+// }
+
+// const res1 = [...new Set(flat(test))].sort((a, b) => a - b)
+// console.log(res1);
+// const res2 = [...new Set(test.flat(Infinity))].sort((a, b) => a - b)
+// console.log(res2);
+
+
+// 1.模拟new过程
+
+// 1.创建一个新对象
+// 2.链接到原型(新对象的原型指向要继承的构造函数的原型)，obj可以访问构造函数原型的属性
+// 3.绑定this实现继承，obj可以访问构造函数的属性
+// 4.如果构造函数返回的是对象则返回他，如果不是则返回obj
+
+// function myNew(constructor, ...args) {
+//     const obj = new Object()
+//     obj.__proto__ = constructor.prototype
+//     console.log(args);
+//     const res = constructor.apply(obj, args)
+//     return res instanceof Object ? res : obj
+// }
+function New(constructor, ...args) {
+    const obj = Object.create(constructor.prototype)
+    const res = constructor.apply(obj, args)
+    return res instanceof Object ? res : obj
 }
 
-const res1 = [...new Set(flat(test))].sort((a, b) => a - b)
-console.log(res1);
-const res2 = [...new Set(test.flat(Infinity))].sort((a, b) => a - b)
-console.log(res2);
+function Animal(name, color) {
+    this.name = name
+    this.color = color
+}
+
+Animal.prototype.action1 = function () {
+    console.log(this.color);
+}
+
+
+const dog1 = New(Animal, 'dog', 'red')
+console.log(dog1);
+dog1.action1()
