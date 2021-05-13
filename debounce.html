@@ -16,9 +16,15 @@
     </div>
     <script>
         const input = document.getElementById('input')
-        input.oninput = throttle1((e) => {
-            console.log(e);
-        }, 1500)
+        input.oninput = throttle((e) => {
+            console.log(e.target.value);
+        })
+        // input.oninput = debounce((e) => {
+        //     console.log(e.target.value);
+        // }, 1500)
+        // input.oninput = throttle1((e) => {
+        //     console.log(e);
+        // }, 1500)
     </script>
 </body>
 

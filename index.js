@@ -2537,13 +2537,13 @@ const arr = [1, [2, [3]]]
 
 // 1.模拟new的过程
 
-function Animals(name, color) {
-    this.name = name
-    this.color = color
-}
-Animals.prototype.action = function () {
-    console.log(this.name, 'walk');
-}
+// function Animals(name, color) {
+//     this.name = name
+//     this.color = color
+// }
+// Animals.prototype.action = function () {
+//     console.log(this.name, 'walk');
+// }
 
 
 // 1.创建一个新的对象
@@ -2717,11 +2717,11 @@ Animals.prototype.action = function () {
 // for (let i in arr2) {
 //     console.log(i);
 // }
-const test = [
-    [1, 2, 2],
-    [3, 4, 5, 5],
-    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
-]
+// const test = [
+//     [1, 2, 2],
+//     [3, 4, 5, 5],
+//     [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+// ]
 // for of不能遍历对象，对象没有迭代器对象,可以遍历数组/数组对象/字符串/map/set
 // function flat(arr) {
 //     let list = []
@@ -2757,22 +2757,81 @@ const test = [
 //     const res = constructor.apply(obj, args)
 //     return res instanceof Object ? res : obj
 // }
-function New(constructor, ...args) {
-    const obj = Object.create(constructor.prototype)
-    const res = constructor.apply(obj, args)
-    return res instanceof Object ? res : obj
-}
+// function New(constructor, ...args) {
+//     const obj = Object.create(constructor.prototype)
+//     const res = constructor.apply(obj, args)
+//     return res instanceof Object ? res : obj
+// }
 
-function Animal(name, color) {
-    this.name = name
-    this.color = color
-}
+// function Animal(name, color) {
+//     this.name = name
+//     this.color = color
+// }
 
-Animal.prototype.action1 = function () {
-    console.log(this.color);
-}
+// Animal.prototype.action1 = function () {
+//     console.log(this.color);
+// }
 
 
-const dog1 = New(Animal, 'dog', 'red')
-console.log(dog1);
-dog1.action1()
+// const dog1 = New(Animal, 'dog', 'red')
+// console.log(dog1);
+// dog1.action1()
+
+// function debounce(fn, wait) {
+//     // 创建一个标记用来存放定时器的返回值
+//     let timer = null
+//     return function (...args) {
+//         // 每次当用户输入的时候，把前一个定时器删除
+//         timer && cleartTimeout(timer)
+//         // 创建一个新的setTimeOut
+//         // 保证点击按钮后的间隔内如果用户还点击了的话则不会执行fn函数
+//         timer = setTimeout(() => {
+//             fn.apply(this, args)
+//         }, wait)
+//     }
+// }
+
+
+// function throttle(fn, wait) {
+//     // 通过闭包保存一个标记
+//     let flag = true
+//     return function (...args) {
+//         if (!flag) {
+//             return
+//         }
+//         // flag设置为false，防止执行之前再被执行
+//         flag = false
+//         setTimeout(() => {
+//             fn.apply(this, args)
+//             flag = true
+//         }, wait)
+//     }
+// }
+// 函数柯里化
+// function curry(fn) {
+//     const argsList = [...arguments].splice(1)
+//     return function () {
+//         const newArgsList = argsList.concat([...arguments])
+//         if (newArgsList.length < fn.length) {
+//             return curry.apply(this, [fn, ...newArgsList])
+//         } else {
+//             return fn.apply(this, newArgsList)
+//         }
+//     }
+// }
+
+// function sum(a, b, c) {
+//     return a + b + c
+// }
+// let sumAll = curry(sum)
+// console.log(sumAll(1, 2, 3));
+// console.log(sumAll(1)(2)(3));
+// console.log(sumAll(1)(2, 3));
+
+// cookie 4K
+// sessionStorange 4-5M
+// localStorage 4-5M
+
+// GET和POST
+
+// CSRF和XSS
