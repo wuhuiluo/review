@@ -2853,7 +2853,86 @@ const arr = [1, [2, [3]]]
 
 // 微任务包括: Promise.then(),Promise.catch() process.nextTick
 // 宏任务: script、setTimeout、setInterval、setImmediate I/O操作，UI渲染\
-const promise1 = new Promise((resolve, reject) => {
-    console.log('promise1'); // 1
-})
-console.log('1', promise1); // 
+
+// const promise1 = new Promise((resolve, reject) => {
+//     console.log('promise1'); // 1
+// })
+// console.log('1', promise1); // '1' Promise{<pending>}
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1); // 1
+//     resolve('success') // 将promise状态为了resolved并且将值保存下来
+//     console.log(2); // 2
+// })
+
+// promise.then(() => {
+//     console.log(3); // 4
+// })
+// console.log(4); // 3
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1);
+//     console.log(2);
+// })
+// // promise中并没有resolve或者reject因此promise.then并不会执行，他只有状态改变了之后才会执行
+// promise.then(() => {
+//     console.log(3);
+// })
+// console.log(4);
+
+// const promise1 = new Promise((resolve, reject) => {
+//     console.log('promise1'); //1
+//     resolve('resolve1')
+// })
+
+// const promise2 = promise1.then(res => {
+//     console.log(res); // 4
+// })
+
+// console.log('1', promise1); // 2 fulfilled resolve1
+// console.log('2', promise2); // 3 pending
+
+// promise结合setTimeout
+// console.log('start'); // 1
+// setTimeout(() => {
+//     console.log('time'); // 4
+// })
+// Promise.resolve().then(() => {
+//     console.log('resolve'); // 3
+// })
+// console.log('end'); // 2
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1); // 1
+//     setTimeout(() => {
+//         console.log('timeStart'); // 4
+//         resolve('success') // fulfilled success
+//         console.log('timeEnd'); // 5
+//     }, 0)
+//     console.log(2); // 2
+// })
+// promise.then(res => {
+//     console.log(res); // 6
+// })
+// console.log(4); // 3
+
+// setTimeout(() => {
+//     console.log('timer1');
+//     setTimeout(() => {
+//         console.log('timer3')
+//     }, 0)
+// }, 0)
+// setTimeout(() => {
+//     console.log('timer2')
+// }, 0)
+// console.log('start') // 1
+setTimeout(() => {
+    console.log('timer1');
+    Promise.resolve().then(() => {
+        console.log('promise')
+    })
+}, 0)
+setTimeout(() => {
+    console.log('timer2')
+}, 0)
+console.log('start') // 1
