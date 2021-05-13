@@ -2835,3 +2835,25 @@ const arr = [1, [2, [3]]]
 // GET和POST
 
 // CSRF和XSS
+
+// 区别
+// CSRF需要登陆之后操作，XSS不需要
+// CSRF是请求页面API来实现非法操作，XSS是向当前页面植入JS脚本来修改页面内容
+
+// 跨站点伪造请求
+// 跨站脚本攻击
+
+// event loop执行顺序:
+// 1.一开始整个脚本作为一个宏任务执行
+// 2.执行过程中同步代码直接执行，宏任务进入宏任务队列，微任务进入微任务队列
+// 3.当前宏任务执行完出队,检查微任务列表，有则一次执行，直到全部执行完
+// 4.执行浏览器UI线程的渲染工作
+// 5.检查是否又Web Worker任务，有则执行
+// 6.执行完本轮的宏任务，回到2，一次循环，直到宏任务和微任务队列都为空
+
+// 微任务包括: Promise.then(),Promise.catch() process.nextTick
+// 宏任务: script、setTimeout、setInterval、setImmediate I/O操作，UI渲染\
+const promise1 = new Promise((resolve, reject) => {
+    console.log('promise1'); // 1
+})
+console.log('1', promise1); // 
