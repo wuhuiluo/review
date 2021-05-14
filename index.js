@@ -3285,18 +3285,70 @@ const arr = [1, [2, [3]]]
 //     console.log('timer2') //6 宏任务2
 // }, 1000)
 
-const p1 = new Promise((resolve) => {
-    setTimeout(() => { // 宏任务
-        resolve('resolve3');
-        console.log('timer1') // 3
-    }, 0)
-    resolve('resovle1'); // p1 设置为 resolved 值为resolve1
-    resolve('resolve2');
-}).then(res => { // 微任务
-    console.log(res) //1: resolved1
-    setTimeout(() => { // 宏任务
-        console.log(p1) // Promise resolve1 resolved1
-    }, 1000)
-}).finally(res => {
-    console.log('finally', res) // 2: 'finally' undeinfed
-})
+// const p1 = new Promise((resolve) => {
+//     setTimeout(() => { // 宏任务
+//         resolve('resolve3');
+//         console.log('timer1') // 3
+//     }, 0)
+//     resolve('resovle1'); // p1 设置为 resolved 值为resolve1
+//     resolve('resolve2');
+// }).then(res => { // 微任务
+//     console.log(res) //1: resolved1
+//     setTimeout(() => { // 宏任务
+//         console.log(p1) // Promise resolve1 resolved1
+//     }, 1000)
+// }).finally(res => {
+//     console.log('finally', res) // 2: 'finally' undeinfed
+// })
+
+// Promise.all
+
+// function all(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach(item => {
+//             Promise.resolve((item, index)).then(res => {
+//                 result[index] = res
+//                 num++
+//                 check()
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+// function allSettle(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === result.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index)).then(res => {
+//             result[index] = {
+//                 status: 'fulfilled',
+//                 value: res
+//             }
+//             num++
+//             check()
+//         }, err => {
+//             result[index] = {
+//                 status: 'rejected',
+//                 reason: err
+//             }
+//             num++
+//             check()
+//         })
+//     })
+// }
