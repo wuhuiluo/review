@@ -3352,3 +3352,36 @@ const arr = [1, [2, [3]]]
 //         })
 //     })
 // }
+
+// function any(promises) {
+//     if (promises.length === 0) {
+//         reject(new AggregateError('No Promise in Promise.any was resolved'))
+//     }
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 reject(reject(new AggregateError('No Promise in Promise.any was resolved')))
+//             }
+//         }
+//         promises.forEach((item, index)).then(res => {
+//             resolve(res)
+//         }, err => {
+//             result[index] = err
+//             num++
+//             check()
+//         })
+//     })
+// }
+
+function race(promises) {
+    if (promises.length === 0) return Promise.resolve()
+    return new Promise((resolve, reject) => {
+        promises.forEach(item).then(res => {
+            resolve(res)
+        }, err => {
+            reject(err)
+        })
+    })
+}
