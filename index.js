@@ -2926,13 +2926,377 @@ const arr = [1, [2, [3]]]
 //     console.log('timer2')
 // }, 0)
 // console.log('start') // 1
-setTimeout(() => {
-    console.log('timer1');
-    Promise.resolve().then(() => {
-        console.log('promise')
-    })
-}, 0)
-setTimeout(() => {
-    console.log('timer2')
-}, 0)
-console.log('start') // 1
+// setTimeout(() => {
+//     console.log('timer1');
+//     Promise.resolve().then(() => {
+//         console.log('promise')
+//     })
+// }, 0)
+// setTimeout(() => {
+//     console.log('timer2')
+// }, 0)
+// console.log('start') // 1
+// Promise.resolve().then(() => { // 微任务1
+//     console.log('promise1');
+//     const timer2 = setTimeout(() => {
+//         console.log('timer2')
+//     }, 0)
+// });
+// const timer1 = setTimeout(() => { // 宏任务1
+//     console.log('timer1')
+//     Promise.resolve().then(() => {
+//         console.log('promise2')
+//     })
+// }, 0)
+// console.log('start'); // 1
+
+// const promise1 = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve('success')
+//     }, 1000)
+// })
+// const promise2 = promise1.then(() => {
+//     throw new Error('error!!!')
+// })
+// console.log('promise1', promise1) // Promise pending
+// console.log('promise2', promise2) // Promise pending
+// setTimeout(() => {
+//     console.log('promise1', promise1)
+//     console.log('promise2', promise2)
+// }, 2000)
+
+// const promise1 = new Promise((resolve, reject) => {
+//     setTimeout(() => { // 宏任务
+//         resolve("success");
+//         console.log("timer1"); // 3
+//     }, 1000);
+//     console.log("promise1里的内容"); // 1
+// });
+// const promise2 = promise1.then(() => {
+//     throw new Error("error!!!");
+// });
+// console.log("promise1", promise1); // Promise pending
+// console.log("promise2", promise2); // Promise pending
+// setTimeout(() => {
+//     console.log("timer2"); // 4
+//     console.log("promise1", promise1); // resolved
+//     console.log("promise2", promise2); // rejected
+// }, 2000);
+
+// const promise = new Promise((resolve, reject) => {
+//     resolve("success1"); // 1
+//     reject("error");
+//     resolve("success2");
+// });
+// promise
+//     .then(res => {
+//         console.log("then: ", res);
+//     }).catch(err => {
+//         console.log("catch: ", err);
+//     })
+
+// const promise = new Promise((resolve, reject) => {
+//     reject("error");
+//     resolve("success2");
+// });
+// promise
+//     .then(res => {
+//         console.log("then1: ", res);
+//     }).then(res => {
+//         console.log("then2: ", res);
+//     }).catch(err => {
+//         console.log("catch: ", err);
+//     }).then(res => {
+//         console.log("then3: ", res); // then3: undefined
+//     })
+
+// resolve(2)
+// Promise.reject(1)
+//     .then(res => {
+//         console.log(res);
+//         return 2;
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         return 3
+//     })
+//     .then(res => {
+//         console.log(res);
+//     });
+
+// const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         console.log('timer')
+//         resolve('success')
+//     }, 1000)
+// })
+// const start = Date.now();
+// promise.then(res => {
+//     console.log(res, Date.now() - start)
+// })
+// promise.then(res => {
+//     console.log(res, Date.now() - start)
+// })
+// Promise.resolve().then(() => {
+//     return new Error('error!!!')
+// }).then(res => {
+//     console.log("then: ", res)
+// }).catch(err => {
+//     console.log("catch: ", err)
+// })
+
+// return Promise.reject(new Error('error!'))
+// throw new Error('error!')
+
+// const promise = Promise.resolve().then(() => {
+//     return promise;
+// })
+// promise.catch(console.err)
+
+// Promise.resolve()
+//     .then(function success1(res) {
+//         throw new Error('error!!!')
+//     }, function fail1(err) {
+//         console.log('fail1', err)
+//     }).catch(function fail2(err) {
+//         console.log('fail2', err)
+//     })
+
+// async function async1() {
+//     console.log("async1 start"); // 1
+//     await async2(); // await后面的语句相当于放到 new Promise后面
+//     console.log("async1 end"); // 4 下一行及以后的代码相当于放在Promise.then中
+// }
+// async function async2() {
+//     console.log("async2"); // 2
+// }
+// async1();
+// console.log('start') // 3
+
+// async function async1() {
+//     console.log("async1 start"); // 1
+//     await async2();
+//     console.log("async1 end"); // 4
+// }
+// async function async2() {
+//     setTimeout(() => { // 宏
+//         console.log('timer') // 5
+//     }, 0)
+//     console.log("async2"); // 2
+// }
+// async1();
+// console.log("start") // 3
+// async function async1() {
+//         console.log("async1 start"); // 1
+//         await async2();
+//         console.log("async1 end"); // 4
+//         setTimeout(() => {
+//                 console.log('timer1') // 7
+//             },
+//         }
+//         async function async2() {
+//             setTimeout(() => {
+//                 console.log('timer2') // 宏 先 5
+//             }, 0)
+//             console.log("async2"); // 2
+//         }
+//         async1();
+//         setTimeout(() => { // 宏任务 后 6
+//             console.log('timer3')
+//         }, 0)
+//         console.log("start") // 3
+
+// async function fn() {
+//     // return await 1234
+//     // Promise.resolve(123)
+//     // 等同于
+//     return 123
+// }
+// fn().then(res => console.log(res))
+
+// async function async1() {
+//     console.log('async1 start'); // 1
+//     await new Promise(resolve => {
+//         console.log('promise1') // 2
+//     })
+//     console.log('async1 success'); // 3
+//     return 'async1 end'
+// }
+// console.log('srcipt start')
+// async1().then(res => console.log(res))
+// console.log('srcipt end')
+
+// async function async1() {
+//     console.log('async1 start'); // 2
+//     await new Promise(resolve => {
+//         console.log('promise1') // 3
+//         resolve('promise1 resolve') 
+//     }).then(res => console.log(res))
+//     console.log('async1 success');
+//     return 'async1 end'
+// }
+// console.log('srcipt start') // 1
+// async1().then(res => console.log(res))
+// console.log('srcipt end')
+
+// async function async1() {
+//     console.log('async1 start'); // 2
+//     await new Promise(resolve => {
+//         console.log('promise1') // 3
+//         resolve('promise resolve')
+//     })
+//     console.log('async1 success'); // 5
+//     return 'async1 end'
+// }
+// console.log('srcipt start') // 1
+// async1().then(res => {
+//     console.log(res) // asycn1 end
+// })
+// new Promise(resolve => {
+//     console.log('promise2') // 4
+//     setTimeout(() => {
+//         console.log('timer')
+//     })
+// })
+
+// async function async1() {
+//     console.log("async1 start"); // 2
+//     await async2();
+//     console.log("async1 end"); // 微任务 6
+// }
+
+// async function async2() {
+//     console.log("async2"); // 3
+// }
+
+// console.log("script start"); // 1
+
+// setTimeout(function () { //  宏任务
+//     console.log("setTimeout"); // 8
+// }, 0);
+
+// async1();
+
+// new Promise(function (resolve) {
+//     console.log("promise1"); // 4
+//     resolve();
+// }).then(function () {
+//     console.log("promise2"); // 7
+// });
+// console.log('script end') // 5
+
+// async function testSometing() {
+//     console.log("执行testSometing"); // 2
+//     return "testSometing";
+// }
+
+// async function testAsync() {
+//     console.log("执行testAsync"); // 6
+//     return Promise.resolve("hello async");
+// }
+
+// async function test() {
+//     console.log("test start..."); // 1
+//     const v1 = await testSometing(); // 微任务
+//     console.log(v1); // 5 testSometing
+//     const v2 = await testAsync();
+//     console.log(v2);
+//     console.log(v1, v2);
+// }
+
+// test();
+
+// var promise = new Promise(resolve => {
+//     console.log("promise start..."); //  3
+//     resolve("promise");
+// });
+// promise.then(val => console.log(val)); // 6微任务
+
+// console.log("test end..."); // 4
+
+// async function async1() {
+//     await async2();
+//     console.log('async1');
+//     return 'async1 success'
+// }
+// async function async2() {
+//     return new Promise((resolve, reject) => {
+//         console.log('async2') // 1
+//         reject('error')
+//     })
+// }
+// async1().then(res => console.log(res))
+
+// async function async1() {
+//     try { // 微任务
+//         await Promise.reject('error!!!')
+//     } catch (e) {
+//         console.log(e)
+//     }
+//     console.log('async1');
+//     return Promise.resolve('async1 success')
+// }
+// async1().then(res => console.log(res))
+// console.log('script start') // 1
+
+
+// const first = () => (new Promise((resolve, reject) => {
+//     console.log(3); // 1
+//     let p = new Promise((resolve, reject) => {
+//         console.log(7); // 2
+//         setTimeout(() => { // 宏2
+//             console.log(5); //  6
+//             resolve(6);
+//             console.log(p) // 7: Promise resolved 1
+//         }, 0)
+//         resolve(1); // 改变p的 Promise状态为resolved 值为1
+//     });
+//     resolve(2); // 改变fisrt的 Promise状态为resolved 值为2
+//     p.then((arg) => { // 微任务1
+//         console.log(arg); //4: 1
+//     });
+// }));
+// first().then((arg) => {
+//     console.log(arg); // 5: 2  微任务2
+// });
+// console.log(4); // 3
+
+
+// const async1 = async () => {
+//     console.log('async1'); // 2
+//     setTimeout(() => { // 宏2
+//         console.log('timer1') // 7
+//     }, 2000)
+//     await new Promise(resolve => {
+//         console.log('promise1') // 3
+//     })
+//     console.log('async1 end')
+//     return 'async1 success'
+// }
+// console.log('script start'); // 1
+// async1().then(res => console.log(res));
+// console.log('script end'); // 4
+// Promise.resolve(1)
+//     .then(2)
+//     .then(Promise.resolve(3))
+//     .catch(4)
+//     .then(res => console.log(res)) // 5: 1微任务1
+// setTimeout(() => {
+//     console.log('timer2') //6 宏任务2
+// }, 1000)
+
+const p1 = new Promise((resolve) => {
+    setTimeout(() => { // 宏任务
+        resolve('resolve3');
+        console.log('timer1') // 3
+    }, 0)
+    resolve('resovle1'); // p1 设置为 resolved 值为resolve1
+    resolve('resolve2');
+}).then(res => { // 微任务
+    console.log(res) //1: resolved1
+    setTimeout(() => { // 宏任务
+        console.log(p1) // Promise resolve1 resolved1
+    }, 1000)
+}).finally(res => {
+    console.log('finally', res) // 2: 'finally' undeinfed
+})
