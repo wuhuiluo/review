@@ -3690,16 +3690,37 @@ const arr = [1, [2, [3]]]
 //     })
 // }
 
-function race(promises) {
-    if (promises.length === 0) return Promise.resolve()
-    return new Promise((resolve, reject) => {
-            promises.forEach(item => {
-                    Promise.resolve(item).then(res => {
-                            resolve(res)
-                        }, err => {
-                            reject(err)
-                        }
-                    })
-            })
-    })
+// function race(promises) {
+//     if (promises.length === 0) return Promise.resolve()
+//     return new Promise((resolve, reject) => {
+//             promises.forEach(item => {
+//                     Promise.resolve(item).then(res => {
+//                             resolve(res)
+//                         }, err => {
+//                             reject(err)
+//                         }
+//                     })
+//             })
+//     })
+// }
+
+async function async1() {
+    console.log('async1 start'); //  2
+    await async2();
+    console.log('async1 end'); // 微任务1 6
 }
+async function async2() {
+    console.log('async2'); // 3
+}
+console.log('script start'); // 1
+setTimeout(function () { // 宏任务
+    console.log('setTimeout'); // 8
+}, 0)
+async1();
+new Promise(function (resolve) {
+    console.log('promise1'); // 4 
+    resolve();
+}).then(function () { // 微任务
+    console.log('promise2'); // 7
+});
+console.log('script end'); // 5
