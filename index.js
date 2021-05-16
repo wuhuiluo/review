@@ -2190,1399 +2190,1418 @@
 
 const arr = [1, [2, [3]]]
 
-    // function flatten(arr) {
-    //     var result = []
-    //     for (var i = 0; i < arr.length; i++) {
-    //         if (Array.isArray(arr[i])) {
-    //             result = result.concat(flatten(arr[i]))
-    //         } else {
-    //             result.push(arr[i])
-    //         }
-    //     }
-    //     return result
-    // }
-
-    // console.log(flatten(arr));
-    // function flatten(arr) {
-    //     while (arr.some(item => Array.isArray(item))) {
-    //         arr = [].concat(...arr)
-    //     }
-    //     return arr
-    // }
-
-    // console.log(flatten(arr));
-
-    // let a = 20
-    // let tomAge = a
-
-    // let obj = {}
-    // let tomObj = obj
-    // obj.name = "tom"
-    // console.log(tomObj.name);
-
-    // 什么是作用域
-    // -当前上下文可以访问到的变量的集合
-
-    // 什么是作用域链查找由内到外进行查找
-
-    // -各种上下文代码在访问变量和函数时的顺序
-
-    // var name = "神奇的程序员";
-
-    // function changeName() {
-    //     let insideName = "大白";
-
-    //     function swapName() {
-    //         let tempName = insideName;
-    //         insideName = name;
-    //         name = tempName;
-
-    //         // 可以访问tempName、insideName、name
-    //     }
-    //     // 可以访问insideName、name
-    //     swapName();
-    // }
-    // // 可以访问name
-    // changeName();
-    // console.log(name);
-
-    // 全局上下文
-    // 函数上下文
-
-    // 未声明直接初始化
-
-    // function foo() {
-    //     console.log(this.a);
-    // }
-
-    // var obj = {
-    //     a: 1,
-    //     foo: foo
-    // }
-    // var bar = obj.foo
-    // console.log(bar);
-
-    // 参数传递造成的隐式绑定丢失
-    // function foo() {
-    //     console.log(this.a)
-    // }
-    // var obj = {
-    //     a: 1,
-    //     foo: foo // 即使换成 () => foo() 也没用
-    // }
-
-    // function doFoo(fn) {
-    //     fn();
-    // }
-    // var a = 2;
-    // doFoo(obj.foo)
-    // 1.判断数组对象的类型 instanceof constructor Object.prototype.toString.call
-    // let arr1 = [1, 2, 3]
-    // let obj = {
-    //     name: '大大',
-    //     age: 1,
-    //     1: 'name'
-    // }
-
-    // console.log(arr1 instanceof Array);
-    // console.log(obj instanceof Array);
-    // console.log(obj instanceof Object);
-
-    // console.log(arr1.constructor === Array);
-    // console.log(obj.constructor === Array);
-    // console.log(obj.constructor === Object);
-
-    // console.log(Object.prototype.toString.call(arr1) === '[object Array]');
-    // console.log(Object.prototype.toString.call(obj) === '[object Array]');
-    // console.log(Object.prototype.toString.call(obj) === '[object Object]');
-
-    // vue-router中的mode的值 hash、history
-
-    // 改变this指向的方法
-    // this在执行环境决定，有call、apply、bind，在new对象的时候也会修改this的值
-
-    // Vue中的hash模式和history模式的区别
-
-    // 原型修改、重写
-    // function Person(name) {
-    //     this.name = name
-    // }
-
-    // Person.prototype.getName = function () {
-
-    // }
-
-    // var p = new Person('whl')
-
-    // console.log(p.__proto__ === Person.prototype);
-    // console.log(p.__proto__ === p.constructor.prototype);
-
-    // hasOwnProperty
-
-    // function iterate(obj) {
-    //     var res = []
-    //     for (var key in obj) {
-    //         if (obj.hasOwnProperty(key)) {
-    //             res.push(`${key}:${obj[key]}`)
-    //         }
-    //     }
-    // }
-
-    // function Person(name) {
-    //     this.name = name
-    // }
-
-    // var p2 = new Person('whl')
-    // console.log(p2.__proto__ === Person.prototype);
-    // console.log(p2.__proto__.__proto__ === Object.prototype);
-    // console.log(p2.__proto__.__proto__.__proto__ === null)
-    // // console.log(p2.__proto__.__proto__.__proto__.__proto__) // 报错
-    // // console.log(p2.__proto__.__proto__.__proto__.__proto__.__proto__) // 报错
-    // console.log(p2.constructor === Person)
-    // console.log(p2.prototype) // undefined p2是实例，没有prototype属性
-    // console.log(Person.constructor === Function)
-    // console.log(Person.prototype) // 打印出Person.prototype这个对象里面的所有方法和属性
-    // console.log(Person.prototype.constructor === Person)
-    // console.log(Person.prototype.__proto__ === Object.prototype)
-    // console.log(Person.__proto__) // Function.prototype
-    // console.log(Function.prototype.__proto__ === Object.prototype)
-    // console.log(Function.__proto__ === Function.prototype)
-    // console.log(Object.__proto__ === Function.prototype)
-    // console.log(Object.prototype.__proto__ === null)
-
-    // function Dog() {
-    //     this.name = 'puppy'
-    // }
-
-    // Dog.prototype.back = () => {
-    //     console.log('woofwoof');
-    // }
-    // const dog = new Dog()
-    // console.log(Dog.prototype.construcotr === Dog && dog.constructor === Dog && dog instanceof Dog);
-
-    // // instanceof 检测的是类型是否在实例的原型链上
-
-    // function Dog() {
-    //     this.name = 'puppy'
-    // }
-    // Dog.prototype.bark = () => {
-    //     console.log('woof!woof!')
-    // }
-
-    // function BigDog() {}
-    // BigDog.prototype = new Dog()
-    // Object.defineProperty(BigDog.prototype, "constructor", {
-    //     value: BigDog,
-    //     enumerable: false
-    // })
-    // const bigDog = new BigDog()
-    // console.log(bigDog.constructor === BigDog) // true
-
-    // 如何阻止事件冒泡
-
-    // event.stopPropgation()
-    // event.cancelBubble = true
-
-    // 事件委托
-
-    // focus、blur没有事件委托
-
-    // 微任务: promise的回调、node中的process.nextTick、对DOM变化监听的MutationObserver
-    // 宏任务: script脚本执行，setTimeout，setInterval、setImmediate、I/O操作、UI渲染等
-
-    // const保证的是内存地址不能改变
-    // 箭头函数的this继承自己作用域上一层的this，箭头函数的this在它定义的时候就已经确定了,之后都不会改变
-
-    // var id = 'GLOBAL';
-    // var obj = {
-    //     id: 'OBJ',
-    //     a: function () {
-    //         console.log(this.id);
-    //     },
-    //     b: () => {
-    //         console.log(this.id);
-    //     }
-    // };
-    // obj.a(); // 'OBJ'
-    // obj.b(); // 'GLOBAL'
-    // const b = new obj.a()
-
-    // 箭头函数不能作为构造函数使用
-    // 箭头函数不能用作Generator函数
-    // 箭头函数不能使用yeild关键字
-
-    // const obj = {
-    //     getArrow() {
-    //         return () => {
-    //             console.log(this);
-    //             console.log(this === obj);
-    //         }
-    //     }
-    // }
-
-    // obj.getArrow()()
-
-    // 对象扩展运算符
-    // let bar = {
-    //     a: 1,
-    //     b: 2
-    // }
-
-    // let baz = {
-    //     ...bar
-    // }
-    // console.log(baz);
-    // let bar = {
-    //     a: 1,
-    //     b: 2
-    // }
-    // let baz = { 扩展运算符对对象实例的拷贝属于一种浅拷贝
-    //     ...bar,
-    //     ...{
-    //         a: 2,
-    //         b: 4
-    //     }
-    // }
-    // console.log(baz);
-    // console.log(...[1, [2, 3, 4], 5]);
-
-    // function add(x, y) {
-    //     return x + y
-    // }
-
-    // let numbers = [1, 2]
-    // let a = add(...numbers)
-    // console.log(a);
-    // const arr1 = [1, 2]
-    // const arr2 = [...arr1]
-    // console.log(arr2);
-    // let arr1 = ['two', 'three']
-    // let arr2 = ['one', ...arr1, 'four', 'five']
-    // console.log(arr2);
-    // console.log([...'hello']);
-    // Array.prototype.slice.call(arguments)
-
-    // 类数组转化为数组的方式有这几种
-
-    // 1.Array.prototype.slice.call(ArrayLike)
-    // Array.prototype.splice.call(ArrayLike,0)
-    // Array.from(arrayLike)
-
-    // Javascript中有哪些数据类型他们的区别
-
-    // 1.undefined、null、boolean、number、string、Symbol、BigInt
-    // console.log([] instanceof Array); 
-    // console.log(function () {}
-    //     instanceof Function);
-    // console.log({}
-    //     instanceof Object);
-
-    // instanceof只能正确判断引用类型数据,不能判断基本类型数据
-    // function fn() {}
-    // fn.prototype = new Array()
-    // fn.prototype.constructor = fn
-    // var f = new fn()
-    // console.log(f.constructor === fn);
-    // console.log(f.constructor === Array);
-    // var a = Object.prototype.toString;
-
-    // console.log(a.call(2) === '[object Number]');
-    // console.log(a.call(true));
-    // console.log(a.call('str'));
-    // console.log(a.call([]));
-    // console.log(a.call(function () {}));
-    // console.log(a.call({}));
-    // console.log(a.call(undefined));
-    // console.log(a.call(null));
-    // console.log(Object.prototype.toString.call([]).slice(8, -1) === 'Array');
-    // console.log([].__proto__ === Array.prototype);
-    // console.log(Array.isArray([]));
-    // console.log([] instanceof Array);
-    // console.log(null == undefined);
-    // instanceof操作符的原理: 用于判断构造函数的prototype属性是否出现在该对象原型链中的任何位置
-    // function MyInstanceof(left, right) {
-    //     let proto = Object.getPrototypeOf(left), // 获取对象的原型
-    //         prototype = right.prototype // 获取构造函数的proototype对象
-    //     while (true) {
-    //         if (!proto) return false
-    //         if (proto === prototype) return true
-    //         proto = Object.getPrototypeOf(proto)
-    //     }
-    // }
-
-    // console.log(MyInstanceof([], Array));
-    // console.log(MyInstanceof({}, Object));
-
-    // // 标记清楚，引用计数垃圾回收的两种方式
-
-    // class B {}
-    // B.prototype.a = 1;
-    // B.prototype.add = function() {
-    //    this.a++;
-    // };
-    // const b1 = new B();
-    // console.log(b1.a); // 1
-
-    // const b2 = new B();
-    // b2.add()
-    // console.log(b2.a);
-
-    // const obj = {
-    //     a: 1,
-    // };
-    // obj.add = () => {
-    //     console.log(this.a);
-    // };
-    // obj.add();
-
-    // 1.模拟new的过程
-
-    // function Animals(name, color) {
-    //     this.name = name
-    //     this.color = color
-    // }
-    // Animals.prototype.action = function () {
-    //     console.log(this.name, 'walk');
-    // }
-
-
-    // 1.创建一个新的对象
-    // 2.连接到原型(新对象的原型指向要继承的构造函数的原型)，obj可以访问构造函数原型的属性
-    // 3.绑定this实现继承，obj可以访问构造函数是的属性
-    // 4.如果构造函数返回的是对象则返回他，如果不是则返回obj
-
-    // function create(constructor, ...args) {
-    //     const obj = new Object()
-    //     obj.__proto__ = constructor.prototype
-    //     // console.log(args);
-    //     const res = constructor.apply(obj, args) // ...args将args转换为数组
-    //     return res instanceof Object ? res : obj
-    // }
-    // const dog = create(Animals, 'dog', 'red')
-    // console.log(dog);
-
-    // Object.create
-
-    // function create(constructor, ...args) {
-    //     const obj = Object.create(constructor.prototype)
-    //     const res = constructor.apply(obj, args)
-    //     return res instanceof Object ? res : obj
-    // }
-    // const dog = create(Animals, 'dog', 'red')
-    // console.log(dog);
-
-    // 函数的柯里化
-
-    // function curry() {
-    //     const argList = [...arguments]
-    //     console.log(argList);
-    //     const fn = function () {
-    //         argList.push(...arguments)
-    //         return fn
-    //     }
-    //     fn.toString = function () {
-    //         return argList.reduce((a, b) => a + b)
-    //     }
-    //     return fn
-    // }
-
-    // console.log(curry(1, 2)(3)(4, 5, 6));
-
-    // function sum(a, b, c) {
-    //     return a + b + c
-    // }
-
-    // function curry(fn) {
-    //     const argsList = [...arguments].splice(1)
-    //     // console.log(argsList);
-    //     return function () {
-    //         const newArgsList = argsList.concat([...arguments])
-    //         if (newArgsList.length < fn.length) {
-    //             return curry.apply(this, [fn, ...newArgsList])
-    //         } else {
-    //             return fn.apply(this, newArgsList)
-    //         }
-    //     }
-    // }
-    // const sumAll = curry(sum)
-    // console.log(sumAll(1)(2)(3));
-    // console.log(sumAll(1)(2, 3));
-
-    // 重绘
-
-    // 当元素样式发生改变，但不影响布局时，浏览器将使用重绘进行元素更新，由于此时只需要UI层面的绘制，因此损耗较小
-
-    // 回流
-
-    // 当元素尺寸、结构、或者触发某些属性的时候，浏览器会重新渲染页面，这叫回流，浏览器需要重新计算，重新进行页面布局，所以损耗较大
-
-    // 1.页面初次渲染
-    // 2.浏览器窗口大小发生改变
-    // 3.元素尺寸、位置、内容发生改变
-    // 4.元素字体大小发生改变
-    // 5.添加或删除可见的DOM元素
-    // 6.触发CSS伪类，如:hover
-    // 7.查询某些属性或者调用某些方法
-    // client offset scroll getComputedStyle getBoundingClinetRect ScrollTo()
-
-    // 浏览器存储
-    // cookie: 用户信息、登陆状态,自行设置过期事件，体积上线为4k
-    // localStorage: 无限期存储，体积上线为4-5M
-    // sessionStorage: 浏览器窗口关闭则删除，体积上线为4-5M
-
-    // 网络请求方式post和get
-    // get：会被浏览器缓存，请求长度受限，会被历史保存记录，浏览器回退时候是无害的，一般不带请求体，发送一个TCP数据包
-    // post：更安全，更多编码类型，可以发送大数据，浏览器回退的时候会再次提交请求，一般带有请求体，发送两个TCP数据包
-
-    // Function.prototype.myCall = function (context, ...args) {
-    //     if (context === null || context === undefined) {
-    //         context = window
-    //     } else {
-    //         context = Object(context)
-    //     }
-    //     // const args = [...arguments].slice(1) //将类数组转换为数组
-    //     const key = Symbol('特殊属性Symbol')
-    //     context[key] = this
-    //     let result = context[key](...args)
-    //     delete context[key]
-    //     return result
-    // }
-
-    // function log() {
-    //     console.log(this);
-    //     console.log(this.name);
-    //     console.log(arguments);
-    // }
-    // let obj = {
-    //     name: 'whl'
-    // }
-    // // 必须是函数来调用
-    // log.myCall(obj, 1, 2, 3)
-
-
-    // Function.prototype.myApply = function (context, args) {
-    //     if (context === null || context === undefined) {
-    //         context = window
-    //     } else {
-    //         context = Object(context)
-    //     }
-    //     const key = Symbol('特殊属性Symbol')
-    //     context[key] = this
-    //     let result = context[key](...args)
-    //     delete context[key]
-    //     return result
-    // }
-
-    // function log() {
-    //     console.log(this);
-    //     console.log(this.name);
-    //     console.log(arguments);
-    // }
-    // let obj = {
-    //     name: 'whl'
-    // }
-    // // 必须是函数来调用
-    // log.myApply(obj, [1, 2, 3])
-
-    // Function.prototype.myBind = function (objThis, ...params) {
-    //     const thisFn = this
-    //     // 对返回的函数 secondParams 二次传参
-    //     let fToBind = function (...secondParams) {
-    //         const isNew = this instanceof fToBind
-    //         const context = isNew ? this : Object(objThis)
-    //         return thisFn.call(context, ...params, ...secondParams)
-    //     }
-    //     if (thisFn.prototype) {
-    //         fToBind.prototype = Object.create(this.Fn.prototype)
-    //     }
-    //     return fTobind
-    // }
-    // 1.拷贝原函数
-    // 2.返回拷贝的函数
-    // 3.调用拷贝的函数
-
-    // 事件委托、事件冒泡
-
-    // 减少内存的效果，节约效率
-
-    // for in for of
-    // 遍历课遍历对象的所有属性 一般用于遍历对象，值是他的键值
-    // const arr2 = [5, 4, 3, 2, 1]
-    // // arr2.name = 'whl'
-
-    // for (let i of arr2) {
-    //     console.log(i);
-    // }
-    // arr2.name = 'name'
-    // for (let i in arr2) {
-    //     console.log(i);
-    // }
-    // const test = [
-    //     [1, 2, 2],
-    //     [3, 4, 5, 5],
-    //     [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
-    // ]
-    // for of不能遍历对象，对象没有迭代器对象,可以遍历数组/数组对象/字符串/map/set
-    // function flat(arr) {
-    //     let list = []
-    //     arr.forEach(item => {
-    //         if (Array.isArray(item)) {
-    //             // console.log(item);
-    //             // console.log(...flat(item));
-    //             list.push(...flat(item))
-    //         } else {
-    //             list.push(item)
-    //         }
-    //     })
-    //     return list
-    // }
-
-    // const res1 = [...new Set(flat(test))].sort((a, b) => a - b)
-    // console.log(res1);
-    // const res2 = [...new Set(test.flat(Infinity))].sort((a, b) => a - b)
-    // console.log(res2);
-
-
-    // 1.模拟new过程
-
-    // 1.创建一个新对象
-    // 2.链接到原型(新对象的原型指向要继承的构造函数的原型)，obj可以访问构造函数原型的属性
-    // 3.绑定this实现继承，obj可以访问构造函数的属性
-    // 4.如果构造函数返回的是对象则返回他，如果不是则返回obj
-
-    // function myNew(constructor, ...args) {
-    //     const obj = new Object()
-    //     obj.__proto__ = constructor.prototype
-    //     console.log(args);
-    //     const res = constructor.apply(obj, args)
-    //     return res instanceof Object ? res : obj
-    // }
-    // function New(constructor, ...args) {
-    //     const obj = Object.create(constructor.prototype)
-    //     const res = constructor.apply(obj, args)
-    //     return res instanceof Object ? res : obj
-    // }
-
-    // function Animal(name, color) {
-    //     this.name = name
-    //     this.color = color
-    // }
-
-    // Animal.prototype.action1 = function () {
-    //     console.log(this.color);
-    // }
-
-
-    // const dog1 = New(Animal, 'dog', 'red')
-    // console.log(dog1);
-    // dog1.action1()
-
-    // function debounce(fn, wait) {
-    //     // 创建一个标记用来存放定时器的返回值
-    //     let timer = null
-    //     return function (...args) {
-    //         // 每次当用户输入的时候，把前一个定时器删除
-    //         timer && cleartTimeout(timer)
-    //         // 创建一个新的setTimeOut
-    //         // 保证点击按钮后的间隔内如果用户还点击了的话则不会执行fn函数
-    //         timer = setTimeout(() => {
-    //             fn.apply(this, args)
-    //         }, wait)
-    //     }
-    // }
-
-
-    // function throttle(fn, wait) {
-    //     // 通过闭包保存一个标记
-    //     let flag = true
-    //     return function (...args) {
-    //         if (!flag) {
-    //             return
-    //         }
-    //         // flag设置为false，防止执行之前再被执行
-    //         flag = false
-    //         setTimeout(() => {
-    //             fn.apply(this, args)
-    //             flag = true
-    //         }, wait)
-    //     }
-    // }
-    // 函数柯里化
-    // function curry(fn) {
-    //     const argsList = [...arguments].splice(1)
-    //     return function () {
-    //         const newArgsList = argsList.concat([...arguments])
-    //         if (newArgsList.length < fn.length) {
-    //             return curry.apply(this, [fn, ...newArgsList])
-    //         } else {
-    //             return fn.apply(this, newArgsList)
-    //         }
-    //     }
-    // }
-
-    // function sum(a, b, c) {
-    //     return a + b + c
-    // }
-    // let sumAll = curry(sum)
-    // console.log(sumAll(1, 2, 3));
-    // console.log(sumAll(1)(2)(3));
-    // console.log(sumAll(1)(2, 3));
-
-    // cookie 4K
-    // sessionStorange 4-5M
-    // localStorage 4-5M
-
-    // GET和POST
-
-    // CSRF和XSS
-
-    // 区别
-    // CSRF需要登陆之后操作，XSS不需要
-    // CSRF是请求页面API来实现非法操作，XSS是向当前页面植入JS脚本来修改页面内容
-
-    // 跨站点伪造请求
-    // 跨站脚本攻击
-
-    // event loop执行顺序:
-    // 1.一开始整个脚本作为一个宏任务执行
-    // 2.执行过程中同步代码直接执行，宏任务进入宏任务队列，微任务进入微任务队列
-    // 3.当前宏任务执行完出队,检查微任务列表，有则一次执行，直到全部执行完
-    // 4.执行浏览器UI线程的渲染工作
-    // 5.检查是否又Web Worker任务，有则执行
-    // 6.执行完本轮的宏任务，回到2，一次循环，直到宏任务和微任务队列都为空
-
-    // 微任务包括: Promise.then(),Promise.catch() process.nextTick
-    // 宏任务: script、setTimeout、setInterval、setImmediate I/O操作，UI渲染\
-
-    // const promise1 = new Promise((resolve, reject) => {
-    //     console.log('promise1'); // 1
-    // })
-    // console.log('1', promise1); // '1' Promise{<pending>}
-
-    // const promise = new Promise((resolve, reject) => {
-    //     console.log(1); // 1
-    //     resolve('success') // 将promise状态为了resolved并且将值保存下来
-    //     console.log(2); // 2
-    // })
-
-    // promise.then(() => {
-    //     console.log(3); // 4
-    // })
-    // console.log(4); // 3
-
-    // const promise = new Promise((resolve, reject) => {
-    //     console.log(1);
-    //     console.log(2);
-    // })
-    // // promise中并没有resolve或者reject因此promise.then并不会执行，他只有状态改变了之后才会执行
-    // promise.then(() => {
-    //     console.log(3);
-    // })
-    // console.log(4);
-
-    // const promise1 = new Promise((resolve, reject) => {
-    //     console.log('promise1'); //1
-    //     resolve('resolve1')
-    // })
-
-    // const promise2 = promise1.then(res => {
-    //     console.log(res); // 4
-    // })
-
-    // console.log('1', promise1); // 2 fulfilled resolve1
-    // console.log('2', promise2); // 3 pending
-
-    // promise结合setTimeout
-    // console.log('start'); // 1
-    // setTimeout(() => {
-    //     console.log('time'); // 4
-    // })
-    // Promise.resolve().then(() => {
-    //     console.log('resolve'); // 3
-    // })
-    // console.log('end'); // 2
-
-    // const promise = new Promise((resolve, reject) => {
-    //     console.log(1); // 1
-    //     setTimeout(() => {
-    //         console.log('timeStart'); // 4
-    //         resolve('success') // fulfilled success
-    //         console.log('timeEnd'); // 5
-    //     }, 0)
-    //     console.log(2); // 2
-    // })
-    // promise.then(res => {
-    //     console.log(res); // 6
-    // })
-    // console.log(4); // 3
-
-    // setTimeout(() => {
-    //     console.log('timer1');
-    //     setTimeout(() => {
-    //         console.log('timer3')
-    //     }, 0)
-    // }, 0)
-    // setTimeout(() => {
-    //     console.log('timer2')
-    // }, 0)
-    // console.log('start') // 1
-    // setTimeout(() => {
-    //     console.log('timer1');
-    //     Promise.resolve().then(() => {
-    //         console.log('promise')
-    //     })
-    // }, 0)
-    // setTimeout(() => {
-    //     console.log('timer2')
-    // }, 0)
-    // console.log('start') // 1
-    // Promise.resolve().then(() => { // 微任务1
-    //     console.log('promise1');
-    //     const timer2 = setTimeout(() => {
-    //         console.log('timer2')
-    //     }, 0)
-    // });
-    // const timer1 = setTimeout(() => { // 宏任务1
-    //     console.log('timer1')
-    //     Promise.resolve().then(() => {
-    //         console.log('promise2')
-    //     })
-    // }, 0)
-    // console.log('start'); // 1
-
-    // const promise1 = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         resolve('success')
-    //     }, 1000)
-    // })
-    // const promise2 = promise1.then(() => {
-    //     throw new Error('error!!!')
-    // })
-    // console.log('promise1', promise1) // Promise pending
-    // console.log('promise2', promise2) // Promise pending
-    // setTimeout(() => {
-    //     console.log('promise1', promise1)
-    //     console.log('promise2', promise2)
-    // }, 2000)
-
-    // const promise1 = new Promise((resolve, reject) => {
-    //     setTimeout(() => { // 宏任务
-    //         resolve("success");
-    //         console.log("timer1"); // 3
-    //     }, 1000);
-    //     console.log("promise1里的内容"); // 1
-    // });
-    // const promise2 = promise1.then(() => {
-    //     throw new Error("error!!!");
-    // });
-    // console.log("promise1", promise1); // Promise pending
-    // console.log("promise2", promise2); // Promise pending
-    // setTimeout(() => {
-    //     console.log("timer2"); // 4
-    //     console.log("promise1", promise1); // resolved
-    //     console.log("promise2", promise2); // rejected
-    // }, 2000);
-
-    // const promise = new Promise((resolve, reject) => {
-    //     resolve("success1"); // 1
-    //     reject("error");
-    //     resolve("success2");
-    // });
-    // promise
-    //     .then(res => {
-    //         console.log("then: ", res);
-    //     }).catch(err => {
-    //         console.log("catch: ", err);
-    //     })
-
-    // const promise = new Promise((resolve, reject) => {
-    //     reject("error");
-    //     resolve("success2");
-    // });
-    // promise
-    //     .then(res => {
-    //         console.log("then1: ", res);
-    //     }).then(res => {
-    //         console.log("then2: ", res);
-    //     }).catch(err => {
-    //         console.log("catch: ", err);
-    //     }).then(res => {
-    //         console.log("then3: ", res); // then3: undefined
-    //     })
-
-    // resolve(2)
-    // Promise.reject(1)
-    //     .then(res => {
-    //         console.log(res);
-    //         return 2;
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         return 3
-    //     })
-    //     .then(res => {
-    //         console.log(res);
-    //     });
-
-    // const promise = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         console.log('timer')
-    //         resolve('success')
-    //     }, 1000)
-    // })
-    // const start = Date.now();
-    // promise.then(res => {
-    //     console.log(res, Date.now() - start)
-    // })
-    // promise.then(res => {
-    //     console.log(res, Date.now() - start)
-    // })
-    // Promise.resolve().then(() => {
-    //     return new Error('error!!!')
-    // }).then(res => {
-    //     console.log("then: ", res)
-    // }).catch(err => {
-    //     console.log("catch: ", err)
-    // })
-
-    // return Promise.reject(new Error('error!'))
-    // throw new Error('error!')
-
-    // const promise = Promise.resolve().then(() => {
-    //     return promise;
-    // })
-    // promise.catch(console.err)
-
-    // Promise.resolve()
-    //     .then(function success1(res) {
-    //         throw new Error('error!!!')
-    //     }, function fail1(err) {
-    //         console.log('fail1', err)
-    //     }).catch(function fail2(err) {
-    //         console.log('fail2', err)
-    //     })
-
-    // async function async1() {
-    //     console.log("async1 start"); // 1
-    //     await async2(); // await后面的语句相当于放到 new Promise后面
-    //     console.log("async1 end"); // 4 下一行及以后的代码相当于放在Promise.then中
-    // }
-    // async function async2() {
-    //     console.log("async2"); // 2
-    // }
-    // async1();
-    // console.log('start') // 3
-
-    // async function async1() {
-    //     console.log("async1 start"); // 1
-    //     await async2();
-    //     console.log("async1 end"); // 4
-    // }
-    // async function async2() {
-    //     setTimeout(() => { // 宏
-    //         console.log('timer') // 5
-    //     }, 0)
-    //     console.log("async2"); // 2
-    // }
-    // async1();
-    // console.log("start") // 3
-    // async function async1() {
-    //         console.log("async1 start"); // 1
-    //         await async2();
-    //         console.log("async1 end"); // 4
-    //         setTimeout(() => {
-    //                 console.log('timer1') // 7
-    //             },
-    //         }
-    //         async function async2() {
-    //             setTimeout(() => {
-    //                 console.log('timer2') // 宏 先 5
-    //             }, 0)
-    //             console.log("async2"); // 2
-    //         }
-    //         async1();
-    //         setTimeout(() => { // 宏任务 后 6
-    //             console.log('timer3')
-    //         }, 0)
-    //         console.log("start") // 3
-
-    // async function fn() {
-    //     // return await 1234
-    //     // Promise.resolve(123)
-    //     // 等同于
-    //     return 123
-    // }
-    // fn().then(res => console.log(res))
-
-    // async function async1() {
-    //     console.log('async1 start'); // 1
-    //     await new Promise(resolve => {
-    //         console.log('promise1') // 2
-    //     })
-    //     console.log('async1 success'); // 3
-    //     return 'async1 end'
-    // }
-    // console.log('srcipt start')
-    // async1().then(res => console.log(res))
-    // console.log('srcipt end')
-
-    // async function async1() {
-    //     console.log('async1 start'); // 2
-    //     await new Promise(resolve => {
-    //         console.log('promise1') // 3
-    //         resolve('promise1 resolve') 
-    //     }).then(res => console.log(res))
-    //     console.log('async1 success');
-    //     return 'async1 end'
-    // }
-    // console.log('srcipt start') // 1
-    // async1().then(res => console.log(res))
-    // console.log('srcipt end')
-
-    // async function async1() {
-    //     console.log('async1 start'); // 2
-    //     await new Promise(resolve => {
-    //         console.log('promise1') // 3
-    //         resolve('promise resolve')
-    //     })
-    //     console.log('async1 success'); // 5
-    //     return 'async1 end'
-    // }
-    // console.log('srcipt start') // 1
-    // async1().then(res => {
-    //     console.log(res) // asycn1 end
-    // })
-    // new Promise(resolve => {
-    //     console.log('promise2') // 4
-    //     setTimeout(() => {
-    //         console.log('timer')
-    //     })
-    // })
-
-    // async function async1() {
-    //     console.log("async1 start"); // 2
-    //     await async2();
-    //     console.log("async1 end"); // 微任务 6
-    // }
-
-    // async function async2() {
-    //     console.log("async2"); // 3
-    // }
-
-    // console.log("script start"); // 1
-
-    // setTimeout(function () { //  宏任务
-    //     console.log("setTimeout"); // 8
-    // }, 0);
-
-    // async1();
-
-    // new Promise(function (resolve) {
-    //     console.log("promise1"); // 4
-    //     resolve();
-    // }).then(function () {
-    //     console.log("promise2"); // 7
-    // });
-    // console.log('script end') // 5
-
-    // async function testSometing() {
-    //     console.log("执行testSometing"); // 2
-    //     return "testSometing";
-    // }
-
-    // async function testAsync() {
-    //     console.log("执行testAsync"); // 6
-    //     return Promise.resolve("hello async");
-    // }
-
-    // async function test() {
-    //     console.log("test start..."); // 1
-    //     const v1 = await testSometing(); // 微任务
-    //     console.log(v1); // 5 testSometing
-    //     const v2 = await testAsync();
-    //     console.log(v2);
-    //     console.log(v1, v2);
-    // }
-
-    // test();
-
-    // var promise = new Promise(resolve => {
-    //     console.log("promise start..."); //  3
-    //     resolve("promise");
-    // });
-    // promise.then(val => console.log(val)); // 6微任务
-
-    // console.log("test end..."); // 4
-
-    // async function async1() {
-    //     await async2();
-    //     console.log('async1');
-    //     return 'async1 success'
-    // }
-    // async function async2() {
-    //     return new Promise((resolve, reject) => {
-    //         console.log('async2') // 1
-    //         reject('error')
-    //     })
-    // }
-    // async1().then(res => console.log(res))
-
-    // async function async1() {
-    //     try { // 微任务
-    //         await Promise.reject('error!!!')
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    //     console.log('async1');
-    //     return Promise.resolve('async1 success')
-    // }
-    // async1().then(res => console.log(res))
-    // console.log('script start') // 1
-
-
-    // const first = () => (new Promise((resolve, reject) => {
-    //     console.log(3); // 1
-    //     let p = new Promise((resolve, reject) => {
-    //         console.log(7); // 2
-    //         setTimeout(() => { // 宏2
-    //             console.log(5); //  6
-    //             resolve(6);
-    //             console.log(p) // 7: Promise resolved 1
-    //         }, 0)
-    //         resolve(1); // 改变p的 Promise状态为resolved 值为1
-    //     });
-    //     resolve(2); // 改变fisrt的 Promise状态为resolved 值为2
-    //     p.then((arg) => { // 微任务1
-    //         console.log(arg); //4: 1
-    //     });
-    // }));
-    // first().then((arg) => {
-    //     console.log(arg); // 5: 2  微任务2
-    // });
-    // console.log(4); // 3
-
-
-    // const async1 = async () => {
-    //     console.log('async1'); // 2
-    //     setTimeout(() => { // 宏2
-    //         console.log('timer1') // 7
-    //     }, 2000)
-    //     await new Promise(resolve => {
-    //         console.log('promise1') // 3
-    //     })
-    //     console.log('async1 end')
-    //     return 'async1 success'
-    // }
-    // console.log('script start'); // 1
-    // async1().then(res => console.log(res));
-    // console.log('script end'); // 4
-    // Promise.resolve(1)
-    //     .then(2)
-    //     .then(Promise.resolve(3))
-    //     .catch(4)
-    //     .then(res => console.log(res)) // 5: 1微任务1
-    // setTimeout(() => {
-    //     console.log('timer2') //6 宏任务2
-    // }, 1000)
-
-    // const p1 = new Promise((resolve) => {
-    //     setTimeout(() => { // 宏任务
-    //         resolve('resolve3');
-    //         console.log('timer1') // 3
-    //     }, 0)
-    //     resolve('resovle1'); // p1 设置为 resolved 值为resolve1
-    //     resolve('resolve2');
-    // }).then(res => { // 微任务
-    //     console.log(res) //1: resolved1
-    //     setTimeout(() => { // 宏任务
-    //         console.log(p1) // Promise resolve1 resolved1
-    //     }, 1000)
-    // }).finally(res => {
-    //     console.log('finally', res) // 2: 'finally' undeinfed
-    // })
-
-    // Promise.all
-
-    // function all(promises) {
-    //     if (promises.length === 0) return Promise.resolve([])
-    //     return new Promise((resolve, reject) => {
-    //         let result = []
-    //         let num = 0
-    //         const check = () => {
-    //             if (num === promises.length) {
-    //                 resolve(result)
-    //             }
-    //         }
-    //         promises.forEach(item => {
-    //             Promise.resolve((item, index)).then(res => {
-    //                 result[index] = res
-    //                 num++
-    //                 check()
-    //             }, err => {
-    //                 reject(err)
-    //             })
-    //         })
-    //     })
-    // }
-
-    // function allSettle(promises) {
-    //     if (promises.length === 0) return Promise.resolve([])
-    //     return new Promise((resolve, reject) => {
-    //         let result = [],
-    //             num = 0
-    //         const check = () => {
-    //             if (num === result.length) {
-    //                 resolve(result)
-    //             }
-    //         }
-    //         promises.forEach((item, index)).then(res => {
-    //             result[index] = {
-    //                 status: 'fulfilled',
-    //                 value: res
-    //             }
-    //             num++
-    //             check()
-    //         }, err => {
-    //             result[index] = {
-    //                 status: 'rejected',
-    //                 reason: err
-    //             }
-    //             num++
-    //             check()
-    //         })
-    //     })
-    // }
-
-    // function any(promises) {
-    //     if (promises.length === 0) {
-    //         reject(new AggregateError('No Promise in Promise.any was resolved'))
-    //     }
-    //     return new Promise((resolve, reject) => {
-    //         let result = [],
-    //             num = 0
-    //         const check = () => {
-    //             if (num === promises.length) {
-    //                 reject(reject(new AggregateError('No Promise in Promise.any was resolved')))
-    //             }
-    //         }
-    //         promises.forEach((item, index)).then(res => {
-    //             resolve(res)
-    //         }, err => {
-    //             result[index] = err
-    //             num++
-    //             check()
-    //         })
-    //     })
-    // }
-
-    // function race(promises) {
-    //     if (promises.length === 0) return Promise.resolve()
-    //     return new Promise((resolve, reject) => {
-    //         promises.forEach(item).then(res => {
-    //             resolve(res)
-    //         }, err => {
-    //             reject(err)
-    //         })
-    //     })
-    // }
-
-    // var length = 10
-
-    // function fn() {
-    //     console.log(this);
-    //     return this.length + 1
-    // }
-
-    // var obj = {
-    //     length: 5,
-    //     test1: function () {
-    //         return fn()
-    //     }
-    // }
-    // obj.test2 = fn
-    // console.log(obj.test1()); // 6
-    // console.log(fn() === obj.test2()); // false
-    // console.log(fn());
-    // console.log(obj.test2());
-
-    // 1.是否连接2.是否可靠3.连接对象个数4.传输方式5.首部开销6.使用场景
-
-    // 客户端发送能力和服务器接受能力
-
-
-    -- -
-    theme: cyanosis
-    -- -
-
-    #HTTP协议与计算机网络
-
-## 1. TCP和UDP
-
-
-    |
-    - | UDP | TCP |
-    |
-    : -: |: -: |: -: |
-    |
-    是否可连接 | 无连接 | 面向连接 |
-    |
-    是否可靠 | 不可靠传输， 不使用流量控制和拥塞控制 | 可靠传输 |
-    |
-    链接对象个数 | 一对一， 一对多， 多对一， 多对多 | 一对一 |
-    |
-    传输方式 | 面向报文 | 面向字节流 |
-    |
-    首部开销 | 首部开销小， 8 字节 | 首部最小20字节， 最大60字节 |
-    |
-    使用场景 | 实时应用（ IP电话， 视频会议， 直播等） | 适用于可靠传输的应用， 比如文件传输
-
-
-## 2. TCP三次握手， 两次行不行， 四次行不行， 四次挥手
-
-    **
-    三次握手 **
-
-    ``
-`
-第一次: client -> SYN = 1, seq = x 
-第二次: server -> ACK = x + 1,SYN = 1,seq = y
-第三次: clinet -> ACK = y + 1
-`
-``
-
-两次握手行不行？ 答案当然是否定的
-
-    ``
-`
-三次握手是通信双方为了确信自己和接收方的发送能力和接受能力都是正常的
-
-第一次： 服务器：客户端发送能力✔，服务器接受能力✔
-第二次： 客户端：客户端发送能力✔，接受能力✔，服务器发送能力✔，接受能力✔
-第三次： 服务器：客户端接受能力✔，服务器发送能力✔
-`
-``
-
-
-##
-3. HTTP请求方法有哪些， PUT和POST的区别
-    `get、post、delete、head、put`
-
-    **
-    幂等性 **
-
-    通俗来讲就是不管进行多少次重复的操作， 都是实现相同的结果
-
-`GET,DELETE,PUT是幂等操作，post不是，原因是前三个重复多次同一个操作，结果是一样的，而POST重复多次，资源就会提交多份`
-
-选用PUT还是POST取决于最终要实现的操作， 比如发送两个同样的请求， 要求产生两个结果， 那应该用POST， 要求产生一个结果那就用PUT
-
-## 4. GET和POST的区别
-
-    |
-    - | GET | POST |
-    |
-    : -: |: -: |: -: |
-    |
-    后退 / 刷新 | 无害 | 数据会被重新提交 |
-    |
-    书签 | 可收藏为书签 | 不可收藏为书签 |
-    |
-    缓存 | 能被缓存 | 不能缓存 |
-    |
-    编码类型 | application / x - www - form - urlencoded | application / x - www - form - urlencoded或multipart / form - data， 二进制数据使用多重编码 |
-    |
-    历史 | 参数保留在浏览器历史中 | 参数不会保存在浏览器历史中 |
-    |
-    安全性 | 安全性较差， 参数拼接在url中 | 相对GET更安全 |
-    |
-    可见性 | 数据在URL中， 所有人可见 | 数据在form data中 |
-
-    **
-    由于GET请求的数据能够被缓存， 所以有时不能返回正确的数据 **
-
-    解决： `服务器端设置缓存失效时间，在请求中添加时间戳的方式`
-
-
-## 5. HTTP状态码, 301, 302
-
-    -
-    1 XX: 服务器收到请求， 需要请求者继续执行操作 -
-    2 XX: 相应成功， 操作被成功接受并处理 -
-    200: ok -
-    203: Non - Authoritative, 非授权信息， 请求成功， 但返回的meta信息不在原始的服务器， 而是一个副本
-
-    -
-    3 XX: 重定向， 需要进一步操作以完成请求 -
-    301: 永久重定向 -
-    302: 临时重定向 -
-    304: not modified, 缓存有效的状态码， 缓存失效时返回200
-
-    -
-    4 XX： 客户端错误， 请求语法错误或无法完成请求 -
-    400： Bad Request， 客户端请求的语法错误 -
-    401： Unauthorized， 要求用户身份认证 -
-    403： Forbidden， 服务器拒绝执行请求 -
-    404： Not Found
-
-    -
-    5 XX: 服务器错误 -
-    500: 服务器内部错误 -
-    501： 服务器不支持请求的功能， 无法完成请求 -
-    502： Bad GateWay， 网关或代理服务器执行请求时， 从远程服务器接收到了一个无效的相应
-
-## 6. Web攻击以及防御(XSS, CSRF)
-
-`XSS(跨站脚本攻击)`
-
-
-XSS: 诱使用户点击一个嵌入恶意脚本的链接(很多攻击者利用论坛、 微博等发布恶意url) 将恶意脚本提交到数据库中， 用户浏览网页时， 恶意脚本从数据库中被加载到页面中执行
-
-防范XSS攻击
-
-    -
-    对危险字符进行转义 `<> / $ ...` -
-    对输入和输出进行转义 -
-    设置cookie属性http - only
-
-`CSRF(跨站请求伪造)`
-
-CSRF： 伪造用户信息发送请求， 在用户不知情的情况下以用户的名义进行非法操作， 原理是利用浏览器的cookie和服务器的session盗取用户身份
-
-
-防范CSRF
-
-    -
-    验证referer字段， 该字段记录该http请求的来源地址 优点： 简单易行， 缺点： 过度依赖浏览器， 不能保证浏览器自身没有安全漏洞 -
-    设置Samesite cookie， 表明该cookie是个同站cookie， 不允许第三方加载cookie信息 优点： 简单易行 缺点： 影响用户体验 -
-    在表单中添加令牌， 验证码识别请求者的身份 -
-    服务器端设置csrftoken
-
-## 7. 浏览器存储(cookie, localStorage, sessionStorage)
-
-    |
-    特性 | cookie | localStorage | sessionStorage |
-    |
-    : -: |: -: |: -: |: -: |
-    |
-    数据声明周期 | 由服务器生成， 可设置生效时间， 如果在浏览器端生成cookie， 默认是浏览器关闭后失效 | 永久有效， 除非手动清楚 | 仅在当前对话下有效， |
-    |
-    大小 | 4 K左右 | 5 MB | 5 MB |
-    与服务器通信 | 每次都会携带在http头重， cookie过多会带来性能问题 | 不参与服务器通信 | 不参与服务器通信
-
-    **
-    cookie的容量是同一站点的限制， 不同的浏览器对同一域下的cookie数量限制不同， 同一域名下的cookie总容量不可超过4K **
-
-    ##8. 浏览器缓存策略(强制缓存和协商缓存)
-
-    **
-    强制缓存 **
-
-    浏览器请求数据的时候， 服务端在response header里面对该文件进行了缓存配置， 浏览器在拿到数据之后， 在过期时间内不会再去重复请求
-
-``
-`
-强制缓存只有在首次请求才会跟服务器通信，读取缓存资源时不会发出任何请求，状态吗为200，http1.1的版本的实现优先级高于http1.0版本
-`
-``
-
-Key: 如何知道当前时间是否超过了过期时间 http1 .0: 通过Expires响应头实现， 表示过期时间 http1 .1: 通过Cache - Control响应头实现， 常用字段是max - age, 表示缓存资源将在xxx秒后过期
+// function flatten(arr) {
+//     var result = []
+//     for (var i = 0; i < arr.length; i++) {
+//         if (Array.isArray(arr[i])) {
+//             result = result.concat(flatten(arr[i]))
+//         } else {
+//             result.push(arr[i])
+//         }
+//     }
+//     return result
+// }
+
+// console.log(flatten(arr));
+// function flatten(arr) {
+//     while (arr.some(item => Array.isArray(item))) {
+//         arr = [].concat(...arr)
+//     }
+//     return arr
+// }
+
+// console.log(flatten(arr));
+
+// let a = 20
+// let tomAge = a
+
+// let obj = {}
+// let tomObj = obj
+// obj.name = "tom"
+// console.log(tomObj.name);
+
+// 什么是作用域
+// -当前上下文可以访问到的变量的集合
+
+// 什么是作用域链查找由内到外进行查找
+
+// -各种上下文代码在访问变量和函数时的顺序
+
+// var name = "神奇的程序员";
+
+// function changeName() {
+//     let insideName = "大白";
+
+//     function swapName() {
+//         let tempName = insideName;
+//         insideName = name;
+//         name = tempName;
+
+//         // 可以访问tempName、insideName、name
+//     }
+//     // 可以访问insideName、name
+//     swapName();
+// }
+// // 可以访问name
+// changeName();
+// console.log(name);
+
+// 全局上下文
+// 函数上下文
+
+// 未声明直接初始化
+
+// function foo() {
+//     console.log(this.a);
+// }
+
+// var obj = {
+//     a: 1,
+//     foo: foo
+// }
+// var bar = obj.foo
+// console.log(bar);
+
+// 参数传递造成的隐式绑定丢失
+// function foo() {
+//     console.log(this.a)
+// }
+// var obj = {
+//     a: 1,
+//     foo: foo // 即使换成 () => foo() 也没用
+// }
+
+// function doFoo(fn) {
+//     fn();
+// }
+// var a = 2;
+// doFoo(obj.foo)
+// 1.判断数组对象的类型 instanceof constructor Object.prototype.toString.call
+// let arr1 = [1, 2, 3]
+// let obj = {
+//     name: '大大',
+//     age: 1,
+//     1: 'name'
+// }
+
+// console.log(arr1 instanceof Array);
+// console.log(obj instanceof Array);
+// console.log(obj instanceof Object);
+
+// console.log(arr1.constructor === Array);
+// console.log(obj.constructor === Array);
+// console.log(obj.constructor === Object);
+
+// console.log(Object.prototype.toString.call(arr1) === '[object Array]');
+// console.log(Object.prototype.toString.call(obj) === '[object Array]');
+// console.log(Object.prototype.toString.call(obj) === '[object Object]');
+
+// vue-router中的mode的值 hash、history
+
+// 改变this指向的方法
+// this在执行环境决定，有call、apply、bind，在new对象的时候也会修改this的值
+
+// Vue中的hash模式和history模式的区别
+
+// 原型修改、重写
+// function Person(name) {
+//     this.name = name
+// }
+
+// Person.prototype.getName = function () {
+
+// }
+
+// var p = new Person('whl')
+
+// console.log(p.__proto__ === Person.prototype);
+// console.log(p.__proto__ === p.constructor.prototype);
+
+// hasOwnProperty
+
+// function iterate(obj) {
+//     var res = []
+//     for (var key in obj) {
+//         if (obj.hasOwnProperty(key)) {
+//             res.push(`${key}:${obj[key]}`)
+//         }
+//     }
+// }
+
+// function Person(name) {
+//     this.name = name
+// }
+
+// var p2 = new Person('whl')
+// console.log(p2.__proto__ === Person.prototype);
+// console.log(p2.__proto__.__proto__ === Object.prototype);
+// console.log(p2.__proto__.__proto__.__proto__ === null)
+// // console.log(p2.__proto__.__proto__.__proto__.__proto__) // 报错
+// // console.log(p2.__proto__.__proto__.__proto__.__proto__.__proto__) // 报错
+// console.log(p2.constructor === Person)
+// console.log(p2.prototype) // undefined p2是实例，没有prototype属性
+// console.log(Person.constructor === Function)
+// console.log(Person.prototype) // 打印出Person.prototype这个对象里面的所有方法和属性
+// console.log(Person.prototype.constructor === Person)
+// console.log(Person.prototype.__proto__ === Object.prototype)
+// console.log(Person.__proto__) // Function.prototype
+// console.log(Function.prototype.__proto__ === Object.prototype)
+// console.log(Function.__proto__ === Function.prototype)
+// console.log(Object.__proto__ === Function.prototype)
+// console.log(Object.prototype.__proto__ === null)
+
+// function Dog() {
+//     this.name = 'puppy'
+// }
+
+// Dog.prototype.back = () => {
+//     console.log('woofwoof');
+// }
+// const dog = new Dog()
+// console.log(Dog.prototype.construcotr === Dog && dog.constructor === Dog && dog instanceof Dog);
+
+// // instanceof 检测的是类型是否在实例的原型链上
+
+// function Dog() {
+//     this.name = 'puppy'
+// }
+// Dog.prototype.bark = () => {
+//     console.log('woof!woof!')
+// }
+
+// function BigDog() {}
+// BigDog.prototype = new Dog()
+// Object.defineProperty(BigDog.prototype, "constructor", {
+//     value: BigDog,
+//     enumerable: false
+// })
+// const bigDog = new BigDog()
+// console.log(bigDog.constructor === BigDog) // true
+
+// 如何阻止事件冒泡
+
+// event.stopPropgation()
+// event.cancelBubble = true
+
+// 事件委托
+
+// focus、blur没有事件委托
+
+// 微任务: promise的回调、node中的process.nextTick、对DOM变化监听的MutationObserver
+// 宏任务: script脚本执行，setTimeout，setInterval、setImmediate、I/O操作、UI渲染等
+
+// const保证的是内存地址不能改变
+// 箭头函数的this继承自己作用域上一层的this，箭头函数的this在它定义的时候就已经确定了,之后都不会改变
+
+// var id = 'GLOBAL';
+// var obj = {
+//     id: 'OBJ',
+//     a: function () {
+//         console.log(this.id);
+//     },
+//     b: () => {
+//         console.log(this.id);
+//     }
+// };
+// obj.a(); // 'OBJ'
+// obj.b(); // 'GLOBAL'
+// const b = new obj.a()
+
+// 箭头函数不能作为构造函数使用
+// 箭头函数不能用作Generator函数
+// 箭头函数不能使用yeild关键字
+
+// const obj = {
+//     getArrow() {
+//         return () => {
+//             console.log(this);
+//             console.log(this === obj);
+//         }
+//     }
+// }
+
+// obj.getArrow()()
+
+// 对象扩展运算符
+// let bar = {
+//     a: 1,
+//     b: 2
+// }
+
+// let baz = {
+//     ...bar
+// }
+// console.log(baz);
+// let bar = {
+//     a: 1,
+//     b: 2
+// }
+// let baz = { 扩展运算符对对象实例的拷贝属于一种浅拷贝
+//     ...bar,
+//     ...{
+//         a: 2,
+//         b: 4
+//     }
+// }
+// console.log(baz);
+// console.log(...[1, [2, 3, 4], 5]);
+
+// function add(x, y) {
+//     return x + y
+// }
+
+// let numbers = [1, 2]
+// let a = add(...numbers)
+// console.log(a);
+// const arr1 = [1, 2]
+// const arr2 = [...arr1]
+// console.log(arr2);
+// let arr1 = ['two', 'three']
+// let arr2 = ['one', ...arr1, 'four', 'five']
+// console.log(arr2);
+// console.log([...'hello']);
+// Array.prototype.slice.call(arguments)
+
+// 类数组转化为数组的方式有这几种
+
+// 1.Array.prototype.slice.call(ArrayLike)
+// Array.prototype.splice.call(ArrayLike,0)
+// Array.from(arrayLike)
+
+// Javascript中有哪些数据类型他们的区别
+
+// 1.undefined、null、boolean、number、string、Symbol、BigInt
+// console.log([] instanceof Array); 
+// console.log(function () {}
+//     instanceof Function);
+// console.log({}
+//     instanceof Object);
+
+// instanceof只能正确判断引用类型数据,不能判断基本类型数据
+// function fn() {}
+// fn.prototype = new Array()
+// fn.prototype.constructor = fn
+// var f = new fn()
+// console.log(f.constructor === fn);
+// console.log(f.constructor === Array);
+// var a = Object.prototype.toString;
+
+// console.log(a.call(2) === '[object Number]');
+// console.log(a.call(true));
+// console.log(a.call('str'));
+// console.log(a.call([]));
+// console.log(a.call(function () {}));
+// console.log(a.call({}));
+// console.log(a.call(undefined));
+// console.log(a.call(null));
+// console.log(Object.prototype.toString.call([]).slice(8, -1) === 'Array');
+// console.log([].__proto__ === Array.prototype);
+// console.log(Array.isArray([]));
+// console.log([] instanceof Array);
+// console.log(null == undefined);
+// instanceof操作符的原理: 用于判断构造函数的prototype属性是否出现在该对象原型链中的任何位置
+// function MyInstanceof(left, right) {
+//     let proto = Object.getPrototypeOf(left), // 获取对象的原型
+//         prototype = right.prototype // 获取构造函数的proototype对象
+//     while (true) {
+//         if (!proto) return false
+//         if (proto === prototype) return true
+//         proto = Object.getPrototypeOf(proto)
+//     }
+// }
+
+// console.log(MyInstanceof([], Array));
+// console.log(MyInstanceof({}, Object));
+
+// // 标记清楚，引用计数垃圾回收的两种方式
+
+// class B {}
+// B.prototype.a = 1;
+// B.prototype.add = function() {
+//    this.a++;
+// };
+// const b1 = new B();
+// console.log(b1.a); // 1
+
+// const b2 = new B();
+// b2.add()
+// console.log(b2.a);
+
+// const obj = {
+//     a: 1,
+// };
+// obj.add = () => {
+//     console.log(this.a);
+// };
+// obj.add();
+
+// 1.模拟new的过程
+
+// function Animals(name, color) {
+//     this.name = name
+//     this.color = color
+// }
+// Animals.prototype.action = function () {
+//     console.log(this.name, 'walk');
+// }
+
+
+// 1.创建一个新的对象
+// 2.连接到原型(新对象的原型指向要继承的构造函数的原型)，obj可以访问构造函数原型的属性
+// 3.绑定this实现继承，obj可以访问构造函数是的属性
+// 4.如果构造函数返回的是对象则返回他，如果不是则返回obj
+
+// function create(constructor, ...args) {
+//     const obj = new Object()
+//     obj.__proto__ = constructor.prototype
+//     // console.log(args);
+//     const res = constructor.apply(obj, args) // ...args将args转换为数组
+//     return res instanceof Object ? res : obj
+// }
+// const dog = create(Animals, 'dog', 'red')
+// console.log(dog);
+
+// Object.create
+
+// function create(constructor, ...args) {
+//     const obj = Object.create(constructor.prototype)
+//     const res = constructor.apply(obj, args)
+//     return res instanceof Object ? res : obj
+// }
+// const dog = create(Animals, 'dog', 'red')
+// console.log(dog);
+
+// 函数的柯里化
+
+// function curry() {
+//     const argList = [...arguments]
+//     console.log(argList);
+//     const fn = function () {
+//         argList.push(...arguments)
+//         return fn
+//     }
+//     fn.toString = function () {
+//         return argList.reduce((a, b) => a + b)
+//     }
+//     return fn
+// }
+
+// console.log(curry(1, 2)(3)(4, 5, 6));
+
+// function sum(a, b, c) {
+//     return a + b + c
+// }
+
+// function curry(fn) {
+//     const argsList = [...arguments].splice(1)
+//     // console.log(argsList);
+//     return function () {
+//         const newArgsList = argsList.concat([...arguments])
+//         if (newArgsList.length < fn.length) {
+//             return curry.apply(this, [fn, ...newArgsList])
+//         } else {
+//             return fn.apply(this, newArgsList)
+//         }
+//     }
+// }
+// const sumAll = curry(sum)
+// console.log(sumAll(1)(2)(3));
+// console.log(sumAll(1)(2, 3));
+
+// 重绘
+
+// 当元素样式发生改变，但不影响布局时，浏览器将使用重绘进行元素更新，由于此时只需要UI层面的绘制，因此损耗较小
+
+// 回流
+
+// 当元素尺寸、结构、或者触发某些属性的时候，浏览器会重新渲染页面，这叫回流，浏览器需要重新计算，重新进行页面布局，所以损耗较大
+
+// 1.页面初次渲染
+// 2.浏览器窗口大小发生改变
+// 3.元素尺寸、位置、内容发生改变
+// 4.元素字体大小发生改变
+// 5.添加或删除可见的DOM元素
+// 6.触发CSS伪类，如:hover
+// 7.查询某些属性或者调用某些方法
+// client offset scroll getComputedStyle getBoundingClinetRect ScrollTo()
+
+// 浏览器存储
+// cookie: 用户信息、登陆状态,自行设置过期事件，体积上线为4k
+// localStorage: 无限期存储，体积上线为4-5M
+// sessionStorage: 浏览器窗口关闭则删除，体积上线为4-5M
+
+// 网络请求方式post和get
+// get：会被浏览器缓存，请求长度受限，会被历史保存记录，浏览器回退时候是无害的，一般不带请求体，发送一个TCP数据包
+// post：更安全，更多编码类型，可以发送大数据，浏览器回退的时候会再次提交请求，一般带有请求体，发送两个TCP数据包
+
+// Function.prototype.myCall = function (context, ...args) {
+//     if (context === null || context === undefined) {
+//         context = window
+//     } else {
+//         context = Object(context)
+//     }
+//     // const args = [...arguments].slice(1) //将类数组转换为数组
+//     const key = Symbol('特殊属性Symbol')
+//     context[key] = this
+//     let result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+// function log() {
+//     console.log(this);
+//     console.log(this.name);
+//     console.log(arguments);
+// }
+// let obj = {
+//     name: 'whl'
+// }
+// // 必须是函数来调用
+// log.myCall(obj, 1, 2, 3)
+
+
+// Function.prototype.myApply = function (context, args) {
+//     if (context === null || context === undefined) {
+//         context = window
+//     } else {
+//         context = Object(context)
+//     }
+//     const key = Symbol('特殊属性Symbol')
+//     context[key] = this
+//     let result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+// function log() {
+//     console.log(this);
+//     console.log(this.name);
+//     console.log(arguments);
+// }
+// let obj = {
+//     name: 'whl'
+// }
+// // 必须是函数来调用
+// log.myApply(obj, [1, 2, 3])
+
+// Function.prototype.myBind = function (objThis, ...params) {
+//     const thisFn = this
+//     // 对返回的函数 secondParams 二次传参
+//     let fToBind = function (...secondParams) {
+//         const isNew = this instanceof fToBind
+//         const context = isNew ? this : Object(objThis)
+//         return thisFn.call(context, ...params, ...secondParams)
+//     }
+//     if (thisFn.prototype) {
+//         fToBind.prototype = Object.create(this.Fn.prototype)
+//     }
+//     return fTobind
+// }
+// 1.拷贝原函数
+// 2.返回拷贝的函数
+// 3.调用拷贝的函数
+
+// 事件委托、事件冒泡
+
+// 减少内存的效果，节约效率
+
+// for in for of
+// 遍历课遍历对象的所有属性 一般用于遍历对象，值是他的键值
+// const arr2 = [5, 4, 3, 2, 1]
+// // arr2.name = 'whl'
+
+// for (let i of arr2) {
+//     console.log(i);
+// }
+// arr2.name = 'name'
+// for (let i in arr2) {
+//     console.log(i);
+// }
+// const test = [
+//     [1, 2, 2],
+//     [3, 4, 5, 5],
+//     [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+// ]
+// for of不能遍历对象，对象没有迭代器对象,可以遍历数组/数组对象/字符串/map/set
+// function flat(arr) {
+//     let list = []
+//     arr.forEach(item => {
+//         if (Array.isArray(item)) {
+//             // console.log(item);
+//             // console.log(...flat(item));
+//             list.push(...flat(item))
+//         } else {
+//             list.push(item)
+//         }
+//     })
+//     return list
+// }
+
+// const res1 = [...new Set(flat(test))].sort((a, b) => a - b)
+// console.log(res1);
+// const res2 = [...new Set(test.flat(Infinity))].sort((a, b) => a - b)
+// console.log(res2);
+
+
+// 1.模拟new过程
+
+// 1.创建一个新对象
+// 2.链接到原型(新对象的原型指向要继承的构造函数的原型)，obj可以访问构造函数原型的属性
+// 3.绑定this实现继承，obj可以访问构造函数的属性
+// 4.如果构造函数返回的是对象则返回他，如果不是则返回obj
+
+// function myNew(constructor, ...args) {
+//     const obj = new Object()
+//     obj.__proto__ = constructor.prototype
+//     console.log(args);
+//     const res = constructor.apply(obj, args)
+//     return res instanceof Object ? res : obj
+// }
+// function New(constructor, ...args) {
+//     const obj = Object.create(constructor.prototype)
+//     const res = constructor.apply(obj, args)
+//     return res instanceof Object ? res : obj
+// }
+
+// function Animal(name, color) {
+//     this.name = name
+//     this.color = color
+// }
+
+// Animal.prototype.action1 = function () {
+//     console.log(this.color);
+// }
+
+
+// const dog1 = New(Animal, 'dog', 'red')
+// console.log(dog1);
+// dog1.action1()
+
+// function debounce(fn, wait) {
+//     // 创建一个标记用来存放定时器的返回值
+//     let timer = null
+//     return function (...args) {
+//         // 每次当用户输入的时候，把前一个定时器删除
+//         timer && cleartTimeout(timer)
+//         // 创建一个新的setTimeOut
+//         // 保证点击按钮后的间隔内如果用户还点击了的话则不会执行fn函数
+//         timer = setTimeout(() => {
+//             fn.apply(this, args)
+//         }, wait)
+//     }
+// }
+
+
+// function throttle(fn, wait) {
+//     // 通过闭包保存一个标记
+//     let flag = true
+//     return function (...args) {
+//         if (!flag) {
+//             return
+//         }
+//         // flag设置为false，防止执行之前再被执行
+//         flag = false
+//         setTimeout(() => {
+//             fn.apply(this, args)
+//             flag = true
+//         }, wait)
+//     }
+// }
+// 函数柯里化
+// function curry(fn) {
+//     const argsList = [...arguments].splice(1)
+//     return function () {
+//         const newArgsList = argsList.concat([...arguments])
+//         if (newArgsList.length < fn.length) {
+//             return curry.apply(this, [fn, ...newArgsList])
+//         } else {
+//             return fn.apply(this, newArgsList)
+//         }
+//     }
+// }
+
+// function sum(a, b, c) {
+//     return a + b + c
+// }
+// let sumAll = curry(sum)
+// console.log(sumAll(1, 2, 3));
+// console.log(sumAll(1)(2)(3));
+// console.log(sumAll(1)(2, 3));
+
+// cookie 4K
+// sessionStorange 4-5M
+// localStorage 4-5M
+
+// GET和POST
+
+// CSRF和XSS
+
+// 区别
+// CSRF需要登陆之后操作，XSS不需要
+// CSRF是请求页面API来实现非法操作，XSS是向当前页面植入JS脚本来修改页面内容
+
+// 跨站点伪造请求
+// 跨站脚本攻击
+
+// event loop执行顺序:
+// 1.一开始整个脚本作为一个宏任务执行
+// 2.执行过程中同步代码直接执行，宏任务进入宏任务队列，微任务进入微任务队列
+// 3.当前宏任务执行完出队,检查微任务列表，有则一次执行，直到全部执行完
+// 4.执行浏览器UI线程的渲染工作
+// 5.检查是否又Web Worker任务，有则执行
+// 6.执行完本轮的宏任务，回到2，一次循环，直到宏任务和微任务队列都为空
+
+// 微任务包括: Promise.then(),Promise.catch() process.nextTick
+// 宏任务: script、setTimeout、setInterval、setImmediate I/O操作，UI渲染\
+
+// const promise1 = new Promise((resolve, reject) => {
+//     console.log('promise1'); // 1
+// })
+// console.log('1', promise1); // '1' Promise{<pending>}
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1); // 1
+//     resolve('success') // 将promise状态为了resolved并且将值保存下来
+//     console.log(2); // 2
+// })
+
+// promise.then(() => {
+//     console.log(3); // 4
+// })
+// console.log(4); // 3
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1);
+//     console.log(2);
+// })
+// // promise中并没有resolve或者reject因此promise.then并不会执行，他只有状态改变了之后才会执行
+// promise.then(() => {
+//     console.log(3);
+// })
+// console.log(4);
+
+// const promise1 = new Promise((resolve, reject) => {
+//     console.log('promise1'); //1
+//     resolve('resolve1')
+// })
+
+// const promise2 = promise1.then(res => {
+//     console.log(res); // 4
+// })
+
+// console.log('1', promise1); // 2 fulfilled resolve1
+// console.log('2', promise2); // 3 pending
+
+// promise结合setTimeout
+// console.log('start'); // 1
+// setTimeout(() => {
+//     console.log('time'); // 4
+// })
+// Promise.resolve().then(() => {
+//     console.log('resolve'); // 3
+// })
+// console.log('end'); // 2
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log(1); // 1
+//     setTimeout(() => {
+//         console.log('timeStart'); // 4
+//         resolve('success') // fulfilled success
+//         console.log('timeEnd'); // 5
+//     }, 0)
+//     console.log(2); // 2
+// })
+// promise.then(res => {
+//     console.log(res); // 6
+// })
+// console.log(4); // 3
+
+// setTimeout(() => {
+//     console.log('timer1');
+//     setTimeout(() => {
+//         console.log('timer3')
+//     }, 0)
+// }, 0)
+// setTimeout(() => {
+//     console.log('timer2')
+// }, 0)
+// console.log('start') // 1
+// setTimeout(() => {
+//     console.log('timer1');
+//     Promise.resolve().then(() => {
+//         console.log('promise')
+//     })
+// }, 0)
+// setTimeout(() => {
+//     console.log('timer2')
+// }, 0)
+// console.log('start') // 1
+// Promise.resolve().then(() => { // 微任务1
+//     console.log('promise1');
+//     const timer2 = setTimeout(() => {
+//         console.log('timer2')
+//     }, 0)
+// });
+// const timer1 = setTimeout(() => { // 宏任务1
+//     console.log('timer1')
+//     Promise.resolve().then(() => {
+//         console.log('promise2')
+//     })
+// }, 0)
+// console.log('start'); // 1
+
+// const promise1 = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve('success')
+//     }, 1000)
+// })
+// const promise2 = promise1.then(() => {
+//     throw new Error('error!!!')
+// })
+// console.log('promise1', promise1) // Promise pending
+// console.log('promise2', promise2) // Promise pending
+// setTimeout(() => {
+//     console.log('promise1', promise1)
+//     console.log('promise2', promise2)
+// }, 2000)
+
+// const promise1 = new Promise((resolve, reject) => {
+//     setTimeout(() => { // 宏任务
+//         resolve("success");
+//         console.log("timer1"); // 3
+//     }, 1000);
+//     console.log("promise1里的内容"); // 1
+// });
+// const promise2 = promise1.then(() => {
+//     throw new Error("error!!!");
+// });
+// console.log("promise1", promise1); // Promise pending
+// console.log("promise2", promise2); // Promise pending
+// setTimeout(() => {
+//     console.log("timer2"); // 4
+//     console.log("promise1", promise1); // resolved
+//     console.log("promise2", promise2); // rejected
+// }, 2000);
+
+// const promise = new Promise((resolve, reject) => {
+//     resolve("success1"); // 1
+//     reject("error");
+//     resolve("success2");
+// });
+// promise
+//     .then(res => {
+//         console.log("then: ", res);
+//     }).catch(err => {
+//         console.log("catch: ", err);
+//     })
+
+// const promise = new Promise((resolve, reject) => {
+//     reject("error");
+//     resolve("success2");
+// });
+// promise
+//     .then(res => {
+//         console.log("then1: ", res);
+//     }).then(res => {
+//         console.log("then2: ", res);
+//     }).catch(err => {
+//         console.log("catch: ", err);
+//     }).then(res => {
+//         console.log("then3: ", res); // then3: undefined
+//     })
+
+// resolve(2)
+// Promise.reject(1)
+//     .then(res => {
+//         console.log(res);
+//         return 2;
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         return 3
+//     })
+//     .then(res => {
+//         console.log(res);
+//     });
+
+// const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         console.log('timer')
+//         resolve('success')
+//     }, 1000)
+// })
+// const start = Date.now();
+// promise.then(res => {
+//     console.log(res, Date.now() - start)
+// })
+// promise.then(res => {
+//     console.log(res, Date.now() - start)
+// })
+// Promise.resolve().then(() => {
+//     return new Error('error!!!')
+// }).then(res => {
+//     console.log("then: ", res)
+// }).catch(err => {
+//     console.log("catch: ", err)
+// })
+
+// return Promise.reject(new Error('error!'))
+// throw new Error('error!')
+
+// const promise = Promise.resolve().then(() => {
+//     return promise;
+// })
+// promise.catch(console.err)
+
+// Promise.resolve()
+//     .then(function success1(res) {
+//         throw new Error('error!!!')
+//     }, function fail1(err) {
+//         console.log('fail1', err)
+//     }).catch(function fail2(err) {
+//         console.log('fail2', err)
+//     })
+
+// async function async1() {
+//     console.log("async1 start"); // 1
+//     await async2(); // await后面的语句相当于放到 new Promise后面
+//     console.log("async1 end"); // 4 下一行及以后的代码相当于放在Promise.then中
+// }
+// async function async2() {
+//     console.log("async2"); // 2
+// }
+// async1();
+// console.log('start') // 3
+
+// async function async1() {
+//     console.log("async1 start"); // 1
+//     await async2();
+//     console.log("async1 end"); // 4
+// }
+// async function async2() {
+//     setTimeout(() => { // 宏
+//         console.log('timer') // 5
+//     }, 0)
+//     console.log("async2"); // 2
+// }
+// async1();
+// console.log("start") // 3
+// async function async1() {
+//         console.log("async1 start"); // 1
+//         await async2();
+//         console.log("async1 end"); // 4
+//         setTimeout(() => {
+//                 console.log('timer1') // 7
+//             },
+//         }
+//         async function async2() {
+//             setTimeout(() => {
+//                 console.log('timer2') // 宏 先 5
+//             }, 0)
+//             console.log("async2"); // 2
+//         }
+//         async1();
+//         setTimeout(() => { // 宏任务 后 6
+//             console.log('timer3')
+//         }, 0)
+//         console.log("start") // 3
+
+// async function fn() {
+//     // return await 1234
+//     // Promise.resolve(123)
+//     // 等同于
+//     return 123
+// }
+// fn().then(res => console.log(res))
+
+// async function async1() {
+//     console.log('async1 start'); // 1
+//     await new Promise(resolve => {
+//         console.log('promise1') // 2
+//     })
+//     console.log('async1 success'); // 3
+//     return 'async1 end'
+// }
+// console.log('srcipt start')
+// async1().then(res => console.log(res))
+// console.log('srcipt end')
+
+// async function async1() {
+//     console.log('async1 start'); // 2
+//     await new Promise(resolve => {
+//         console.log('promise1') // 3
+//         resolve('promise1 resolve') 
+//     }).then(res => console.log(res))
+//     console.log('async1 success');
+//     return 'async1 end'
+// }
+// console.log('srcipt start') // 1
+// async1().then(res => console.log(res))
+// console.log('srcipt end')
+
+// async function async1() {
+//     console.log('async1 start'); // 2
+//     await new Promise(resolve => {
+//         console.log('promise1') // 3
+//         resolve('promise resolve')
+//     })
+//     console.log('async1 success'); // 5
+//     return 'async1 end'
+// }
+// console.log('srcipt start') // 1
+// async1().then(res => {
+//     console.log(res) // asycn1 end
+// })
+// new Promise(resolve => {
+//     console.log('promise2') // 4
+//     setTimeout(() => {
+//         console.log('timer')
+//     })
+// })
+
+// async function async1() {
+//     console.log("async1 start"); // 2
+//     await async2();
+//     console.log("async1 end"); // 微任务 6
+// }
+
+// async function async2() {
+//     console.log("async2"); // 3
+// }
+
+// console.log("script start"); // 1
+
+// setTimeout(function () { //  宏任务
+//     console.log("setTimeout"); // 8
+// }, 0);
+
+// async1();
+
+// new Promise(function (resolve) {
+//     console.log("promise1"); // 4
+//     resolve();
+// }).then(function () {
+//     console.log("promise2"); // 7
+// });
+// console.log('script end') // 5
+
+// async function testSometing() {
+//     console.log("执行testSometing"); // 2
+//     return "testSometing";
+// }
+
+// async function testAsync() {
+//     console.log("执行testAsync"); // 6
+//     return Promise.resolve("hello async");
+// }
+
+// async function test() {
+//     console.log("test start..."); // 1
+//     const v1 = await testSometing(); // 微任务
+//     console.log(v1); // 5 testSometing
+//     const v2 = await testAsync();
+//     console.log(v2);
+//     console.log(v1, v2);
+// }
+
+// test();
+
+// var promise = new Promise(resolve => {
+//     console.log("promise start..."); //  3
+//     resolve("promise");
+// });
+// promise.then(val => console.log(val)); // 6微任务
+
+// console.log("test end..."); // 4
+
+// async function async1() {
+//     await async2();
+//     console.log('async1');
+//     return 'async1 success'
+// }
+// async function async2() {
+//     return new Promise((resolve, reject) => {
+//         console.log('async2') // 1
+//         reject('error')
+//     })
+// }
+// async1().then(res => console.log(res))
+
+// async function async1() {
+//     try { // 微任务
+//         await Promise.reject('error!!!')
+//     } catch (e) {
+//         console.log(e)
+//     }
+//     console.log('async1');
+//     return Promise.resolve('async1 success')
+// }
+// async1().then(res => console.log(res))
+// console.log('script start') // 1
+
+
+// const first = () => (new Promise((resolve, reject) => {
+//     console.log(3); // 1
+//     let p = new Promise((resolve, reject) => {
+//         console.log(7); // 2
+//         setTimeout(() => { // 宏2
+//             console.log(5); //  6
+//             resolve(6);
+//             console.log(p) // 7: Promise resolved 1
+//         }, 0)
+//         resolve(1); // 改变p的 Promise状态为resolved 值为1
+//     });
+//     resolve(2); // 改变fisrt的 Promise状态为resolved 值为2
+//     p.then((arg) => { // 微任务1
+//         console.log(arg); //4: 1
+//     });
+// }));
+// first().then((arg) => {
+//     console.log(arg); // 5: 2  微任务2
+// });
+// console.log(4); // 3
+
+
+// const async1 = async () => {
+//     console.log('async1'); // 2
+//     setTimeout(() => { // 宏2
+//         console.log('timer1') // 7
+//     }, 2000)
+//     await new Promise(resolve => {
+//         console.log('promise1') // 3
+//     })
+//     console.log('async1 end')
+//     return 'async1 success'
+// }
+// console.log('script start'); // 1
+// async1().then(res => console.log(res));
+// console.log('script end'); // 4
+// Promise.resolve(1)
+//     .then(2)
+//     .then(Promise.resolve(3))
+//     .catch(4)
+//     .then(res => console.log(res)) // 5: 1微任务1
+// setTimeout(() => {
+//     console.log('timer2') //6 宏任务2
+// }, 1000)
+
+// const p1 = new Promise((resolve) => {
+//     setTimeout(() => { // 宏任务
+//         resolve('resolve3');
+//         console.log('timer1') // 3
+//     }, 0)
+//     resolve('resovle1'); // p1 设置为 resolved 值为resolve1
+//     resolve('resolve2');
+// }).then(res => { // 微任务
+//     console.log(res) //1: resolved1
+//     setTimeout(() => { // 宏任务
+//         console.log(p1) // Promise resolve1 resolved1
+//     }, 1000)
+// }).finally(res => {
+//     console.log('finally', res) // 2: 'finally' undeinfed
+// })
+
+// Promise.all
+
+// function all(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach(item => {
+//             Promise.resolve((item, index)).then(res => {
+//                 result[index] = res
+//                 num++
+//                 check()
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+// function allSettle(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === result.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index)).then(res => {
+//             result[index] = {
+//                 status: 'fulfilled',
+//                 value: res
+//             }
+//             num++
+//             check()
+//         }, err => {
+//             result[index] = {
+//                 status: 'rejected',
+//                 reason: err
+//             }
+//             num++
+//             check()
+//         })
+//     })
+// }
+
+// function any(promises) {
+//     if (promises.length === 0) {
+//         reject(new AggregateError('No Promise in Promise.any was resolved'))
+//     }
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 reject(reject(new AggregateError('No Promise in Promise.any was resolved')))
+//             }
+//         }
+//         promises.forEach((item, index)).then(res => {
+//             resolve(res)
+//         }, err => {
+//             result[index] = err
+//             num++
+//             check()
+//         })
+//     })
+// }
+
+// function race(promises) {
+//     if (promises.length === 0) return Promise.resolve()
+//     return new Promise((resolve, reject) => {
+//         promises.forEach(item).then(res => {
+//             resolve(res)
+//         }, err => {
+//             reject(err)
+//         })
+//     })
+// }
+
+// var length = 10
+
+// function fn() {
+//     console.log(this);
+//     return this.length + 1
+// }
+
+// var obj = {
+//     length: 5,
+//     test1: function () {
+//         return fn()
+//     }
+// }
+// obj.test2 = fn
+// console.log(obj.test1()); // 6
+// console.log(fn() === obj.test2()); // false
+// console.log(fn());
+// console.log(obj.test2());
+
+// 1.是否连接2.是否可靠3.连接对象个数4.传输方式5.首部开销6.使用场景
+
+// 客户端发送能力和服务器接受能力
+
+
+//     -- -
+//     theme: cyanosis
+//     -- -
+
+//     #HTTP协议与计算机网络
+
+// ## 1. TCP和UDP
+
+
+//     |
+//     - | UDP | TCP |
+//     |
+//     : -: |: -: |: -: |
+//     |
+//     是否可连接 | 无连接 | 面向连接 |
+//     |
+//     是否可靠 | 不可靠传输， 不使用流量控制和拥塞控制 | 可靠传输 |
+//     |
+//     链接对象个数 | 一对一， 一对多， 多对一， 多对多 | 一对一 |
+//     |
+//     传输方式 | 面向报文 | 面向字节流 |
+//     |
+//     首部开销 | 首部开销小， 8 字节 | 首部最小20字节， 最大60字节 |
+//     |
+//     使用场景 | 实时应用（ IP电话， 视频会议， 直播等） | 适用于可靠传输的应用， 比如文件传输
+
+
+// ## 2. TCP三次握手， 两次行不行， 四次行不行， 四次挥手
+
+//     **
+//     三次握手 **
+
+//     ``
+// `
+// 第一次: client -> SYN = 1, seq = x 
+// 第二次: server -> ACK = x + 1,SYN = 1,seq = y
+// 第三次: clinet -> ACK = y + 1
+// `
+// ``
+
+// 两次握手行不行？ 答案当然是否定的
+
+//     ``
+// `
+// 三次握手是通信双方为了确信自己和接收方的发送能力和接受能力都是正常的
+
+// 第一次： 服务器：客户端发送能力✔，服务器接受能力✔
+// 第二次： 客户端：客户端发送能力✔，接受能力✔，服务器发送能力✔，接受能力✔
+// 第三次： 服务器：客户端接受能力✔，服务器发送能力✔
+// `
+// ``
+
+
+// ##
+// 3. HTTP请求方法有哪些， PUT和POST的区别
+//     `get、post、delete、head、put`
+
+//     **
+//     幂等性 **
+
+//     通俗来讲就是不管进行多少次重复的操作， 都是实现相同的结果
+
+// `GET,DELETE,PUT是幂等操作，post不是，原因是前三个重复多次同一个操作，结果是一样的，而POST重复多次，资源就会提交多份`
+
+// 选用PUT还是POST取决于最终要实现的操作， 比如发送两个同样的请求， 要求产生两个结果， 那应该用POST， 要求产生一个结果那就用PUT
+
+// ## 4. GET和POST的区别
+
+//     |
+//     - | GET | POST |
+//     |
+//     : -: |: -: |: -: |
+//     |
+//     后退 / 刷新 | 无害 | 数据会被重新提交 |
+//     |
+//     书签 | 可收藏为书签 | 不可收藏为书签 |
+//     |
+//     缓存 | 能被缓存 | 不能缓存 |
+//     |
+//     编码类型 | application / x - www - form - urlencoded | application / x - www - form - urlencoded或multipart / form - data， 二进制数据使用多重编码 |
+//     |
+//     历史 | 参数保留在浏览器历史中 | 参数不会保存在浏览器历史中 |
+//     |
+//     安全性 | 安全性较差， 参数拼接在url中 | 相对GET更安全 |
+//     |
+//     可见性 | 数据在URL中， 所有人可见 | 数据在form data中 |
+
+//     **
+//     由于GET请求的数据能够被缓存， 所以有时不能返回正确的数据 **
+
+//     解决： `服务器端设置缓存失效时间，在请求中添加时间戳的方式`
+
+
+// ## 5. HTTP状态码, 301, 302
+
+//     -
+//     1 XX: 服务器收到请求， 需要请求者继续执行操作 -
+//     2 XX: 相应成功， 操作被成功接受并处理 -
+//     200: ok -
+//     203: Non - Authoritative, 非授权信息， 请求成功， 但返回的meta信息不在原始的服务器， 而是一个副本
+
+//     -
+//     3 XX: 重定向， 需要进一步操作以完成请求 -
+//     301: 永久重定向 -
+//     302: 临时重定向 -
+//     304: not modified, 缓存有效的状态码， 缓存失效时返回200
+
+//     -
+//     4 XX： 客户端错误， 请求语法错误或无法完成请求 -
+//     400： Bad Request， 客户端请求的语法错误 -
+//     401： Unauthorized， 要求用户身份认证 -
+//     403： Forbidden， 服务器拒绝执行请求 -
+//     404： Not Found
+
+//     -
+//     5 XX: 服务器错误 -
+//     500: 服务器内部错误 -
+//     501： 服务器不支持请求的功能， 无法完成请求 -
+//     502： Bad GateWay， 网关或代理服务器执行请求时， 从远程服务器接收到了一个无效的相应
+
+// ## 6. Web攻击以及防御(XSS, CSRF)
+
+// `XSS(跨站脚本攻击)`
+
+
+// XSS: 诱使用户点击一个嵌入恶意脚本的链接(很多攻击者利用论坛、 微博等发布恶意url) 将恶意脚本提交到数据库中， 用户浏览网页时， 恶意脚本从数据库中被加载到页面中执行
+
+// 防范XSS攻击
+
+//     -
+//     对危险字符进行转义 `<> / $ ...` -
+//     对输入和输出进行转义 -
+//     设置cookie属性http - only
+
+// `CSRF(跨站请求伪造)`
+
+// CSRF： 伪造用户信息发送请求， 在用户不知情的情况下以用户的名义进行非法操作， 原理是利用浏览器的cookie和服务器的session盗取用户身份
+
+
+// 防范CSRF
+
+//     -
+//     验证referer字段， 该字段记录该http请求的来源地址 优点： 简单易行， 缺点： 过度依赖浏览器， 不能保证浏览器自身没有安全漏洞 -
+//     设置Samesite cookie， 表明该cookie是个同站cookie， 不允许第三方加载cookie信息 优点： 简单易行 缺点： 影响用户体验 -
+//     在表单中添加令牌， 验证码识别请求者的身份 -
+//     服务器端设置csrftoken
+
+// ## 7. 浏览器存储(cookie, localStorage, sessionStorage)
+
+//     |
+//     特性 | cookie | localStorage | sessionStorage |
+//     |
+//     : -: |: -: |: -: |: -: |
+//     |
+//     数据声明周期 | 由服务器生成， 可设置生效时间， 如果在浏览器端生成cookie， 默认是浏览器关闭后失效 | 永久有效， 除非手动清楚 | 仅在当前对话下有效， |
+//     |
+//     大小 | 4 K左右 | 5 MB | 5 MB |
+//     与服务器通信 | 每次都会携带在http头重， cookie过多会带来性能问题 | 不参与服务器通信 | 不参与服务器通信
+
+//     **
+//     cookie的容量是同一站点的限制， 不同的浏览器对同一域下的cookie数量限制不同， 同一域名下的cookie总容量不可超过4K **
+
+//     ##8. 浏览器缓存策略(强制缓存和协商缓存)
+
+//     **
+//     强制缓存 **
+
+//     浏览器请求数据的时候， 服务端在response header里面对该文件进行了缓存配置， 浏览器在拿到数据之后， 在过期时间内不会再去重复请求
+
+// ``
+// `
+// 强制缓存只有在首次请求才会跟服务器通信，读取缓存资源时不会发出任何请求，状态吗为200，http1.1的版本的实现优先级高于http1.0版本
+// `
+// ``
+
+// Key: 如何知道当前时间是否超过了过期时间 http1 .0: 通过Expires响应头实现， 表示过期时间 http1 .1: 通过Cache - Control响应头实现， 常用字段是max - age, 表示缓存资源将在xxx秒后过期
+
+
+// var p = Promise.resolve('ok')
+//     .finally(res => {
+//         return res
+//     }).then(res => {
+//         console.log('陈工', res);
+//     }, err => {
+//         console.log('shibai', err);
+//     })
+
+var p = Promise.resolve('ok')
+    .finally(() => {
+        return Promise.reject('err')
+    }).then(res => {
+        console.log('cg', res);
+    }, err => {
+        console.log('shibai', err);
+    })
