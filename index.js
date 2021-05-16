@@ -3597,11 +3597,109 @@ const arr = [1, [2, [3]]]
 //         console.log('shibai', err);
 //     })
 
-var p = Promise.resolve('ok')
-    .finally(() => {
-        return Promise.reject('err')
-    }).then(res => {
-        console.log('cg', res);
-    }, err => {
-        console.log('shibai', err);
+// var p = Promise.resolve('ok')
+//     .finally(() => {
+//         return Promise.reject('err')
+//     }).then(res => {
+//         console.log('cg', res);
+//     }, err => {
+//         console.log('shibai', err);
+//     })
+
+// 1.Promise的理解
+
+// 由于JS语言特性，所有程序都是单线程执行的,JS中的浏览器事件、请求事件都是异步执行的，通过回调函数处理异步的结果，为了解决异步回调，Promise是异步编程的一种解决方案
+
+// 手写Promise.all
+
+// function all(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 result[index] = res
+//                 num++
+//                 check()
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+
+// allSettled
+// function allSettled(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 result[index] = {
+//                     status: 'fulfilled',
+//                     value: res
+//                 }
+//                 num++
+//                 check()
+//             }, err => {
+//                 result[index] = {
+//                     status: 'rejected',
+//                     reason: err
+//                 }
+//                 num++
+//                 check()
+//             })
+//         })
+//     })
+// }
+
+// function any(promises) {
+//     if (promises.length === 0) {
+//         reject(new AggregateError('No Promise in Promise.any was resolved'))
+//     }
+//     return new Promise((resolve, reject) => {
+//         let result = [],
+//             num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 reject(new AggregateError('No Promise in Promise.any was resolved'))
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 resolve(res)
+//             }, err => {
+//                 result[index] = err
+//                 num++
+//                 check()
+//             })
+//         })
+//     })
+// }
+
+function race(promises) {
+    if (promises.length === 0) return Promise.resolve()
+    return new Promise((resolve, reject) => {
+            promises.forEach(item => {
+                    Promise.resolve(item).then(res => {
+                            resolve(res)
+                        }, err => {
+                            reject(err)
+                        }
+                    })
+            })
     })
+}
