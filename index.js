@@ -3850,3 +3850,100 @@ const arr = [1, [2, [3]]]
 //     }
 // }
 // greet();
+
+// var a = 10
+// var obj = {
+//     a: 20,
+//     say: () => {
+//         console.log(this);
+//         console.log(this.a)
+//     }
+// }
+// obj.say()
+
+// var a = 10
+// var obj = {
+//     a: 20,
+//     say: function () {
+//         console.log(this.a)
+//     }
+// }
+// obj.say.call(this) // 此处显示绑定this为全局window对象
+
+// 获取数组中的最大值和最小值
+// var numbers = [5, 458, 120, -215];
+// var maxInNumbers = Math.max.apply(Math, numbers) //458
+// var minInNumbers = Math.min.call(Math, 5, 458, 120, -215); //458
+// console.log(maxInNumbers, minInNumbers);
+
+// 数组相加
+// var array1 = [12, "foo", {
+//     name: "Joe"
+// }, -2458];
+// var array2 = ["Doe", 555, 100];
+
+// Array.prototype.push.apply(array1, array2)
+// console.log(array1);
+
+// var a = 10
+// var obj = {
+//     a: 20,
+//     say: () => {
+//         console.log(this.a)
+//     }
+// }
+
+// obj.say()
+// for (let i = 0; i < 5; i++) {
+//     (function (j) {
+//         setTimeout(() => {
+//             console.log(j);
+//         }, j * 1000)
+//     })(i)
+// }
+// var a = 12
+// var b = a
+// b = 1
+
+// function sum(x, y) {
+//     var total = x + y
+//     return total
+// }
+// sum(1, 2)
+
+// console.log(a, b) // undefined, undeifned
+// var a = 12,
+//     b = '林一一'
+
+// function foo() {
+//     // 2
+//     console.log(a, b) // 12 ''
+//     // 3
+//     var a = b = 13
+//     console.log(a, b)
+// }
+// foo()
+// console.log(a, b)
+
+// 函数声明提升的优先级高于变量声明的提升
+// var a = 1
+
+// function a() {
+//     console.log(a);
+// }
+
+// console.log(a);
+
+// var a = {
+//     name: 'xuxi'
+// };
+
+// function b(a) {
+//     a.age = 12;
+//     a = {
+//         num: 1
+//     };
+//     return a
+// }
+// var a1 = b(a);
+// console.log(a, a1)
