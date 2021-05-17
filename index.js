@@ -3734,15 +3734,119 @@ const arr = [1, [2, [3]]]
 // 动态作用域
 // 静态作用域
 
-var value = 1
+// var value = 1
 
-function foo() {
-    console.log(value);
-}
+// function foo() {
+//     console.log(value); // 首先查找当前作用域中是否又value，如果没有，则会向外一层查找
+// }
 
-function bar() {
-    var value = 2
-    foo()
-}
+// function bar() {
+//     var value = 2
+//     foo()
+// }
 
-bar()
+// bar()
+
+// var globalValue = `global value`;
+
+// function checkGlobal() {
+//     var localValue = `local value`;
+//     console.log(localValue); // "local value"
+//     console.log(globalValue); // "global value"
+// }
+
+// console.log(globalValue); // "global value"
+// console.log(checkGlobal); // "global value"
+// console.log(localValue); // "Uncaught ReferenceError: localValue is not defined"
+
+// for (let i = 0; i < 2; i++) {
+//     let i = 'hello'
+//     console.log(i);
+// }
+// var a = 1
+
+// function check() {
+//     return function () {
+//         console.log(a);
+//         console.log(b);
+//     }
+// }
+
+// var func = check()
+// func()
+
+// 当函数可以记住并访问所在的词法作用域的时，就产生了闭包,即使是在当前词法作用域外执行函数
+
+// (function () {
+//     var a = 1
+
+//     function test() {
+//         console.log(a);
+//     }
+
+//     window.module = {
+//         a,
+//         test
+//     }
+// })()
+
+// function outer() {
+//     var num = 0
+//     return function add() {
+//         num++
+//         console.log(num);
+//     }
+// }
+
+// var func1 = outer()
+// func1()
+// func1()
+
+// var func2 = outer()
+// func2()
+// func2()
+
+// for (var i = 0; i < Array.length; i++) {
+//     (function (k) {
+//         buttons[k].onclick = function () {
+//             console.log(k + 1);
+//         }
+//     })(i)
+// }
+
+// let x = 5;
+
+// function fn(x) {
+//     console.log(x);
+//     return function (y) {
+//         console.log(y + (++x)); // 13
+//     }
+// }
+// let f = fn(6);
+// f(7);
+// console.log(x); // 5
+
+// function func1() {
+//     alert(num);
+// }
+
+// function func2() {
+//     var num = 456;
+
+//     function func3() {
+//         func1();
+//     }
+//     func3();
+// }
+
+// func2()
+
+// var name = 'Peter';
+
+// function greet() {
+//     var greeting = 'Hello'; {
+//         let lang = 'English';
+//         console.log(`${lang}: ${greeting} ${name}`);
+//     }
+// }
+// greet();
