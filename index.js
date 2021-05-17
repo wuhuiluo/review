@@ -3948,20 +3948,20 @@ const arr = [1, [2, [3]]]
 // var a1 = b(a);
 // console.log(a, a1)
 
-var a = 1
-const fn = () => {
-    console.log(this.a)
-}
-fn()
+// var a = 1
+// const fn = () => {
+//     console.log(this.a)
+// }
+// fn()
 
 
-var r = new Promise(function (resolve, reject) {
-    console.log("a"); // 1
-    resolve()
-});
-setTimeout(() => console.log("d"), 0) // 宏任务 4
-r.then(() => console.log("c")); // 微任务 3
-console.log("b") // 2
+// var r = new Promise(function (resolve, reject) {
+//     console.log("a"); // 1
+//     resolve()
+// });
+// setTimeout(() => console.log("d"), 0) // 宏任务 4
+// r.then(() => console.log("c")); // 微任务 3
+// console.log("b") // 2
 
 
 // Object.prototype.a = 'Object';
@@ -4038,3 +4038,194 @@ console.log("b") // 2
 // fn = 2019;
 // console.log(fn);
 // 2019
+// var a = 10
+
+// function foo() {
+//     console.log(a)
+// }
+
+// function sum() {
+//     var a = 20
+//     foo()
+// }
+
+// sum()
+
+// var n = 10
+
+// function fn1() {
+//     var n = 20
+
+//     function f() {
+//         n++;
+//         console.log(n)
+//     }
+//     f()
+//     return f
+// }
+
+// var x = fn1() 
+// console.log(x);
+// x()
+// x() 
+// console.log(n) // 10
+
+// 闭包经典使用场景 
+// 1.return回一个函数
+// var n = 10
+
+// function fn() {
+//     var n = 20
+
+//     function f() {
+//         n++;
+//         console.log(n)
+//     }
+//     return f
+// }
+
+// var x = fn()
+// x() // 21
+// 2.函数作为参数
+// var a = 'linyiyi'
+
+// function foo() {
+//     var a = 'foo'
+
+//     function fo() {
+//         console.log(a);
+//     }
+//     return fo
+// }
+
+// function f(p) {
+//     var a = 'f'
+//     p()
+// }
+// f(foo())
+
+// var n = 'whl';
+// (function p() {
+//     console.log(n);
+// })()
+
+// for (var i = 0; i < 10; i++) {
+//     (function (j) {
+//         setTimeout(() => {
+//             console.log(j);
+//         }, 1000)
+//     })(i)
+// }
+
+// var data = [];
+
+// for (var i = 0; i < 3; i++) {
+//     data[i] = function () {
+//         console.log(i);
+//     };
+// }
+
+// data[0]();
+// data[1]();
+// data[2]()
+
+// async function async1() {
+//     console.log('async1 start');
+//     await async2();
+//     setTimeout(function () {
+//         console.log('setTimeout1') 
+//     }, 0)
+// }
+// async function async2() {
+//     setTimeout(function () {
+//         console.log('setTimeout2')
+//     }, 0)
+// }
+// console.log('script start');
+// setTimeout(function () {
+//     console.log('setTimeout3');
+// }, 0)
+// async1();
+// new Promise(function (resolve) {
+//     console.log('promise1');
+//     resolve();
+// }).then(function () {
+//     console.log('promise2');
+// });
+// console.log('script end');
+
+let name = 'hello world!'; // let语句不会挂载在window上
+let obj = {
+    name: '哈哈哈~',
+    name2: this.name,
+    // name2: ''
+    getName1: function () {
+        console.log('getName1 = ', this.name); // 哈哈哈~
+    },
+    getName2: function () {
+        console.log('getName2 = ', this.name2); // ""
+    },
+    getName3: () => {
+        console.log('getName3 = ', this.name2); // hello world!
+    },
+    getName4() {
+        setTimeout(function () {
+            console.log('getName4 = ', this.name); // hello world!
+        });
+    },
+    getName5() {
+        setTimeout(() => {
+            console.log('getName5 = ', this.name2);
+        });
+    },
+}
+
+console.log(obj.name); // 哈哈哈~
+console.log(obj.name2); // 哈哈哈~
+obj.getName1();
+obj.getName2();
+obj.getName3();
+obj.getName4();
+obj.getName5();
+
+
+// var obj = {
+//     user: "哈哈哈",
+//     subObj: {
+//         user: "啦啦啦",
+//         fn: function () {
+//             console.log(this.user);
+//         }
+//     }
+// }
+// var fn1 = obj.subObj.fn;
+// fn1();
+
+// var user = "11";
+// const fn = () => {
+//     let user = "22"
+//     console.log(this.user); // 11
+// }
+// let obj = {
+//     user: "33",
+//     fn: () => {
+//         console.log(this.user); // 11
+//     }
+// }
+// let subObj = {
+//     user: "44",
+//     son: {
+//         user: "55",
+//         fn: () => {
+//             console.log(this.user);
+//         }
+//     }
+// }
+// fn();
+// obj.fn();
+// subObj.son.fn();
+// let fn1 = obj.fn;
+// let fn2 = subObj.son.fn;
+// fn1();
+// fn2();
+// 全部11
