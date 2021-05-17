@@ -3947,3 +3947,56 @@ const arr = [1, [2, [3]]]
 // }
 // var a1 = b(a);
 // console.log(a, a1)
+
+var a = 1
+const fn = () => {
+    console.log(this.a)
+}
+fn()
+
+
+var r = new Promise(function (resolve, reject) {
+    console.log("a"); // 1
+    resolve()
+});
+setTimeout(() => console.log("d"), 0) // 宏任务 4
+r.then(() => console.log("c")); // 微任务 3
+console.log("b") // 2
+
+
+// Object.prototype.a = 'Object';
+// Function.prototype.a = 'Function';
+
+// function Person() {};
+// var child = new Person();
+// console.log(child.a);
+// console.log(Person.a);
+
+// Object.prototype.a = 'Object';
+// Function.prototype.a = 'Function';
+// function Person() {};
+// var child = new Person();
+// console.log(child.a); 
+// console.log(Person.a);
+
+// 1
+console.log(a, b)
+var a = 12,
+    b = '林一一'
+
+function foo() {
+    // 2
+    console.log(a, b)
+    // 3
+    var a = b = 13
+    console.log(a, b)
+}
+foo()
+console.log(a, b)
+
+/* 输出：
+    undefined undefined
+    undefined "林一一"
+    13 13
+    12 13
+*/
