@@ -3979,24 +3979,62 @@ console.log("b") // 2
 // console.log(child.a); 
 // console.log(Person.a);
 
-// 1
-console.log(a, b)
-var a = 12,
-    b = '林一一'
+// onsole.log(a, b)
+// var a = 12,
+//     b = '林一一'
 
-function foo() {
-    // 2
-    console.log(a, b)
-    // 3
-    var a = b = 13
-    console.log(a, b)
-}
-foo()
-console.log(a, b)
+// function foo() {
+//     console.log(a, b) // 
+//     //  var a =b =13
+//     console.log(a, b)
+// }
+// foo()
+// // 4
+// console.log(a, b)
 
-/* 输出：
-    undefined undefined
-    undefined "林一一"
-    13 13
-    12 13
-*/
+// a = 0
+
+// function foo() {
+//     var a = 12;
+//     b = '林一一'
+//     console.log('b' in window) // true
+//     console.log(a, b) // 12 'linyiyi'
+// }
+
+// foo()
+// console.log(b) // 'linyiyi'
+// console.log(a) // 0
+
+// function foo() {
+//     console.log(a) // 报错 后续代码不在执行
+//     a = 12;
+//     b = '林一一'
+//     console.log('b' in window)
+//     console.log(a, b) 
+// }
+// foo()
+
+// fn();
+// console.log(v1); // u
+// console.log(v2);
+// console.log(v3);
+
+// function fn() {
+//     var v1 = v2 = v3 = 2019;
+//     console.log(v1);
+//     console.log(v2);
+//     console.log(v3);
+// }
+
+// var a = 2;
+
+// function a() {
+//     console.log(3);
+// }
+// console.log(typeof a); // number
+// var fn;
+// function fn() {}
+// console.log(fn);
+// fn = 2019;
+// console.log(fn);
+// 2019
