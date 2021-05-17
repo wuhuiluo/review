@@ -3704,23 +3704,45 @@ const arr = [1, [2, [3]]]
 //     })
 // }
 
-async function async1() {
-    console.log('async1 start'); //  2
-    await async2();
-    console.log('async1 end'); // 微任务1 6
+// async function async1() {
+//     console.log('async1 start'); //  2
+//     await async2();
+//     console.log('async1 end'); // 微任务1 6
+// }
+// async function async2() {
+//     console.log('async2'); // 3
+// }
+// console.log('script start'); // 1
+// setTimeout(function () { // 宏任务
+//     console.log('setTimeout'); // 8
+// }, 0)
+// async1();
+// new Promise(function (resolve) {
+//     console.log('promise1'); // 4 
+//     resolve();
+// }).then(function () { // 微任务
+//     console.log('promise2'); // 7
+// });
+// console.log('script end'); // 5
+
+
+// 作用域和作用域链
+
+// 作用域：变量和函数可访问的范围，即作用域控制变量和函数的可见性和声明周期
+
+// 词法作用域
+// 动态作用域
+// 静态作用域
+
+var value = 1
+
+function foo() {
+    console.log(value);
 }
-async function async2() {
-    console.log('async2'); // 3
+
+function bar() {
+    var value = 2
+    foo()
 }
-console.log('script start'); // 1
-setTimeout(function () { // 宏任务
-    console.log('setTimeout'); // 8
-}, 0)
-async1();
-new Promise(function (resolve) {
-    console.log('promise1'); // 4 
-    resolve();
-}).then(function () { // 微任务
-    console.log('promise2'); // 7
-});
-console.log('script end'); // 5
+
+bar()
