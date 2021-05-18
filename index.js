@@ -4271,13 +4271,13 @@ Class可以通过对象语法和数组语法进行动态绑定
 
 ``
 `
-<div :class="{ active: isActive, 'text-danger' : hasError }></div>
-
-data: {
-    isActive: true,
-    hasError: false
-}
-`
+    <div :class="{ active: isActive, 'text-danger' : hasError }></div>
+    
+    data: {
+        isActive: true,
+        hasError: false
+    }
+    `
 ``
 
 -
@@ -4285,13 +4285,13 @@ data: {
 
     ``
 `
-<div :class="[ isActive? activeClass : '', errorClass ]></div>
-
-data: {
-    activeClass: 'active'
-    errorClass: 'text-danger'
-}
-`
+    <div :class="[ isActive? activeClass : '', errorClass ]></div>
+    
+    data: {
+        activeClass: 'active'
+        errorClass: 'text-danger'
+    }
+    `
 ``
 
 Style也可以通过对象语法和数组语法进行动态绑定
@@ -4301,13 +4301,13 @@ Style也可以通过对象语法和数组语法进行动态绑定
 
 ``
 `
-<div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
-
-data: {
-    activeCOlor: 'red',
-    fontSize: 30
-}
-`
+    <div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+    
+    data: {
+        activeCOlor: 'red',
+        fontSize: 30
+    }
+    `
 ``
 
 -
@@ -4315,16 +4315,16 @@ data: {
 
     ``
 `
-<div :style="[ styleColor,styleSize ]"></div>
-
-data: {
-   styleColor: {
-       color: 'red'
-   },
-   styleSize: {
-       fontSize: '23px'
-}
-`
+    <div :style="[ styleColor,styleSize ]"></div>
+    
+    data: {
+       styleColor: {
+           color: 'red'
+       },
+       styleSize: {
+           fontSize: '23px'
+    }
+    `
 ``
 
 ##
@@ -4340,13 +4340,13 @@ data: {
 
 ``
 `
-props: ['initialCounter']m
-data: function {
-    return {
-        counter: this.initalCounter
+    props: ['initialCounter']m
+    data: function {
+        return {
+            counter: this.initalCounter
+        }
     }
-}
-`
+    `
 ``
 
 -
@@ -4354,16 +4354,101 @@ data: function {
 
 ``
 `
-props: ['size'],
-computed: {
-    normalizedSize: function() {
-        return this.size.trim().toLowerCase()
+    props: ['size'],
+    computed: {
+        normalizedSize: function() {
+            return this.size.trim().toLowerCase()
+        }
     }
-}
-`
+    `
 ``
 
 ##
 5. computed 和 watch 的区别和应用的场景
 
-    `computed`
+    `computed`: 是计算属性， 以来其他属性值， 并且computed的值有缓存， 只有它依赖的属性值发生改变， 下一次获取computed的值才会重新计算computed的值
+
+`watch`: 更多的是[观察] 的作用， 类似某些数据的监听回调， 每当监听的数据变化时都会执行回调进行后续操作。
+
+
+运用场景
+
+    -
+    当我们需要进行数值计算， 并且依赖于其他数据时， 应该使用computed， 因为可以利用computed的缓存特性， 避免每次获取值时， 都要重新计算。
+
+    -
+    当我们需要在数据变化时执行异步或者开销较大的操作时， 应该使用watch， 使用watch选项允许我们执行异步操作(访问一个API)， 限制我们执行操作的频率， 并在我们得到最终结果前， 设置中间状态， 这些都是计算属性无法做到的。
+
+
+## 6. 直接给一个数组项赋值， Vue能检测到变化吗
+
+由于Javascript的限制， Vue不能检测到以下数组的变动:
+
+    -当你利用索引值设置一个数组项时, 例如: `vm.items[indexOfItem] = newValue` -
+    当你修改数组长度的时, 例如: `vm.items.length =- newLength`
+
+为了解决第一个问题， Vue提供了以下操作方法:
+
+    ``
+`
+    // Vue.set
+    Vue.set(vm.items, indexOfItem ,newValue)
+    // vm.$set，Vue.set的一个别名
+    vm.$set(vm.items, indexOfItem ,newValue)
+    // Array.prototype.splice
+    vm.items.splice(indexOfItem, 1, newValue)
+    `
+``
+
+为了解决第二个问题, Vue提供了以下操作方法
+
+    ``
+`
+    // Array.prototype.splice
+    vm.items.splice(newLengh)
+    `
+``
+
+
+##
+7. 谈谈你对Vue生命周期的理解
+
+    (1)
+    (2)
+
+
+
+## 8. Vue的父组件和子组件生命周期钩子函数执行顺序
+
+Vue的父组件和子组件生命周期钩子函数执行顺序可以归类为以下四部分
+
+    -
+    加载渲染过程
+
+父 beforeCrete - > 父 created - > 父 beforeMount - > 子 beforeCreate - > 子 created - > 子 mounted - > 父 mounted
+
+    -
+    子组件更新过程
+
+父 beforeUpdate - > 子 beforeUpdate - > 子 updated - > 父 updated
+
+    -
+    父组件更新过程
+
+父 beforeUpdate - > 父 updated
+
+    -
+    销毁过程
+
+父 beforeDestroy - > 子 beforeDestroy - > 子 destoryed - > 父 destoryed
+
+## 9. 在哪个生命周期内调用异步请求
+
+可以在钩子函数created, beforeMount, mounted中进行调用, 因为在这三个钩子函数中， data已经创建， 可以将服务器端返回的数据进行赋值， 但是我推荐在created钩子函数中调用异步请求， 因为在created钩子函数中调用异步请求有以下优点
+
+    -
+    能更快获取到服务端数据， 减少页面loading时间 -
+    ssr不支持beforeMount、 mounted钩子函数， 所以放在created有助于一致性。
+
+
+## 10. 组件中的data为什么是一个函数
