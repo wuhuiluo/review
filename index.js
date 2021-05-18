@@ -4272,3 +4272,196 @@ const arr = [1, [2, [3]]]
 // display: none与visibility: hidden的区别
 
 // display: none 那么该元素以及它的所有后代元素都会隐藏，隐藏后的元素无法点击，占据的空间会消失
+
+// async function async1() {
+//     console.log('async1 start'); // 2
+//     await async2();
+//     console.log('async1 end'); //  7微任务2
+// }
+// async function async2() {
+//     console.log('async2 start'); // 3
+//     return new Promise((resolve, reject) => {
+//         resolve();
+//         console.log('async2 promise'); // 4
+//     })
+// }
+// console.log('script start'); // 1
+// setTimeout(function () { // 宏任务1
+//     console.log('setTimeout'); //10
+// }, 0);
+// async1();
+// new Promise(function (resolve) {
+//     console.log('promise1'); // 5
+//     resolve();
+// }).then(function () { // 微任务
+//     console.log('promise2'); // 8
+// }).then(function () {
+//     console.log('promise3'); //9
+// });
+// console.log('script end') // 6
+// window.name = 'ByteDance';
+
+// function A() {
+//     this.name = 123;
+// }
+// A.prototype.getA = function () {
+//     console.log(this);
+//     return this.name + 1;
+// }
+// let a = new A();
+// let funcA = a.getA;
+// funcA();
+// console.log(funcA());
+
+// Object.defineProperty() // 劫持各个数据属性的setter / getter \
+// Object.defineProperty() // 会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象
+// 数据描述符，存取描述符
+// configurable
+// enumerable
+// let val = 'tom'
+// let person = {}
+// Object.defineProperty(person, 'name', {
+//     get() {
+//         console.log('name属性被读取了');
+//         return val
+//     },
+//     set(newVal) {
+//         console.log('name属性被修改了。，。');
+//         val = newVal
+//     }
+// })
+// console.log(person.name);
+
+// 遍历对象的每个属性
+// let person = {
+//     name: 'tom',
+//     age: 15
+// }
+
+// function observable(obj) {
+//     if (!obj || typeof obj !== 'object') {
+//         return
+//     }
+//     let keys = Object.keys(obj)
+//     console.log(keys);
+// }
+
+// observable(person)
+
+
+// var bar = {
+//     myName: "https://www.meituan.com/",
+//     printName: function () {
+//         console.log(myName)
+//     }
+// }
+
+// function foo() {
+//     let myName = "MEITUAN"
+//     return bar.printName
+// }
+// let myName = "美团"
+
+// let _printName = foo()
+// console.log(_printName);
+// _printName()
+// bar.printName()
+
+// function foo() {
+//     setTimeout(function () {
+//         console.log('id:', this.id);
+//     });
+// }
+// var id = 21;
+// foo.call({
+//     id: 42
+// })
+
+// var a = {
+//     a: 1
+// }
+// var b = (val) => {
+//     console.log(val);
+//     val['b'] = 2
+// }
+// b(a)
+// console.log(a)
+
+// var color = "green";
+// var test = {
+//     color: "blue",
+//     getColor: function () {
+//         var color = "red";
+//         console.log(this.color);
+//     },
+// };
+// var getColor = test.getColor;
+// getColor(); 
+// test.getColor(); 
+
+// var a = 1
+// const fn = () => {
+//     console.log(this.a)
+// }
+// fn()
+
+// var r = new Promise(function (resolve, reject) {
+//     console.log("a"); // 1
+//     resolve()
+// });
+// setTimeout(() => console.log("d"), 0) // 4
+// r.then(() => console.log("c")); // 3 
+// console.log("b") // 2
+
+// Object.prototype.a = 'Object';
+// Function.prototype.a = 'Function';
+
+// function Person() {};
+// var child = new Person();
+// console.log(child.a);
+// console.log(Person.a);
+
+// Vue底层重写的数组方法
+
+// push() pop() shift() unshift() splice() sort() reverse()
+
+// 1  构造函数  内部变量指向匿名函数
+function Fun() {
+    getName = function () {
+        console.log(1);
+    };
+    console.log(this);
+    return this;
+}
+// 2 定义全局变量 getName  
+var getName;
+// 3 定义一个getName 函数 函数声明提升
+function getName() {
+    console.log(5);
+}
+// 4 给构造函数定义一个属性  getName 
+Fun.getName = function () {
+    console.log(2);
+};
+// 5 在构造函数的原型上定义 一个getName方法
+Fun.prototype.getName = function () {
+    console.log(3);
+};
+// 6  getName变量指向一个匿名函数 
+getName = function () {
+    console.log(4);
+};
+getName(); // 4
+Fun.getName() // 2
+Fun().getName(); // 4
+getName(); // 4
+new Fun.getName(); // 
+new Fun().getName();
+new new Fun().getName();
+
+// var getName = 'whl';
+// var getName = function () {
+//     console.log(5);
+// }
+// console.log(getName); // [Function: getName]
+// getName() // 5
