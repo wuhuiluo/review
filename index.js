@@ -4426,38 +4426,38 @@ const arr = [1, [2, [3]]]
 // push() pop() shift() unshift() splice() sort() reverse()
 
 // 1  构造函数  内部变量指向匿名函数
-function Fun() {
-    getName = function () {
-        console.log(1);
-    };
-    console.log(this);
-    return this;
-}
-// 2 定义全局变量 getName  
-var getName;
-// 3 定义一个getName 函数 函数声明提升
-function getName() {
-    console.log(5);
-}
-// 4 给构造函数定义一个属性  getName 
-Fun.getName = function () {
-    console.log(2);
-};
-// 5 在构造函数的原型上定义 一个getName方法
-Fun.prototype.getName = function () {
-    console.log(3);
-};
-// 6  getName变量指向一个匿名函数 
-getName = function () {
-    console.log(4);
-};
-getName(); // 4
-Fun.getName() // 2
-Fun().getName(); // 4
-getName(); // 4
-new Fun.getName(); // 
-new Fun().getName();
-new new Fun().getName();
+// function Fun() {
+//     getName = function () {
+//         console.log(1);
+//     };
+//     // console.log(this);
+//     return this;
+// }
+// // 2 定义全局变量 getName  
+// var getName = 1;
+// // 3 定义一个getName 函数 函数声明提升
+// function getName() {
+//     console.log(5);
+// }
+// // 4 给构造函数定义一个属性  getName 
+// Fun.getName = function () {
+//     console.log(2);
+// };
+// // 5 在构造函数的原型上定义 一个getName方法
+// Fun.prototype.getName = function () {
+//     console.log(3);
+// };
+// // 6  getName变量指向一个匿名函数 
+// // getName = function () {
+// //     console.log(4);
+// // };
+// getName(); // 4
+// Fun.getName() // 2
+// Fun().getName(); // 4
+// getName(); // 4
+// new Fun.getName(); // 
+// new Fun().getName();
+// new new Fun().getName();
 
 // var getName = 'whl';
 // var getName = function () {
@@ -4465,3 +4465,25 @@ new new Fun().getName();
 // }
 // console.log(getName); // [Function: getName]
 // getName() // 5
+// var getName = 1
+
+// function getName() {
+//     console.log(2);
+// }
+
+// console.log(getName);
+// getName()
+
+// 如何创建BFC
+
+// float的值不是none
+// position的值不是static和relative
+// display的值是inline-block、table-cell、flex
+// overflow的值不是visible
+
+// W3C标准盒模型和IE和模型的区别
+// box-sizing: content-box W3C盒子模型
+// box-sizing: border-box 是IE盒模型
+// W3C width指的是content部分的宽度
+// IE width指的是content+padding+
+
