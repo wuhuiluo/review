@@ -4487,3 +4487,114 @@ const arr = [1, [2, [3]]]
 // W3C width指的是content部分的宽度
 // IE width指的是content+padding+
 
+// console.log(1) // 1
+
+// setTimeout(function() {
+//   console.log(2) // 6
+// })
+
+// new Promise(function (resolve) {
+//   console.log(3) // 2
+//   resolve()
+//  }).then(function () {
+//   console.log(4) // 4
+// }).then(function() {
+//   console.log(5) //5
+// })
+
+// console.log(6) // 3
+
+
+// async function async1() {
+//   console.log('async1 start'); // 2
+//   await async2(); // await后面的是微任务 6
+//   console.log('async1 end');
+// }
+// async function async2() {
+//   console.log('async2'); // 3
+// }
+// console.log('script start'); // 1
+// setTimeout(function () { // 宏1 8
+//   console.log('setTimeout');
+// }, 0)
+// async1();
+// new Promise(function (resolve) {
+//   console.log('promise1'); // 4
+//   resolve();
+// }).then(function () { // 微任务 7
+//   console.log('promise2');
+// });
+// console.log('script end'); // 5
+
+// console.log('start'); // 1
+// setTimeout(() => { // 宏任务
+//   console.log('children2'); // 3
+//   Promise.resolve().then(() => {
+//     console.log('children3'); // 4
+//   })
+// }, 0);
+
+// new Promise(function (resolve, reject) {
+//   console.log('children4'); // 2 
+//   setTimeout(function () { // 宏2
+//     console.log('children5'); // 5
+//     resolve('children6')
+//   }, 0)
+// }).then((res) => { // 微任务
+//   console.log('children7'); // 6
+//   setTimeout(() => { // 宏3
+//     console.log(res); // 
+//   }, 0)
+// })
+
+// const p = function () {
+//   return new Promise((resolve, reject) => {
+//     const p1 = new Promise((resolve, reject) => {
+//       setTimeout(() => { // 宏任务
+//         resolve(1)
+//       }, 0)
+//       resolve(2)
+//     })
+//     p1.then((res) => {
+//       console.log(res); // 3: 1
+//     })
+//     console.log(3); // 1
+//     resolve(4);
+//   })
+// }
+
+
+// p().then((res) => {
+//   console.log(res); // 4: 4
+// })
+// console.log('end'); // 2
+
+// 位置 1
+setTimeout(function () { // 宏任务1
+  console.log('timeout1');
+}, 1000);
+
+// 位置 2
+console.log('start'); // 1
+
+// 位置 3
+Promise.resolve().then(function () {
+  // 位置 5
+  console.log('promise1'); // 3
+  // 位置 6
+  Promise.resolve().then(function () { // 微任务
+    console.log('promise2'); // 
+  });
+  // 位置 7
+  setTimeout(function () { // 宏任务3
+    // 位置 8
+    Promise.resolve().then(function () {
+      console.log('promise3');
+    });
+    // 位置 9
+    console.log('timeout2')
+  }, 0);
+});
+
+// 位置 4
+console.log('done'); // 2
