@@ -4637,26 +4637,42 @@ const arr = [1, [2, [3]]]
 //     return a + b
 // }
 
-setTimeout(() => {
-    console.log(1);
-}, 0);
-async function main1() {
-    new Promise((resolve, reject) => {
-        console.log(2);
-        resolve();
-    }).then(() => {
-        console.log(3);
-    })
-    await main2();
-    console.log(7);
-}
-async function main2() {
-    console.log(8);
-}
-requestAnimationFrame(() => {
-    console.log(9);
-});
-main1();
-setTimeout(() => {
-    console.log(10);
-}, 0);
+// setTimeout(() => { // 宏任务
+//     console.log(1); // 5: 1
+// }, 0);
+// async function main1() {
+//     new Promise((resolve, reject) => {
+//         console.log(2); // 1
+//         resolve();
+//     }).then(() => { // 微1
+//         console.log(3); // 3: 3
+//     })
+//     await main2(); // 微2
+//     console.log(7); // 4: 7
+// }
+// async function main2() {
+//     console.log(8); // 2
+// }
+// requestAnimationFrame(() => {
+//     console.log(9); // 宏任务2 6: 9
+// });
+// main1();
+// setTimeout(() => { // 宏3任务
+//     console.log(10); 7: 10
+// }, 0);
+
+// function Person(name) {
+//     this.name = name
+// }
+
+// Person.prototype.getName = function () {}
+
+// var p = new Person('whl')
+
+// console.log(p.__proto__ === Person.prototype);
+// console.log(p.__proto__ === p.constructor.prototype);
+// p.__proto__.constructor.prototype.__proto__
+// Person.prototype.constructor.prototype.__proto__
+
+// 如何获取对象的原型 Object.getPrototypeOf()
+// 获取非原型链上的属性hasOwnProperty()
