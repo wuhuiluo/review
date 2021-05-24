@@ -4611,3 +4611,52 @@ const arr = [1, [2, [3]]]
 //         poll: 1000
 //     }
 // }
+// (function (window) {
+//     var name = 'whl'
+//     var sex = 'male'
+
+//     function tell() { // 这样就不能修改其中的数据了
+//         console.log('I m', this.name);
+//     }
+//     window.Module = {
+//         tell
+//     }
+// })(window)
+
+// window.Module.tell()
+// define('mymodule', ["dep1", "dep2"], function (d1, d2) {
+
+// })
+
+// require(['module', '../file'], function (module, file) {
+
+// })
+// const math = require('./math')
+
+// exports.getSum = function (a, b) {
+//     return a + b
+// }
+
+setTimeout(() => {
+    console.log(1);
+}, 0);
+async function main1() {
+    new Promise((resolve, reject) => {
+        console.log(2);
+        resolve();
+    }).then(() => {
+        console.log(3);
+    })
+    await main2();
+    console.log(7);
+}
+async function main2() {
+    console.log(8);
+}
+requestAnimationFrame(() => {
+    console.log(9);
+});
+main1();
+setTimeout(() => {
+    console.log(10);
+}, 0);
