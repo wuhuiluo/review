@@ -4570,31 +4570,44 @@ const arr = [1, [2, [3]]]
 // console.log('end'); // 2
 
 // 位置 1
-setTimeout(function () { // 宏任务1
-  console.log('timeout1');
-}, 1000);
+// setTimeout(function () { // 宏任务1
+//   console.log('timeout1');
+// }, 1000);
 
-// 位置 2
-console.log('start'); // 1
+// // 位置 2
+// console.log('start'); // 1
 
-// 位置 3
-Promise.resolve().then(function () {
-  // 位置 5
-  console.log('promise1'); // 3
-  // 位置 6
-  Promise.resolve().then(function () { // 微任务
-    console.log('promise2'); // 
-  });
-  // 位置 7
-  setTimeout(function () { // 宏任务3
-    // 位置 8
-    Promise.resolve().then(function () {
-      console.log('promise3');
-    });
-    // 位置 9
-    console.log('timeout2')
-  }, 0);
-});
+// // 位置 3
+// Promise.resolve().then(function () {
+//   // 位置 5
+//   console.log('promise1'); // 3
+//   // 位置 6
+//   Promise.resolve().then(function () { // 微任务
+//     console.log('promise2'); // 
+//   });
+//   // 位置 7
+//   setTimeout(function () { // 宏任务3
+//     // 位置 8
+//     Promise.resolve().then(function () {
+//       console.log('promise3');
+//     });
+//     // 位置 9
+//     console.log('timeout2')
+//   }, 0);
+// });
 
-// 位置 4
-console.log('done'); // 2
+// // 位置 4
+// console.log('done'); // 
+
+// module.exports = {
+//     // 默认false，也就是不开启
+//     watch: true,
+//     // 只有开启监听模式时， watchOptions才有意义
+//     watchOptions: {
+//         // 默认为空，不监听的文件或者文件夹，支持正则匹配
+//         ignored: /node_modules/,
+//         aggregateTimeout: 300,
+//         // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
+//         poll: 1000
+//     }
+// }
