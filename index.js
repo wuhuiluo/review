@@ -4676,3 +4676,9 @@ const arr = [1, [2, [3]]]
 
 // 如何获取对象的原型 Object.getPrototypeOf()
 // 获取非原型链上的属性hasOwnProperty()
+
+// 原型链
+
+// console.log(Function.prototype.__proto__ === Object.prototype);
+// console.log(Function.__proto__.__proto__ === Object.prototype);
+// console.log(Object.prototype.__proto__ === null);
