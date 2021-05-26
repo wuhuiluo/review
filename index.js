@@ -4796,8 +4796,70 @@ const arr = [1, [2, [3]]]
 // }
 
 // showName.myCall(me) // icon
-function readArr(...args) {
-    console.log(args);
+// function readArr(...args) {
+//     console.log(args);
+// }
+
+// readArr(1, 2, 4, 5)
+
+Function.prototype.myApply = function (context, args) {
+    // 1: 判断当前传参是否是数组
+    if (args && !(args instanceof Array)) {
+        throw new TypeError('呀呀呀，参数必须是数组哦')
+    }
+    // 2: 上面说的 如果是null默认指向window
+    context = context || window
+    // 3: 把函数挂到目标对象上（这里的 this 就是我们要改造的的那个函数）
+    context.func = this
+    // 4: 执行函数并且存储上面说的 返回值
+    console.log([...args]);
+    const result = context.func(args ? [...args] : '')
+    // 5: 删除 1 中挂到目标对象上的函数，把目标对象”完璧归赵”
+    delete context.func;
+    // 6: 返回结果值
+    return result;
+}
+var me = {
+    name: 'icon'
 }
 
-readArr(1, 2, 4, 5)
+// Function.prototype.myCall = function (context) {
+//     if (context === null || context === undefined) {
+//         // 指定为 null 和 undefined 的 this 值会自动指向全局对象(浏览器中为window)
+//         context = window
+//     } else {
+//         context = Object(context) // 值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的实例对象
+//     }
+//     const args = [...arguments].slice(1) // 将类数组转换为数组ES6
+//     const key = Symbol('特殊属性Symbol') // 用于临时储存函数
+//     context[key] = this; // 函数的this指向隐式绑定到context上
+//     let result = context[key](...args); // 通过隐式绑定执行函数并传递参数
+//     delete context[key]; // 删除上下文对象的属性
+//     return result; // 返回函数执行结果
+// };
+
+function showName() {
+    console.log(this.name)
+}
+
+var me = {
+    name: 'icon'
+}
+
+showName.myApply(me, [1, 2, 3, 4, 5]) // icon
+
+
+Function.prototype.myBind = function (context, ...args) {
+    // 1: 保存下当前 this（这里的 this 就是我们要改造的的那个函数）
+    const _this = this;
+    // 2: 返回一个函数
+    return function F() {
+        // 3: 因为返回了一个函数，除了直接调用还可以 new F()，所以需要判断分开走
+        // 4: new 的方式
+        if (_this instanceof F) {
+            return new _this(...args, ...arguments);
+        }
+        // 5: 直接调用，这里选择了 apply 的方式实现但是对于参数需要注意以下情况：因为 bind 可以实现类似这样的代码 f.bind(obj, 1)(2)，所以我们需要将两边的参数拼接起来，于是就有了这样的实现 args.concat(…arguments)；
+        return _this.apply(context, args.concat(...arguments));
+    }
+}
