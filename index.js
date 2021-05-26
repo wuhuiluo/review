@@ -4838,28 +4838,50 @@ var me = {
 //     return result; // 返回函数执行结果
 // };
 
-function showName() {
-    console.log(this.name)
-}
+// function showName() {
+//     console.log(this.name)
+// }
 
-var me = {
-    name: 'icon'
-}
+// var me = {
+//     name: 'icon'
+// }
 
-showName.myApply(me, [1, 2, 3, 4, 5]) // icon
+// showName.myApply(me, [1, 2, 3, 4, 5]) // icon
 
 
-Function.prototype.myBind = function (context, ...args) {
-    // 1: 保存下当前 this（这里的 this 就是我们要改造的的那个函数）
-    const _this = this;
-    // 2: 返回一个函数
-    return function F() {
-        // 3: 因为返回了一个函数，除了直接调用还可以 new F()，所以需要判断分开走
-        // 4: new 的方式
-        if (_this instanceof F) {
-            return new _this(...args, ...arguments);
+// Function.prototype.myBind = function (context, ...args) {
+//     // 1: 保存下当前 this（这里的 this 就是我们要改造的的那个函数）
+//     const _this = this;
+//     // 2: 返回一个函数
+//     return function F() {
+//         // 3: 因为返回了一个函数，除了直接调用还可以 new F()，所以需要判断分开走
+//         // 4: new 的方式
+//         if (_this instanceof F) {
+//             return new _this(...args, ...arguments);
+//         }
+//         // 5: 直接调用，这里选择了 apply 的方式实现但是对于参数需要注意以下情况：因为 bind 可以实现类似这样的代码 f.bind(obj, 1)(2)，所以我们需要将两边的参数拼接起来，于是就有了这样的实现 args.concat(…arguments)；
+//         return _this.apply(context, args.concat(...arguments));
+//     }
+// }
+
+function shallowClone(source) {
+    let target = {}
+    for (let i in source) {
+        if (source.hasOwnProperty(i)) {
+            target[i] = source[i]
         }
-        // 5: 直接调用，这里选择了 apply 的方式实现但是对于参数需要注意以下情况：因为 bind 可以实现类似这样的代码 f.bind(obj, 1)(2)，所以我们需要将两边的参数拼接起来，于是就有了这样的实现 args.concat(…arguments)；
-        return _this.apply(context, args.concat(...arguments));
+    }
+    return target
+}
+
+let demo = {
+    b: {
+        c: {}
     }
 }
+let demo2 = shallowClone(demo)
+let demo3 = demo;
+console.log(demo3 === demo) // true
+console.log(demo2.b.c === demo.b.c) // true
+console.log(demo2.b === demo.b) // true
+console.log(demo2 === demo) // false
