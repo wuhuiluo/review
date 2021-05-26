@@ -4682,3 +4682,122 @@ const arr = [1, [2, [3]]]
 // console.log(Function.prototype.__proto__ === Object.prototype);
 // console.log(Function.__proto__.__proto__ === Object.prototype);
 // console.log(Object.prototype.__proto__ === null);
+
+// blur 失去焦点 focus 获取焦点
+// mousedown mouseup click 
+// function MyInstanceof(L, R) {
+//     if (typeof L !== 'object' || L === null) return false
+//     let proto = Object.getPrototypeOf(L)
+//     while (true) {
+//         if (proto === null) return false
+//         if (proto === R.prototype) return true
+//         proto = Object.getPrototypeOf(proto)
+//     }
+// }
+// console.log(MyInstanceof("111", String)); //false
+// console.log(MyInstanceof(new String("111"), String)); //true
+
+// F.prototype === f.__proto__ === 原型对象(原型)
+// f.constructor === F.prototype.constructor === F === f.__proto__.constructor
+
+// 在调用new的过程中会发生四件事
+
+// 1.新生成一个对象
+// 2.链接到原型
+// 3.绑定this
+// 4.返回新对象
+
+// 自己实现一个new
+// 1.创建要给空对象
+// 2.获取构造函数
+// 3.设置空对象的原型
+// 4.绑定this并执行构造函数
+// 5.确保返回值为对象
+
+// function newLast() {
+//     let obj = {}
+//     let Con = [].shift.call(arguments)
+//     obj.__proto__ = Con.prototype
+//     let result = Con.apply(obj, arguments)
+//     return result instanceof Object ? result : obj
+// }
+
+// function instanceofLast(left,right) {
+//     let prototype = right.prototype
+//     let left = left.__proto__
+//     while(true) {
+//         if(left === null || left === undefined) return false
+//         if(prototype === left) return true
+//         left = left.__proto__
+//     }
+// }
+
+// IE盒模型border-box，W3C盒模型content-box
+// content padding border margin
+
+// function foo() {
+//     console.log(this.a);
+// }
+// var a = 1
+// foo()
+
+// const obj = {
+//     a: 2,
+//     foo: foo
+// }
+// obj.foo()
+// const c = new foo()
+
+// let a = {}
+// let fn = function() {
+//     console.log(this);
+// }
+
+// fn.bind().bind(a)()
+// function func() {
+//     console.log(this);
+//     console.log(this.__proto__ === func.prototype);
+// }
+
+// Func = func.bind(1)
+// console.log(Func);
+
+// function func() {
+//     console.log(this)
+// }
+
+// boundFunc = func.bind(1)
+// boundFunc.apply(2) // 1，口诀 3 优先
+
+// function func(num) {
+//     this.count++
+// }
+
+// func.count = 0
+
+// func(1)
+
+// Function.prototype.myCall = function (context) {
+//     console.log(this);
+//     // 1: 把函数挂到目标对象上（这里的 this 就是我们要改造的的那个函数）
+//     context.func = this
+//     // 2: 执行函数
+//     context.func()
+//     // 3: 删除 1 中挂到目标对象上的函数，把目标对象”完璧归赵”
+//     delete context.func
+// }
+
+// var me = {
+//     name: 'icon'
+// }
+
+// function showName() {
+//     console.log(this.name)
+// }
+
+// showName.myCall(me) // icon
+function readArr(...args) {
+    console.log(args);
+}
+
+readArr(1, 2, 4, 5)
