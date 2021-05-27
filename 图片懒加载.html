@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Lazyload</title>
+    <style>
+        img {
+            display: block;
+            margin-bottom: 50px;
+            height: 200px;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" /><img
+        src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+    <img src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" /><img
+        src="./default.png"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/437cad7e17314f0b9a86623d7faa2ccf~tplv-k3u1fbpfcp-zoom-1.image" />
+</body>
+<script>
+    let Img = document.getElementsByTagName("img")
+    let len = Img.length
+
+    function lazyload() {
+        let viewH = document.body.clientHeight
+        let scrollTop = document.body.scrollTop
+        for (let i = 0; i < len; i++) {
+            if (Img[i].offsetTop < scrollTop + viewH) {
+                Img[i].src = Img[i].getAttribute('data-src')
+               
+            }
+        }
+    }
+
+    function throttle(fn, delay) {
+        let flag = true,
+            timer = null
+        return function (...args) {
+            let context = this
+            if (!flag) return
+            flag = false
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(context, args)
+                flag = true
+            }, delay)
+        }
+    }
+    window.addEventListener('scroll', throttle(lazyload, 1000))
+</script>
+
+</html>
