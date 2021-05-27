@@ -4885,3 +4885,12 @@ console.log(demo3 === demo) // true
 console.log(demo2.b.c === demo.b.c) // true
 console.log(demo2.b === demo.b) // true
 console.log(demo2 === demo) // false
+
+
+let obj = {
+    name: 'wuhuiluo',
+    age: 18
+}
+localStorage.setItem('name', 'sanyuan')
+localStorage.setImte('info', JSON.stringify(obj))
+
