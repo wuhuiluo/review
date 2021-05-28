@@ -4802,26 +4802,26 @@ const arr = [1, [2, [3]]]
 
 // readArr(1, 2, 4, 5)
 
-Function.prototype.myApply = function (context, args) {
-    // 1: 判断当前传参是否是数组
-    if (args && !(args instanceof Array)) {
-        throw new TypeError('呀呀呀，参数必须是数组哦')
-    }
-    // 2: 上面说的 如果是null默认指向window
-    context = context || window
-    // 3: 把函数挂到目标对象上（这里的 this 就是我们要改造的的那个函数）
-    context.func = this
-    // 4: 执行函数并且存储上面说的 返回值
-    console.log([...args]);
-    const result = context.func(args ? [...args] : '')
-    // 5: 删除 1 中挂到目标对象上的函数，把目标对象”完璧归赵”
-    delete context.func;
-    // 6: 返回结果值
-    return result;
-}
-var me = {
-    name: 'icon'
-}
+// Function.prototype.myApply = function (context, args) {
+//     // 1: 判断当前传参是否是数组
+//     if (args && !(args instanceof Array)) {
+//         throw new TypeError('呀呀呀，参数必须是数组哦')
+//     }
+//     // 2: 上面说的 如果是null默认指向window
+//     context = context || window
+//     // 3: 把函数挂到目标对象上（这里的 this 就是我们要改造的的那个函数）
+//     context.func = this
+//     // 4: 执行函数并且存储上面说的 返回值
+//     console.log([...args]);
+//     const result = context.func(args ? [...args] : '')
+//     // 5: 删除 1 中挂到目标对象上的函数，把目标对象”完璧归赵”
+//     delete context.func;
+//     // 6: 返回结果值
+//     return result;
+// }
+// var me = {
+//     name: 'icon'
+// }
 
 // Function.prototype.myCall = function (context) {
 //     if (context === null || context === undefined) {
@@ -4864,212 +4864,284 @@ var me = {
 //     }
 // }
 
-function shallowClone(source) {
-    let target = {}
-    for (let i in source) {
-        if (source.hasOwnProperty(i)) {
-            target[i] = source[i]
-        }
-    }
-    return target
+// function shallowClone(source) {
+//     let target = {}
+//     for (let i in source) {
+//         if (source.hasOwnProperty(i)) {
+//             target[i] = source[i]
+//         }
+//     }
+//     return target
+// }
+
+// let demo = {
+//     b: {
+//         c: {}
+//     }
+// }
+// let demo2 = shallowClone(demo)
+// let demo3 = demo;
+// console.log(demo3 === demo) // true
+// console.log(demo2.b.c === demo.b.c) // true
+// console.log(demo2.b === demo.b) // true
+// console.log(demo2 === demo) // false
+
+
+// let obj = {
+//     name: 'wuhuiluo',
+//     age: 18
+// }
+// localStorage.setItem('name', 'sanyuan')
+// localStorage.setImte('info', JSON.stringify(obj))
+
+
+// ## 谈谈你对XSS攻击的理解
+
+// 什么是XSS攻击
+
+// XSS全称是`Cross Site Scripting`,为了与`CSS`区分开来，故简称`XSS`，翻译过来就是跨站脚本
+
+// XSS是指黑客往HTML文件或者DOM中注入恶意脚本,从而在用户浏览页面时利用注入的恶意脚本对用户实施攻击的一种手段
+
+// 最开始的时候，这种攻击是通过跨域来实现的，所以叫跨域脚本，现在插入恶意代码的方式越来越多，所以是否跨域注入脚本已经不是唯一的注入手段了，但是这个XSS名字却一直保留至今
+
+// 注入恶意脚本可以完成这些事情
+
+// - 1. 窃取cookie
+// - 2. 监听用户行为，比如账号密码输入后发给黑客服务器
+// - 3. 在网页中生成浮窗广告
+// - 4. 修改DOM伪造登陆表单
+
+
+// 一般的情况下,XSS攻击有三种实现方式
+
+// - 存储型XSS攻击
+// - 反射型XSS攻击
+// - 基于DOM的XSS攻击
+
+
+// **存储型XSS攻击**
+
+// 从图上看，存储型XSS攻击大致步骤如下：
+
+// 1. 首先黑客利用站点漏洞将一段恶意的Javascriptdiamagnetic提交到网站的数据库
+// 2. 然后用户向网站请求包含了恶意Javascript脚本的页面
+// 3. 当用户浏览该页面的时候，恶意脚本就会将用户的Cookie信息等数据上传到服务器
+
+// 比较常见的场景：
+
+// 在评论区提交一份脚本代码，假设前后端没有做好转义工作，那内容上传到服务器，在页面渲染的时候就会执行，相当于执行一段未知的JS代码，这就是存储型XSS攻击
+
+
+// **反射型XSS攻击**
+
+// 反射型XSS攻击指的就是恶意脚本作为网络请求的一部分，随后网站又把恶意的javascript脚本返回给用户，当恶意Javascript脚本在用户页面中被执行时，黑客就可以利用该脚本做一些恶意操作
+
+
+// 举个例子:
+
+// ```
+// http://wuhuiluo.com?query=<script>alert("你受到了XSS攻击")</script>
+
+// ```
+
+// 如上，服务器拿到后解析参数query，最后将内容返回给了浏览器，浏览器将这些内容作为HTML的一部分解析，发现是Javascript脚本，直接执行，这样子被XSS攻击了。
+
+
+// 这也就是反射型名字的由来，将恶意脚本作为参数，通过网络请求，最后经过服务器，在反射到HTML文档中，执行解析。
+
+
+// 主要注意的就是，「服务器不会存储这些恶意的脚本，这也算是和存储型XSS攻击的区别吧」。
+
+// 基于DOM的XSS攻击
+
+
+// 基于 DOM 的 XSS 攻击是不牵涉到页面 Web 服务器的。具体来讲，黑客通过各种手段将恶意脚本注入用户的页面中，，在页面传输的时候劫持输网络包
+
+// 常见的劫持手段有:
+
+// - WIFI路由劫持
+// - 本地恶意软件
+
+// **阻止XSS攻击的策略**
+
+// 以上讲述的XSS攻击原理，都有一个共同点：让恶意脚本直接在浏览器执行
+
+// 针对XSS攻击，有以下三种解决办法
+
+// **对输入脚本进行过滤或转码**
+
+// 对用户输入的信息过滤或者是转码
+
+// 举个例子
+
+// 转码后
+// ```
+// &lt;script&gt;alert(&#39;你受到XSS攻击了&#39;)&lt;/script&gt;
+// ```
+
+// 这样的代码在html解析过程中是无法执行的
+
+// 当然了对`<script>`、`<img>`、`<a>`等关键字标签也是可以过来的，效果如下
+// ```
+// ```
+// 最后什么都没有剩下
+
+// **利用CSP**
+
+// 该安全策略的实现基于一个叫做`Content-Security-Policy`的HTTP首部
+
+// CSP，浏览器中的内容安全策略，核心思想大概就是服务器决定浏览器加载哪些资源，具体来说有几个功能
+
+// - 限制加载其他域下的资源文件，这样即使黑客插入了一个 JavaScript 文件，这个 JavaScript 文件也是无法被加载的；
+// - 禁止向第三方域提交数据，这样用户数据也不会外泄；
+// - 提供上报机制，能帮助我们及时发现 XSS 攻击。
+// - 禁止执行内联脚本和未授权的脚本；
+
+// **利用HttpOnly**
+
+// 由于很多XSS攻击都是用来盗用Cookie的，因此还可以通过使用HttpOnly属性来保护我们Cookie的安全，这样子的话，Javascript便无法读取Cookie的值，这样也能很好的防范XSS攻击
+
+// 通常服务器可以将某些Cookie设置为HttpOnly标志，HttpOnly是服务器通过HTTP响应头设置的，下面是打开Google时，HTTP响应头的一段
+
+// ```
+// set-cookie: NID=189=M8l6-z41asXtm2uEwcOC5oh9djkffOMhWqQrlnCtOI; expires=Sat, 18-Apr-2020 06:52:22 GMT; path=/; domain=.google.com; HttpOnly
+// ```
+
+// **总结**
+
+// `XSS`攻击是指浏览器中执行恶意脚本，然后拿到用户的信息进行操作，主要分为存储型，反射型，文档型，防范的措施包括
+
+// - 对输入内容过滤或者转码，尤其是类似与`<script>`、`<img>`、`<a>`标签
+// - 利用CSP
+// - 利用Cookie的HttpOnly属性
+
+// 除了以上策略之外，我们还可以通过添加验证码防止脚本冒充用户提交危险操作，对于一些不受信任的输入，还可以限制其输入长度，这样可以增大XSS攻击的难度
+
+
+// ## 能不能说一说CSRF攻击
+
+// 什么是CSRF攻击
+
+// CSRF 英文全称是 `Cross-site request forgery`，所以又称为“跨站请求伪造”,是指黑客引诱用户打开黑客的网站，在黑客的网站中，利用用户的登陆状态发起的跨站请求，简单来讲，CSRF攻击就是黑客利用了用户的登陆状态，并通过第三方站点来做一些坏事
+
+// 一般的情况下，点开一个诱导你的链接，黑客会在你不知情的时候做哪些事情呢
+
+// 1. 自动发起Get请求
+
+// 黑客网页里面可能有这样一段代码
+
+// ```
+// <img src="http://bank.example/withdraw?amount=10000&for=hacker" > 
+
+// ```
+
+// 在受害者访问含有这个img的页面后，浏览器会自动向`http://bank.example/withdraw?account=xiaoming&amount=10000&for=hacker`发出一次HTTP请求。
+
+// `bank.example`就会受到包含受害者登陆信息的一次跨域请求
+
+// 2. 自动发起Post请求
+
+// 黑客网页中有一个表单，自动提交的表单
+
+// ```
+// <form action="http://bank.example/withdraw" method=POST>
+// <input type="hidden" name="account" value="xiaoming" />
+// <input type="hidden" name="amount" value="10000" />
+// <input type="hidden" name="for" value="hacker" />
+// </form>
+// <script> document.forms[0].submit(); </script> 
+// ```
+
+// 访问该页面后，表单会自动提交，相当于模拟用户完成了一次POST操作。
+
+// 同样也会携带相应的用户 cookie 信息，让服务器误以为是一个正常的用户在操作，让各种恶意的操作变为可能。
+
+// 3. 引诱用户点击链接
+
+// 这种需要诱导用户去点击链接才会触发，这类的情况比如在论坛中发布照片，照片中嵌入了恶意链接，或者是以广告的形式去诱导，比如：
+
+// ```
+// <a href="http://test.com/csrf/withdraw.php?amount=1000&for=hacker" taget="_blank">
+// 重磅消息！！！
+// <a/>
+// ```
+
+// 点击后，自动发送 get 请求，接下来和自动发 GET 请求部分同理。
+
+// 以上三种情况就是CSRF攻击原理，跟XSS对比的话，CSRF攻击并不需要将恶意代码注入HTML中，而是跳转新的页面利用服务器的验证漏洞和用户之前的登陆状态来模拟用户进行操作
+
+// **防护策略**
+
+// 其实我们可以想到，黑客只能借助受害者的`cookie`骗取服务器的信任，但是黑客并不能凭借拿到cookie，也看不到cookie的内容，另外，对于服务器返回的结果，由于同源策略的限制，黑客也无法解析
+
+// > 这就告诉我们，我们需要保护的对象是那些可以直接产生数据改变的服务，而对于读取数据的服务，则不需要`CSRF`的保护，而保护的关键，是在请求中放入黑客不能伪造的信息
+
+// 用户操作限制--验证码机制
+
+// 方法：添加验证码来识别是不是用户主要去发起这个请求，由于一定强度的验证码机器无法识别，因此危险网站不能伪造一个完整的请求
+
+// 1. 验证来源站点
+
+// 在服务器验证请求来源的站点，由于大量的CSRF攻击来自第三方站站点，因此服务器可以禁止来自第三方站点的请求，主要通过HTTP请求头中的两个Header
+
+// - Origin Header
+// - Referer Header
+
+// 这两个Header在浏览器发起请求时，大多数情况会带上，并且不能由前端自己定义内容
+
+// 服务器可以通过接下这两个Header中的域名，确定请求的来源域
+
+// 其中，Origin只包含域名信息，而Referer包含了具体的URL路径
+
+// 在某些情况下，这两者都是可以伪造的，通过Ajax中定义请求头即可，安全性略差
+
+// 2. 利用Cookie的SameSite属性
+
+// `SameSite`可以设置为三个值,`Strict`、`Lax`、`None`
+
+// 1. 在`Strict`模式下，浏览器完全禁止第三方请求携带Cookie。比如请求`sanyuan.com`网站只能在sanyuan.com域名当中请求才能携带 Cookie，在其他网站请求都不能。
+// 2. 在`Lax`模式，就宽松一点了，但是只能在 get 方法提交表单况或者 `a` 标签发送 `get` 请求的情况下可以携带 Cookie，其他情况均不能。
+// 3. 在None模式下，Cookie将在所有上下文中发送，即允许跨域发送。
+
+
+// 3. CSRF Token
+
+// 前面讲到的是CSRF的另一个特征是，攻击者无法直接窃取到用户信息(Cookie,Header,网站内容等)，仅仅是冒用Cookie中的信息
+
+// 那么我们可以使用Token，在不涉及XSS的前提下，一般黑客很难拿到Token
+
+// Token(令牌)做为Web领域验证身份是一个不错的选择
+
+// Token的步骤如下
+
+// 「第一步:将CSRF Token输出到页面中」
+
+// > 首先，用户打开页面的时候，服务器需要给这个用户生成一个Token，该Token通过加密算法对数据进行加密，一般Token都包括随机字符串和时间戳的组合，显然在提交时Token不能再放在Cookie中了（XSS可能会获取Cookie），否则又会被攻击者冒用。因此，为了安全起见Token最好还是存在服务器的Session中，之后在每次页面加载时，使用JS遍历整个DOM树，对于DOM中所有的a和form标签后加入Token。这样可以解决大部分的请求，但是对于在页面加载之后动态生成的HTML代码，这种方法就没有作用，还需要程序员在编码时手动添加Token。
+
+
+// 「第二步:页面提交的请求携带这个Token」
+
+// > 对于GET请求，Token将附在请求地址之后，这样URL 就变成 http://url?csrftoken=tokenvalue。 而对于 POST 请求来说，要在 form 的最后加上：
+// <input type=”hidden” name=”csrftoken” value=”tokenvalue”/>
+// 这样，就把Token以参数的形式加入请求了。
+
+
+// 「第三步：服务器验证Token是否正确」
+
+// > 当用户从客户端得到了Token，再次提交给服务器的时候，服务器需要判断Token的有效性，验证过程是先解密Token，对比加密字符串以及时间戳，如果加密字符串一致且时间未过期，那么这个Token就是有效的。
+
+
+// **总结**
+
+// CSRF即跨站请求伪造，本质是冲着浏览器分不清发起请求的是不是真正的用户本人，所以防范的关键在于请求中放入黑客不能伪造的信息，从而防止黑客伪造一个完整的请求欺骗服务器
+
+// 防范错失：验证码机制，验证来源站点，利用Cookie的SameSite属性，CSRF Token
+
+var name = 'whl'
+
+
+{
+    name: 'qwe'
+    let name
 }
-
-let demo = {
-    b: {
-        c: {}
-    }
-}
-let demo2 = shallowClone(demo)
-let demo3 = demo;
-console.log(demo3 === demo) // true
-console.log(demo2.b.c === demo.b.c) // true
-console.log(demo2.b === demo.b) // true
-console.log(demo2 === demo) // false
-
-
-let obj = {
-    name: 'wuhuiluo',
-    age: 18
-}
-localStorage.setItem('name', 'sanyuan')
-localStorage.setImte('info', JSON.stringify(obj))
-
-
-## 谈谈你对XSS攻击的理解
-
-什么是XSS攻击
-
-XSS全称是`Cross Site Scripting`,为了与`CSS`区分开来，故简称`XSS`，翻译过来就是跨站脚本
-
-XSS是指黑客往HTML文件或者DOM中注入恶意脚本,从而在用户浏览页面时利用注入的恶意脚本对用户实施攻击的一种手段
-
-最开始的时候，这种攻击是通过跨域来实现的，所以叫跨域脚本，现在插入恶意代码的方式越来越多，所以是否跨域注入脚本已经不是唯一的注入手段了，但是这个XSS名字却一直保留至今
-
-注入恶意脚本可以完成这些事情
-
-- 1. 窃取cookie
-- 2. 监听用户行为，比如账号密码输入后发给黑客服务器
-- 3. 在网页中生成浮窗广告
-- 4. 修改DOM伪造登陆表单
-
-
-一般的情况下,XSS攻击有三种实现方式
-
-- 存储型XSS攻击
-- 反射型XSS攻击
-- 基于DOM的XSS攻击
-
-
-**存储型XSS攻击**
-
-从图上看，存储型XSS攻击大致步骤如下：
-
-1. 首先黑客利用站点漏洞将一段恶意的Javascriptdiamagnetic提交到网站的数据库
-2. 然后用户向网站请求包含了恶意Javascript脚本的页面
-3. 当用户浏览该页面的时候，恶意脚本就会将用户的Cookie信息等数据上传到服务器
-
-比较常见的场景：
-
-在评论区提交一份脚本代码，假设前后端没有做好转义工作，那内容上传到服务器，在页面渲染的时候就会执行，相当于执行一段未知的JS代码，这就是存储型XSS攻击
-
-
-**反射型XSS攻击**
-
-反射型XSS攻击指的就是恶意脚本作为网络请求的一部分，随后网站又把恶意的javascript脚本返回给用户，当恶意Javascript脚本在用户页面中被执行时，黑客就可以利用该脚本做一些恶意操作
-
-
-举个例子:
-
-```
-http://wuhuiluo.com?query=<script>alert("你受到了XSS攻击")</script>
-
-```
-
-如上，服务器拿到后解析参数query，最后将内容返回给了浏览器，浏览器将这些内容作为HTML的一部分解析，发现是Javascript脚本，直接执行，这样子被XSS攻击了。
-
-
-这也就是反射型名字的由来，将恶意脚本作为参数，通过网络请求，最后经过服务器，在反射到HTML文档中，执行解析。
-
-
-主要注意的就是，「服务器不会存储这些恶意的脚本，这也算是和存储型XSS攻击的区别吧」。
-
-基于DOM的XSS攻击
-
-
-基于 DOM 的 XSS 攻击是不牵涉到页面 Web 服务器的。具体来讲，黑客通过各种手段将恶意脚本注入用户的页面中，，在页面传输的时候劫持输网络包
-
-常见的劫持手段有:
-
-- WIFI路由劫持
-- 本地恶意软件
-
-**阻止XSS攻击的策略**
-
-以上讲述的XSS攻击原理，都有一个共同点：让恶意脚本直接在浏览器执行
-
-针对XSS攻击，有以下三种解决办法
-
-**对输入脚本进行过滤或转码**
-
-对用户输入的信息过滤或者是转码
-
-举个例子
-
-转码后
-```
-&lt;script&gt;alert(&#39;你受到XSS攻击了&#39;)&lt;/script&gt;
-```
-
-这样的代码在html解析过程中是无法执行的
-
-当然了对`<script>`、`<img>`、`<a>`等关键字标签也是可以过来的，效果如下
-```
-```
-最后什么都没有剩下
-
-**利用CSP**
-
-该安全策略的实现基于一个叫做`Content-Security-Policy`的HTTP首部
-
-CSP，浏览器中的内容安全策略，核心思想大概就是服务器决定浏览器加载哪些资源，具体来说有几个功能
-
-- 限制加载其他域下的资源文件，这样即使黑客插入了一个 JavaScript 文件，这个 JavaScript 文件也是无法被加载的；
-- 禁止向第三方域提交数据，这样用户数据也不会外泄；
-- 提供上报机制，能帮助我们及时发现 XSS 攻击。
-- 禁止执行内联脚本和未授权的脚本；
-
-**利用HttpOnly**
-
-由于很多XSS攻击都是用来盗用Cookie的，因此还可以通过使用HttpOnly属性来保护我们Cookie的安全，这样子的话，Javascript便无法读取Cookie的值，这样也能很好的防范XSS攻击
-
-通常服务器可以将某些Cookie设置为HttpOnly标志，HttpOnly是服务器通过HTTP响应头设置的，下面是打开Google时，HTTP响应头的一段
-
-```
-set-cookie: NID=189=M8l6-z41asXtm2uEwcOC5oh9djkffOMhWqQrlnCtOI; expires=Sat, 18-Apr-2020 06:52:22 GMT; path=/; domain=.google.com; HttpOnly
-```
-
-**总结**
-
-`XSS`攻击是指浏览器中执行恶意脚本，然后拿到用户的信息进行操作，主要分为存储型，反射型，文档型，防范的措施包括
-
-- 对输入内容过滤或者转码，尤其是类似与`<script>`、`<img>`、`<a>`标签
-- 利用CSP
-- 利用Cookie的HttpOnly属性
-
-除了以上策略之外，我们还可以通过添加验证码防止脚本冒充用户提交危险操作，对于一些不受信任的输入，还可以限制其输入长度，这样可以增大XSS攻击的难度
-
-
-## 能不能说一说CSRF攻击
-
-什么是CSRF攻击
-
-CSRF 英文全称是 `Cross-site request forgery`，所以又称为“跨站请求伪造”,是指黑客引诱用户打开黑客的网站，在黑客的网站中，利用用户的登陆状态发起的跨站请求，简单来讲，CSRF攻击就是黑客利用了用户的登陆状态，并通过第三方站点来做一些坏事
-
-一般的情况下，点开一个诱导你的链接，黑客会在你不知情的时候做哪些事情呢
-
-1. 自动发起Get请求
-
-黑客网页里面可能有这样一段代码
-
-```
-<img src="http://bank.example/withdraw?amount=10000&for=hacker" > 
-
-```
-
-在受害者访问含有这个img的页面后，浏览器会自动向`http://bank.example/withdraw?account=xiaoming&amount=10000&for=hacker`发出一次HTTP请求。
-
-`bank.example`就会受到包含受害者登陆信息的一次跨域请求
-
-2. 自动发起Post请求
-
-黑客网页中有一个表单，自动提交的表单
-
-```
-<form action="http://bank.example/withdraw" method=POST>
-<input type="hidden" name="account" value="xiaoming" />
-<input type="hidden" name="amount" value="10000" />
-<input type="hidden" name="for" value="hacker" />
-</form>
-<script> document.forms[0].submit(); </script> 
-```
-
-访问该页面后，表单会自动提交，相当于模拟用户完成了一次POST操作。
-
-同样也会携带相应的用户 cookie 信息，让服务器误以为是一个正常的用户在操作，让各种恶意的操作变为可能。
-
-3. 引诱用户点击链接
-
-这种需要诱导用户去点击链接才会触发，这类的情况比如在论坛中发布照片，照片中嵌入了恶意链接，或者是以广告的形式去诱导，比如：
-
-```
-<a href="http://test.com/csrf/withdraw.php?amount=1000&for=hacker" taget="_blank">
-重磅消息！！！
-<a/>
-```
-
-点击后，自动发送 get 请求，接下来和自动发 GET 请求部分同理。
-
-以上三种情况就是CSRF攻击原理，跟XSS对比的话，CSRF攻击并不需要将恶意代码注入HTML中，而是跳转新的页面利用服务器的验证漏洞和用户之前的登陆状态来模拟用户进行操作
-
-**防护策略**
-
