@@ -5335,3 +5335,119 @@ const arr = [1, [2, [3]]]
 // console.log(Son2.getNumOne()); // 4
 // console.log(Son2.getNumTwo()); // 6
 
+// 原型式继承
+// function object(obj) {
+//     function F() {}
+//     F.prototype = obj
+//     return new F()
+// }
+
+
+// Object.create() 
+
+// 寄生式继承
+// var person = {
+//     name: 'whl',
+//     array: [1, 2, 3]
+// }
+
+// function createObj(origin) {
+//     const clone = Object.create(origin)
+//     clone.sayName = function () {
+//         console.log(this.name);
+//     }
+//     return clone
+// }
+
+// const person1 = createObj(person)
+// person1.sayName()
+
+// 寄生式组合继承
+
+// function Father(name) {
+//     this.name = name
+//     this.test = [1, 2, 3]
+// }
+
+// Father.prototype.getName = function () {
+//     console.log(this.name);
+// }
+
+// function Son(name, age) {
+//     Father.call(this, name)
+//     this.age = age
+// }
+
+// function inheritPrototype(Son, Father) {
+//     let prototype = Object.create(Father.prototype)
+//     prototype.constructor = Son
+//     Son.prototype = prototype
+// }
+// inheritPrototype(Son, Father)
+// const Son1 = new Son('qwe', 22)
+// const Son2 = new Son('aaa', 23)
+// Son1.test.push(4)
+// console.log(Son1.test); // [1,2,3,4]
+// console.log(Son2.test); // [1,2,3]
+// Son1.getName() // qwe
+// Son2.getName() // aaa
+// console.log(Son1.hasOwnProperty('test')); // true
+// console.log(Father.prototype.isPrototypeOf(Son1)); // true
+
+
+// class One {
+//     constructor(name, age) {
+//         this.name = name
+//         this.age = age
+//         this.jn = 'shuijiao'
+//     }
+//     getInfo() {
+//         return `我叫:${this.name},今年${this.age}岁了,我喜欢${this.jn}`
+//     }
+// }
+
+// class Two extends One {
+//     constructor(x, y, gender) {
+//         super(x, y)
+//         this.gender = gender
+//     }
+//     getTwoInfo() {
+//         return `${super.getInfo()},喜欢${this.jn},我是${this.gender}`
+//     }
+// }
+
+// const two = new Two('whl', 22, 'boy')
+
+// console.log(two.getTwoInfo());
+
+// 101： 在HTTP升级为websocket的时候，如果服务器同意变更，就会发送101
+
+// 200： 表示从客户端发来的请求在服务器被正确处理
+// 204： 表示请求成功，但没有资源返回
+// 206:  表示客户端进行了范围请求，服务器成功执行了这部分的GET亲求
+
+// 301 永久重定向，表示资源已经被分配给了新的URL
+// 302 临时重定向，表示资源临时被分配给了新的URL
+// 303 表示资源存在着另一个URL，应使用GET方法来获取资源
+// 304 服务器告诉客户端我的缓存没有改变你不需要来取，就用你自己本地的把
+// 307 与临时重定向302含义一样
+
+
+// 400 请求报文存在语法错误 
+// 401 发送的请求需要有通过HTTP认证的认证信息
+// 403 请求资源的访问被服务器拒绝
+// 404 在服务器上没有找到请求的资源
+// 405 服务器禁止使用该方法
+
+// 500  表示服务器在执行请求的时候发生了错误
+// 502 服务器本身是正常的，访问的时候除了错误
+// 503 表示服务器处于超负载或者正在停机维护，无法处理请求
+
+// GET 通常用来获取资源
+// HEAD 获取资源的元信息
+// POST 提交数据
+// PUT  修改数据
+// DELETE 删除资源
+// CONNECT 建立资源隧道，用于代理服务器
+// OPTIONS 列出可对资源实行的请求方法，用来跨域请求
+// TRACE 追踪请求相应的传输路径
