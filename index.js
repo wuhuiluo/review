@@ -5138,10 +5138,134 @@ const arr = [1, [2, [3]]]
 
 // 防范错失：验证码机制，验证来源站点，利用Cookie的SameSite属性，CSRF Token
 
-var name = 'whl'
+// var name = 'whl'
+
+// {
+//     name = 'qwe'
+//     console.log(name);
+// }
+
+// {
+//     let name = 'jack'
+// }
+// console.log(name);
+
+// function showName() {
+//     console.log(name);
+// }
+
+// showName()
+
+// {
+//     let name1 = 'jack';
+// }
+
+// // console.log(name1); //Uncaught ReferenceError: name is not defined
+
+// function showName() {
+//     console.log(name1);
+// }
+
+// showName(); //Uncaught ReferenceError: name is not defined
+
+// function myInstanceof(L,R) {
+//     let proto = Object.getPrototypeOf(L)
+//     while(true) {
+//         if(proto === null) return false
+//         if(proto === RTCIceGatherer.p)
+//     }
+// }
+
+// function Person(name, age) {
+//     this.name = name
+//     this.age = age
+// }
+
+// var person = new Person('whl', 10)
+
+// console.log(Object.prototype.toString.call(person) === '[object Object]');
+
+// hasOwnProperty()
+
+// function new1() {
+//     let obj = {}
+//     let Con = [].shift.call(arguments)
+//     let args = Array.prototype.slice.call(arguments, 0)
+//     console.log(args);
+//     obj.__proto__ = Con.prototype
+//     let result = Con.apply(obj, args)
+//     return result instanceof Object ? result : obj
+// }
+
+// function Person(name, age) {
+//     this.name = name
+//     this.age = age
+// }
+
+// var person = new1(Person, "whl", 18)
+
+// console.log(person.name);
+// console.log(person.age);
 
 
-{
-    name: 'qwe'
-    let name
-}
+// 如何判断数组
+
+// 1. 使用instanceof
+
+// let arr = []
+// arr instanceof Array
+
+// Array.isArray([])
+// Array.isArray(true)
+
+// var arr = []
+// arr.constructor === Array
+
+// Object.prototype.toString.call([]) === '[object Array]'
+
+// function isArray(obj) {
+//     return Object.prototype.toString.call(obj) === '[object Array]'
+// }
+
+// var arr = [1, 2, 3]
+
+// console.log(isArray(arr));
+
+// // 1.原型链式继承
+
+// function Father() {
+//     this.qwe = 'abc'
+//     this.info = {
+//         name: 'whl',
+//         age: 19
+//     }
+// }
+
+// Father.prototype.getInfo = function () {
+//     console.log(this.info)
+// }
+
+// function Son(a, b) {
+//     this.a = a
+//     this.b = b
+// }
+
+// // 让父类的实例作为子类的圆型对象
+// Son.prototype = new Father()
+// Son.prototype.constructor = Son
+// Son.prototype.showInfo = function () {
+//     return this.a + this.b
+// }
+
+// let Son1 = new Son(2, 4)
+// Son1.getInfo()
+// console.log(Son1.showInfo());
+// // hasOwnProperty 确定是否是自身的属性
+// console.log(Son1.hasOwnProperty('qwe'));
+// console.log(Son1.hasOwnProperty('a'));
+// console.log(Son1.hasOwnProperty('b'));
+
+// console.log(Father.prototype.isPrototypeOf(Son1));
+// console.log(Son.prototype.isPrototypeOf(Son1)); // true
+// console.log(Object.prototype.isPrototypeOf(Son1));
+
