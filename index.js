@@ -5269,3 +5269,69 @@ const arr = [1, [2, [3]]]
 // console.log(Son.prototype.isPrototypeOf(Son1)); // true
 // console.log(Object.prototype.isPrototypeOf(Son1));
 
+// 2.构造函数法
+
+// function Father() {
+//     this.test = [1, 2, 3]
+// }
+
+// Father.prototype.getTest = function () {
+//     console.log(this.test);
+// }
+
+// function Son(a, b) {
+//     console.log(this);
+//     Father.call(this)
+//     this.a = a
+//     this.b = b
+// }
+
+// Son.prototype.showTest = function () {
+//     console.log(this.a + this.b);
+// }
+
+
+// let Son1 = new Son(1, 2)
+// let Son2 = new Son(2, 3)
+// Son1.test.push(4)
+// console.log(Son1.test);
+// console.log(Son2.test);
+// // console.log(Son1.getTest());
+// console.log(Son1.hasOwnProperty('test'))
+// console.log(Father.prototype.isPrototypeOf(Son1));
+
+
+// function Father(num) {
+//     this.numOne = num
+//     this.numList = [1, 2]
+// }
+
+// Father.prototype.getNumOne = function () {
+//     return this.numOne
+// }
+
+// function Son(num1, num2) {
+//     Father.call(this, num1)
+//     this.num2 = num2
+// }
+
+// Son.prototype = new Father()
+// Son.prototype.constructor = Son
+// Son.prototype.getNumTwo = function () {
+//     return this.num2
+// }
+// var Son1 = new Son(4, 9)
+// Son1.numList.push(6)
+// console.log(Son1.numList); // [1, 2, 6]
+// console.log(Son1.getNumOne()); // 3
+// console.log(Son1.getNumTwo());; // 5
+
+
+
+// var Son2 = new Son(3, 5)
+// Son2.numList.push(7)
+
+// console.log(Son2.numList); // [1, 2, 7]
+// console.log(Son2.getNumOne()); // 4
+// console.log(Son2.getNumTwo()); // 6
+
