@@ -5489,3 +5489,18 @@ const arr = [1, [2, [3]]]
 
 // 502 服务器本身是正常的，访问的时候除了错误
 // 503 表示服务器处于超负载或者正在停机维护，无法处理请求
+
+// 缓存相关header
+
+// 请求相应头
+
+// expires 资源过期的时间
+// cache-control  控制缓存策略 优先使用这个
+// if-modified-since
+// last-modifyed
+// ETag
+// if none-match
+// 浏览器缓存机制：约定资源过期时间
+
+// from memory cache
+// from disk cache

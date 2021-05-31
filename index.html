@@ -10,38 +10,68 @@
 </head>
 
 <body>
-    <ul id="myLink">
+    <!-- <ul id="myLink">
         <li id="1">aaa</li>
         <li id="2">bbb</li>
         <li id="3">ccc</li>
-    </ul>
-    <button id="abc">加一个li</button>
+    </ul> -->
+    <!-- <button id="abc">加一个li</button> -->
     <script>
-        var myLink = document.getElementById('myLink')
-        var button = document.getElementById('abc')
-        myLink.onclick = function (ev) {
-            var e = ev || window.event,
-                tar = e.target || e.srcElement,
-                tagName = tar.tagName.toLowerCase(); // -> 这里获取的是大写的，所以我们为了方便转了小写
+        let data = {
+            name: 'whl',
+            age: 19
+        }
 
-            if (tagName === 'li') {
-                console.log(tar.innerText); // 这里打印li内的文本内容
+        observe(data)
+
+        function observe(target) {
+            if (typeof target !== 'object' || target === null) {
+                return target
+            }
+            for (let key in target) {
+                defineReactive(target, key, target[key])
             }
         }
-        button.onclick = function () {
-            var li = document.createElement('li')
-            li.innerText = 123
-            myLink.appendChild(li)
+
+        function defineReactive(target, key, value) {
+            Object.defineProperty(target, key, {
+                get() {
+                    return value
+                },
+                set(newValue) {
+                    if (newValue !== value) {
+                        value = newValue
+                        console.log("试图更新");
+                    }
+                }
+            })
         }
-        // for (var i = 0; i < li.length; i++) {
-        //     li[i].onclick = function (e) {
-        //         var e = event || window.event
-        //         var target = e.target || e.srcElement
-        //         console.log(e.srcElement);
-        //         console.log(e.target);
-        //         alert(e.target.id + ':' + e.target.innerHTML)
+        // data.age = 15
+        // var myLink = document.getElementById('myLink')
+        // var button = document.getElementById('abc')
+        // myLink.onclick = function (ev) {
+        //     var e = ev || window.event,
+        //         tar = e.target || e.srcElement,
+        //         tagName = tar.tagName.toLowerCase(); // -> 这里获取的是大写的，所以我们为了方便转了小写
+
+        //     if (tagName === 'li') {
+        //         console.log(tar.innerText); // 这里打印li内的文本内容
         //     }
         // }
+        // button.onclick = function () {
+        //     var li = document.createElement('li')
+        //     li.innerText = 123
+        //     myLink.appendChild(li)
+        // }
+        // // for (var i = 0; i < li.length; i++) {
+        // //     li[i].onclick = function (e) {
+        // //         var e = event || window.event
+        // //         var target = e.target || e.srcElement
+        // //         console.log(e.srcElement);
+        // //         console.log(e.target);
+        // //         alert(e.target.id + ':' + e.target.innerHTML)
+        // //     }
+        // // }
     </script>
 </body>
 
