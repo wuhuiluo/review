@@ -5924,3 +5924,25 @@ const arr = [1, [2, [3]]]
 //         })
 //     })
 // }
+
+// call、apply、bind
+// Function.prototype.myCall = function (context, ...args) {
+//     if (!context || context === null) {
+//         context = window
+//     }
+//     let fn = Symbol()
+//     context[fn] = this
+//     return context[fn](...args)
+// }
+
+async function func1() {
+    console.log('1s');
+    await func2()
+    console.log('2s');
+}
+
+async function func2() {
+    console.log('2');
+}
+
+func1()
