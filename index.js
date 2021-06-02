@@ -5934,15 +5934,15 @@ const arr = [1, [2, [3]]]
 //     context[fn] = this
 //     return context[fn](...args)
 // }
+// 15：13
+// async function func1() {
+//     console.log('1s');
+//     await func2()
+//     console.log('2s');
+// }
 
-async function func1() {
-    console.log('1s');
-    await func2()
-    console.log('2s');
-}
+// async function func2() {
+//     console.log('2');
+// }
 
-async function func2() {
-    console.log('2');
-}
-
-func1()
+// func1()
