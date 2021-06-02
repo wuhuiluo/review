@@ -5946,3 +5946,85 @@ const arr = [1, [2, [3]]]
 // }
 
 // func1()
+
+// 引用类型的赋值是对象保存在栈中的地址的赋值
+
+// 浅拷贝就是一层拷贝，深拷贝就是无限层次的拷贝
+
+// let shallowClone = source => {
+//     let target = {}
+//     for (let key in source) {
+//         if (source.hasOwnProperty(key)) {
+//             target[key] = source[key]
+//         }
+//     }
+//     return target
+// }
+
+// let demo = {
+//     b: {
+//         c: {}
+//     }
+// }
+
+// let demo2 = shallowClone(demo)
+// let demo3 = demo
+// console.log(demo3 === demo);
+// console.log(demo2.b.c === demo.b.c) // true
+// console.log(demo2.b === demo.b) // true
+// console.log(demo2 === demo) // false
+
+// let demo = {
+//     name: 'dayday',
+//     book: {
+//         title: 'Do you realy JS',
+//         price: '45'
+//     }
+// }
+// let clone_demo = JSON.parse(JSON.stringify(demo))
+// console.log(clone_demo);
+// demo.name = 'new name'
+// demo.book.price = '100'
+// console.log(clone_demo.name, clone_demo.book.price);
+
+// 注意:
+// 会忽然undefined Symbol
+// 不能序列化函数
+// 不能处理正则
+// 不能正确处理new Date()
+// 不能解决循环引用的对象
+
+// 先写一个兼容数组并且判断null方法的函数
+
+// let isObject = obj => typeof obj === 'object' && object !== null
+
+// 完整实现深拷贝
+
+// let isObject = obj => typeof obj === 'object' && obj !== null
+
+// let DeepClone = (source, hash = new WeakMap()) => {
+//     if (!isObject(source)) return source // 非对象返回自身   
+//     if (hash.has(source)) return hash.get(source)
+//     let target = Array.isArray(source) ? [] : {}
+//     hash.set(source, target) // 设置哈希表
+//     for (let key in source) {
+//         if (Object.prototype.hasOwnProperty.call(source, key)) {
+//             target[key] = isObject(source[key]) ? DeepClone(source[key], hash) : source[key] // 传入哈希表
+//         }
+//     }
+//     return target
+// }
+
+// let obj = {
+//     a: 1,
+//     b: {
+//         c: 2,
+//         d: 3
+//     }
+// }
+// obj.a = obj.b;
+// obj.b.c = obj.a;
+// let clone_obj = DeepClone(obj)
+// console.log(clone_obj)
+
+
