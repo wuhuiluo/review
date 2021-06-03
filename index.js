@@ -6027,4 +6027,81 @@ const arr = [1, [2, [3]]]
 // let clone_obj = DeepClone(obj)
 // console.log(clone_obj)
 
+// 深拷贝和浅拷贝是针对引用类型的，因为引用类型是放在堆内存中的，在栈内存中的地址指向对内存的数据
 
+// let obj = {
+//     a: 1,
+//     b: {
+//         c: 2,
+//     }
+// }
+
+// let obj2 = Object.assign({}, obj)
+// obj2.b.c = 100
+// console.log(obj);
+// console.log(obj2);
+
+// // 类数组转换为数组的方法
+// const args = [...arguments].slice(1)
+// const args = Array.prototype.slice.call(arguments, 1)
+// const args = Array.from(arguments).slice(1)
+
+// this为调用的函数
+// context: 参数对象
+// Function.prototype.myCall = function (context) {
+//     // 不传参的话默认为window
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     let args = Array.from(arguments).slice(1)
+//     const result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+// function print(age, b, c) {
+//     console.log(this.name + '' + age + b + c);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myCall(obj, 1, 2, 3)
+
+// this 为调用的函数
+// context 参数对象
+// Function.prototype.myApply = function (context) {
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     let result;
+//     console.log(...arguments[1]);
+//     if (arguments[1]) {
+//         result = context[key](...arguments[1])
+//     } else {
+//         result = context[key]()
+//     }
+//     delete context[key]
+//     return result
+// }
+
+// function print(age1, age2, age3) {
+//     console.log(this.name + "" + age1 + age2 + age3);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myApply(obj, [1, 2, 3])
+
+// let arr1 = [2, 3, 4]
+// let arr2 = [6, 7, 8]
+// console.log(arr1.concat(...arr2));
+
+Function.prototype.myApply = function(context) {
+    if(typeof this !== 'function') {
+        throw new Type
+    }
+}
