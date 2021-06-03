@@ -5830,7 +5830,7 @@ const arr = [1, [2, [3]]]
 // 增加代码可读性
 // 有利于搜索引擎爬虫分析
 // 在CSS加载失败的情况下也能呈现完整的页面结构
-
+// 在CSS加载失败的情况下也能呈现完整的页面结构
 
 // all方法
 
@@ -6244,3 +6244,59 @@ const arr = [1, [2, [3]]]
 
 // 伪类
 // :active :hover :visited :any :any=link :checked :default :defined :disabled :empty :first :first-child :nth-child()
+
+// 哪些属性可以继承
+// visibility cursor
+// color font-size font-family font-weight
+
+// HTML语义化
+
+// 1.增加代码可读性
+// 2.利于搜索引擎和爬虫分析
+
+// 块级元素 独占一行 div h1 h2 table form ul p 如果没有设置宽度默认为100%
+// 行内元素 不独占一行 span img input button a i label
+// 区别
+// 块级元素总是占据一行，高度和宽度都能设置
+// 内敛元素和其他元素在同一行的，并不自己占据一行，高度和宽度不能自己设置，只能容纳文本和其他内敛元素，margin只有left和rihgt起作用
+
+// 防抖将多次执行变为只执行一次 节流将多次执行变为每隔一段时间执行
+
+// function debounce(fn, delay) {
+//     let tiemr = null
+//     return function () {
+//         clearTimeout(timer)
+//         timer = setTimeout(() => {
+//             fn.apply(this, args)
+//         }, delay)
+//     }
+// }
+
+// function throttle(fn, wait) {
+//     let flag = true
+//     return function () {
+//         if (!flag) return
+//         flag = false
+//         setTimeout(() => {
+//             fn.apply(this, arguments)
+//             flag = true
+//         }, wait)
+//     }
+// }
+
+// function throttle(fn, wait) {
+//     let timer = 0
+//     return function () {
+//         let now = new Date()
+//         let args = arguments
+//         if (now - timer > wait) {
+//             fn.apply(this, args)
+//             timer = now
+//         }
+//     }
+// }
+// 指定时间间隔内只执行一次
+// 多次点击只执行一次
+
+// 宏任务 I/O操作 setTimeout setInterval setImmediate requestAnimationFrame
+// 微任务 process.nextTick promise.then catch finally
