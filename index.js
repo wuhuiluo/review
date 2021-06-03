@@ -6099,9 +6099,68 @@ const arr = [1, [2, [3]]]
 // let arr1 = [2, 3, 4]
 // let arr2 = [6, 7, 8]
 // console.log(arr1.concat(...arr2));
+// this 被调用的函数
+// context 参数对象
+// Function.prototype.myApply = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new TypeError('Error')
+//     }
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     let result
+//     if (arguments[1]) {
+//         result = context[key](...arguments[1])
+//     } else {
+//         result = context[key]
+//     }
+//     delete context[key]
+//     return result
+// }
 
-Function.prototype.myApply = function(context) {
-    if(typeof this !== 'function') {
-        throw new Type
-    }
-}
+// function print(age1, age2, age3) {
+//     console.log(this.name + '分割' + age1 + age2 + age3);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myApply(obj, [1, 2, 3])
+// this 被调用的函数
+// context 参数对象
+// Function.prototype.myBind = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new ErrorType('Error')
+//     }
+//     // 获取传递的参数
+//     const args = Array.from(arguments).slice(1)
+//     console.log(args);
+//     // _this指向调用的函数
+//     const _this = this
+
+//     // 返回一个函数
+//     return function F() {
+//         // 因为返回了一个函数 我们可以new F()
+//         // 对于new的情况来说，不会被任何方式改变this
+//         if (this instanceof F) {
+//             return new _this(...args, ...arguments)
+//         } else {
+//             return _this.apply(context, args.concat(...arguments))
+//         }
+//     }
+// }
+
+// function print(age1, age2, age3) {
+//     console.log(this.name, age1, age2, age3);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// let F = print.myBind(obj, 1, 2, 3)
+
+// let obj1 = new F()
+// obj1.name = 'qwe'
+// console.log(obj1);
