@@ -6164,3 +6164,83 @@ const arr = [1, [2, [3]]]
 // let obj1 = new F()
 // obj1.name = 'qwe'
 // console.log(obj1);
+
+// 什么是闭包
+// 闭包是指有权访问另一个函数作用域中的变量的函数
+// 创建闭包的方式，就是在一个函数内部创建另一个函数
+
+// 捕获、目标、冒泡
+
+// 没有冒泡时间 blur focus mouseenter mouseleave
+// scroll浏览器禁止该事件冒泡
+
+// w3c content-box
+// IE border-box
+
+// 伪类:active 伪元素::before 不存在的DOM
+// ID选择器 100
+// 属性选择器 类选择器 伪类 0010
+// 标签选择器和微元素选择器0001
+
+// width padding border margin
+
+// flex: 1 flex-grow flex-shrink flex-basis 0 1 auto
+
+// 事件捕获 事件冒泡
+
+// addEventListener() removeEventListener() 包含三个参数
+// 1.要处理的事件名字
+// 2.作为事件处理程序的函数
+// 3.一个布尔值true(捕获阶段调用的函数,false冒泡阶段调用的函数)
+
+// var btn = document.getElementById('myBtn')
+// var handler = function () {
+//     console.log('我是handler()处理的');
+// }
+
+// var hanlder1 = function () {
+//     console.log('我是handle1()处理的');
+// }
+// btn.addEventListener('click', handler, false)
+// btn.addEventListener('click', handler1, false)
+
+// 捕获阶段 目标阶段 冒泡阶段
+
+// 事件冒泡 事件开始时，由具体的元素接受，然后逐级向上传播到较为不具体的节点
+// 事件开始时，由具体的元素接受，然后逐级向上传播到较为不具体的节点
+// 事件开始时，由具体的元素接受，然后逐级向上传播到较为不具体的节点
+// 事件开始时，由具体的元素接受，然后逐级向上传播到较为不具体的节点
+// 事件开始时， 由具体的元素接受， 然后逐级向上传播到较为不具体的节点
+
+// 事件传播
+
+// 1. 从window对象传导到目标节点称为捕获阶段
+// 2. 在目标节点触发，成为目标阶段
+// 3. 
+
+// 介绍一下CSS盒子模型
+// content padding border margin
+// W3C盒子模型 
+// IE盒子模型
+
+// CSS选择器有哪些
+
+// id选择器(#myid)
+// 类选择器(.myclassName)
+// 标签选择器(div,h1,p)
+// 子代选择器(ul > li)
+// 后代选择器(li a)
+// 通配符选择器 (*)
+// 属性选择器(a[rel ='external'])
+// 伪类选择器(a:hover,li:nth-child)
+
+// 伪元素和伪类
+
+// ::after
+// ::before
+// ::first-letter
+// ::first-line
+// ::selection
+
+// 伪类
+// :active :hover :visited :any :any=link :checked :default :defined :disabled :empty :first :first-child :nth-child()
