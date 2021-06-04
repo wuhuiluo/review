@@ -6261,6 +6261,8 @@ const arr = [1, [2, [3]]]
 // 内敛元素和其他元素在同一行的，并不自己占据一行，高度和宽度不能自己设置，只能容纳文本和其他内敛元素，margin只有left和rihgt起作用
 
 // 防抖将多次执行变为只执行一次 节流将多次执行变为每隔一段时间执行
+// 防抖将多次执行变为一次执行，节流将多次执行变成每隔一段时间执行
+
 
 // function debounce(fn, delay) {
 //     let tiemr = null
@@ -6450,3 +6452,122 @@ const arr = [1, [2, [3]]]
 //     })
 
 // console.log('script end') // 4
+
+// NODE中的微任务process.nextTick
+// NODE中的宏任务setImmediate
+
+// 防抖 多次执行变为一次执行，指定时间间隔内只执行一次
+
+// function debounce(fn, delay) {
+//     let tiemr = null
+//     return function () {
+//         clearTimeout(timer)
+//         timer = setTimeout(() => {
+//             fn.apply(this, args)
+//         }, delay)
+//     }
+// }
+
+// function debounce(fn, delay) {
+//     let timer = null
+//     return function () {
+//         if (timer) clearTimeout(timer)
+//         timer = setTimeout(() => {
+//             fn.apply(this, args)
+//         }, delay)
+//     }
+// }
+
+// function throttle(fn, wait) {
+//     let flag = true
+//     return function () {
+//         if (!flag) return
+//         flag = false
+//         setTimeout(() => {
+//             fn.apply(this, arguments)
+//             flag = true
+//         }, wait)
+//     }
+// }
+
+// function throttle(fn, wait) {
+//     let timer = 0
+//     return function () {
+//         let now = new Date()
+//         let args = arguments
+//         if (now - timer > wait) {
+//             fn.apply(this, args)
+//             timer = now
+//         }
+//     }
+// }
+// function throttle(fn, wait) {
+//     let flag = true
+//     return function () {
+//         if (!flag) return
+//         flag = false
+//         setTimeout(() => {
+//             fn.apply(this, arguments)
+//             flag = true
+//         }, wait)
+//     }
+// }
+
+// function throttle(fn, wait) {
+//     let timer = 0
+//     return function () {
+//         let now = new Date()
+//         let args = arguments
+//         if (now - timer > wait) {
+//             fn.apply(this, args)
+//             timer = now
+//         }
+//     }
+// }
+
+// call、apply、bind
+// context: 参数对象
+// // this 被调用的函数
+// Function.prototype.myCall = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new ErrorType('error')
+//     }
+//     // 不穿参的话默认为window   
+//     context = context || window
+//     let key = Symbol('key')
+//     context[key] = this
+//     let args = Array.from(arguments).slice(1)
+//     let result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+// Function.prototype.myApply = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new ErrorType('error')
+//     }
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     let result
+//     if (arguments[1]) {
+//         result = context[key](...arguments[1])
+//     } else {
+//         result = context[key]()
+//     }
+//     delete context[key]
+//     return result
+// }
+// Function.prototype.myBind = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new ErrorType('error')
+//     }
+//     const args = Array.from(argumnets).slice(1)
+//     let _this = this
+//     return function F() {
+//         if (this instanceof F) {
+//             return new _this(...args, ...arguments)
+//         } else {
+//             return _this.apply(context, args.concat(...arguments))
+//         }
+//     }
+// }
