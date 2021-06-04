@@ -6334,3 +6334,119 @@ const arr = [1, [2, [3]]]
 // 500：表示服务器在执行请求的时候发生了错误
 // 502：服务器本身是正常的，访问的时候出了错误
 // 503：表示服务器处于负载或者停机维护，无法处理请求
+
+// Promise.resolve().then(() => { // 微任务
+//     console.log('Promise1') // 1
+//     setTimeout(() => { // 第二轮
+//         console.log('setTimeout2') // 4
+//     }, 0)
+// })
+
+// setTimeout(() => { // 宏任务 
+//     console.log('setTimeout1') // 2
+//     Promise.resolve().then(() => {
+//         console.log('Promise2') // 3
+//     })
+// }, 0)
+// 1 7 6 8 2 4 3 5 9 11 10 12
+// console.log('1'); // 1
+
+// setTimeout(function () { // 宏任务
+//     console.log('2'); // 第五次输出2
+//     process.nextTick(function () { // 微任务 第七次输出3
+//         console.log('3');
+//     })
+//     new Promise(function (resolve) {
+//         console.log('4'); //  第六次输出4
+//         resolve();
+//     }).then(function () { // 微任务   
+//         console.log('5') // 第八次输出5
+//     })
+// })
+// process.nextTick(function () { // 微任务1  第三次输出6
+//     console.log('6');
+// })
+// new Promise(function (resolve) {
+//     console.log('7'); // 第二次输出7
+//     resolve();
+// }).then(function () { // 微任务
+//     console.log('8') // 第四次输出8 
+// })
+
+// setTimeout(function () { // 宏任务
+//     console.log('9'); // 第九次输出9
+//     process.nextTick(function () { // 微任务 第十二次输出10
+//         console.log('10');
+//     })
+//     new Promise(function (resolve) {
+//         console.log('11'); // 第十次输出11
+//         resolve();
+//     }).then(function () {
+//         console.log('12') // 第十三次输出12
+//     })
+// })
+
+// 调用栈 同步任务和异步任务
+// 任务队列
+// 主线程
+
+// JS运行时任务队列会分为微任务和宏任务队列
+
+// 宏任务
+// script整体的代码 setTimeout setInterval I/O操作 UI渲染
+// 微任务
+// promise.then
+// MutationOberser
+
+// 1: script start
+// 2: promise1
+// 3: script end
+// setTimeout(() => {
+//     console.log('setTimeout');
+// }, 0)
+// new Promise((resolve, reject) => {
+//     console.log('prmomise1');
+//     resolve()
+// }).then(() => {
+//     console.log('then11');
+//     new Promise((resolve, reject) => {
+//         console.log('promise2');
+//         resolve()
+//     }).then(() => {
+//         console.log('then2-1');
+//     }).then(() => {
+//         console.log('then2-2');
+//     })
+// }).then(() => {
+//     console.log('then12');
+
+
+// asycn隐式返回Promise
+
+// console.log('script start') // 1
+
+// async function async1() { // async隐式返回Promise
+//     await async2() // await后面的代码会被阻塞 promise.then()
+//     console.log('async1 end') // 微任务  7
+// }
+// async function async2() {
+//     console.log('async2 end') // 2
+// }
+// async1()
+
+// setTimeout(function () { // 宏任务
+//     console.log('setTimeout') // 8
+// }, 0)
+
+// new Promise(resolve => {
+//         console.log('Promise') // 3
+//         resolve()
+//     })
+//     .then(function () { // 微任务
+//         console.log('promise1') // 5
+//     })
+//     .then(function () {
+//         console.log('promise2') //  6
+//     })
+
+// console.log('script end') // 4
