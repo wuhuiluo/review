@@ -6571,3 +6571,50 @@ const arr = [1, [2, [3]]]
 //         }
 //     }
 // }
+
+// new Promise((resolve, reject) => {
+//         console.log('promise1');
+//         resolve()
+//     })
+//     .then(() => { // 微任务如果继续产生微任务，则继续执行微任务
+//         console.log('then11', 2);
+//         new Promise((resolve, reject) => {
+//                 console.log('promise2', 3);
+//                 resolve()
+//             })
+//             .then(() => {
+//                 console.log('then21', 4);
+//                 new Promise((resolve, reject) => {
+//                         console.log('promise3', 5);
+//                         resolve()
+//                     })
+//                     .then(() => {
+//                         console.log('then31', 7);
+//                     })
+//                     .then(() => {
+//                         console.log('then32', 9);
+//                     })
+//             })
+//             .then(() => {
+//                 console.log('then22', 8);
+//             })
+//     })
+//     .then(() => {
+//         console.log('then12', 6);
+//     })
+
+// 宏任务
+// 1.script(整体的代码)
+// 2. setTimeout
+// 3.setInterval
+// 4.I/O操作
+// 5.UI渲染
+
+// 微任务
+
+// Promise.then
+// MutationObserver
+
+// 事件运行顺序
+
+Event Loop 
