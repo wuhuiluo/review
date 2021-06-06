@@ -6686,3 +6686,48 @@ const arr = [1, [2, [3]]]
 // CONNECT: 建立资源连接隧道
 // OPTIONS: 列出可对资源实行的请求发
 // TRACE: 追踪请求对应的传输路径
+
+// 关于浮动
+// 浮动会使元素脱离标准流，不占据页面空间，会覆盖标准流的元素，但是不会覆盖标准流元素的文字
+// 浮动会使元素脱离标准流，不占据页面空间，会覆盖标准流的元素
+
+// 清除浮动的方法
+
+// 1.触发BFC 父级元素overflow: auto
+// 利用伪元素
+
+// .clearfix::after {
+// content: ''
+// display: table;
+// clear: both
+// }
+
+// 定位
+// static 默认定位
+// relative: 根据自身定位
+// absolute：依据最近一层定位元素定位
+// fixed固定定位：元素的位置相对于浏览器窗口是固定位置
+// inherit：继承父元素的定位
+
+// CSS盒子模型
+
+// IE盒子模型boder-box width：表示content+padding+border的总和
+// W3C content-box width：content的宽度
+
+// margin重叠只有相邻元素的margin-top和margin-bottom会发生重叠margin-left和margin-right不会发生重叠
+
+// BFC块级格式化上下文，一块独立的渲染区域，内部元素的渲染不会影响外界元素 
+// BFC块级格式化上下文，是一块独立渲染的区域，盒子内部元素与盒子外部元素互不影响
+// 触发BFC的渲染规则
+
+// 1.内部盒子会在垂直方向上一个接一个防止
+// 2.属于同一个BFC的两个相邻的盒子的margin会发生重叠
+// 3.计算BFC高度的时候，浮动的元素也参与计算
+// 4.BFC就是一个隔离独立的容器，里面的子元素不会影响到外面的元素
+
+// float脱离文档流，高度塌陷
+
+// overflow: hidden
+// text - overflow: elippises
+// white - space: nowrap
+
