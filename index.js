@@ -6731,3 +6731,6 @@ const arr = [1, [2, [3]]]
 // text - overflow: elippises
 // white - space: nowrap
 
+// 第二次相同资源时时间
+// IF NONE MATCH IF MODIFY SINCE ETAG
+
