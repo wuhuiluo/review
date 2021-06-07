@@ -6838,3 +6838,110 @@ const arr = [1, [2, [3]]]
 // computed: 计算属性， 依赖其他属性值， 具有缓存， 只有它依赖的属性值改变， 才会重新计算computed的值， 简称别人变化影响我自己， 所以是一份数据受到多份数据影响
 // 使用场景：一个数据受到多个数据影响
 
+// watch: 更多的是观察的作用，数据的监听回调，每当监听的数据变化时都会执行回调进行后面的操作，immediate:true，立即调用，deep：true深度监听对象内部值的变化
+
+// watch更多是管擦和作用，每当监听的数据变化时都会执行回调进行后续的操作，immediate：true立即执行，deep：true，深度监听对象内部的变化
+// 使用场景：数据变化执行异步或者开销较大的操作时候，watch允许我们执行异步操作，限制执行该操作的频率，并在拿到结果前，设置中间装填，一个数据影响多个数据的时候
+
+// 原型链式继承
+
+// 将父类实例作为子类原型
+// 父类的方法可以复用，更改一个子类的引用属性，其他子类也会受到影响
+// function Father() {
+//     this.qwe = 'abc'
+//     this.info = {
+//         name: 'whl',
+//         age: 22
+//     }
+// }
+
+// Father.prototype.getInfo = function () {
+//     console.log(this.info);
+// }
+
+// function Son(a, b) {
+//     this.a = a
+//     this.b = b
+// }
+
+// // 继承Father
+// Son.prototype = new Father()
+// Son.prototype.constructor = Son
+
+// Son.prototype.showInfo = function() {
+//     return this.a + this.b
+// }
+
+// let Son1 = new Son(1, 2)
+// Son1.getInfo()
+
+
+// 构造函数法
+// function Father(name) {
+//     this.test = [1, 2, 3]
+//     this.name = name
+// }
+
+// Father.prototype.getTest = function () {
+//     console.log(this.test);
+// }
+
+// function Son(a, b, name) {
+//     Father.call(this, name)
+//     this.a = a
+//     this.b = b
+// }
+
+// Son.prototype.showTest = function () {
+//     console.log(this.a + this.b);
+// }
+
+// let Son1 = new Son(1, 2, 'whl')
+// let Son2 = new Son(3, 4, 'qwe')
+// Son1.test.push(4)
+// console.log(Son1);
+// console.log(Son2);
+
+// 原型链法是对原型属性和方法的继承，通过构造函数实现对实例属性的继承
+
+
+// 组合继承是原型链继承+构造函数继承
+// function Father(name) {
+//     this.name = name
+//     this.numList = [1, 2]
+// }
+// Father.prototype.getName = function () {
+//     return this.name
+// }
+
+// function Son(num1, num2, name) {
+//     Father.call(this, name)
+//     this.num1 = num1
+//     this.num2 = num2
+// }
+
+// Son.prototype = new Father()
+// Son.prototype.construcotr = Son
+// Son.prototype.getNum1 = function () {
+//     return this.num1
+// }
+// Son.prototype.getNum2 = function () {
+//     return this.num2
+// }
+
+// // var Son1 = new Son(3, 5, 'whl')
+// // Son1.numList.push(6)
+// // console.log(Son1.numList);
+// // console.log(Son1.getNum1());
+// // console.log(Son1.getNum2());
+
+
+// var Son2 = new Son(2, 4, 'whl')
+// Son2.numList.push(7)
+// console.log(Son2.numList);
+// console.log(Son2.getNum1());
+// console.log(Son2.getNum2());
+
+function all(promises) {
+
+}
