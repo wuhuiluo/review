@@ -7076,12 +7076,29 @@ const arr = [1, [2, [3]]]
 
 // comiler添加订阅者 
 
-// Dep负责维护依赖，
-// 订阅者来自Compiler，
+// Dep订阅器采用发布-订阅模式负责维护依赖，
+// 订阅者来自Compiler解析器，
 // 数据改变的时候，
-// 通过Wacher绑定更新函数，
+// 通过Wacher订阅者绑定更新函数，
 // Watcher向Dep中添加订阅者，
 // 一旦Dep接到Observer的通知，
 // 他就会再去通知wacher
 // ，watcher调用自身的update方法，
-// 触发Compiler中绑定的回调，更新试图
+// 触发Compiler中绑定的函数，更新试图
+
+// v-if：v-if：条件不成立不渲染DOM，v-show：切换DOM的显示和隐藏不频繁切换的场景
+// v-show：需要频繁切换的场景
+
+// 包括子属性对象的属性
+
+// Vue双向数据绑定采用数据劫持结合发布订阅模式，通过Object.defineProperty劫持各个属性的setter和getter，在数据变化的时候发布消息给订阅者，触发相应的监听回调
+
+// getter负责获取值 
+// setter负责设置值
+
+// Compiler负责解析模板指令，将模板中的变量替换成数据
+
+
+// Vue双向数据绑定是通过数据劫持结合发布订阅模式， 通过Object.defineProperty() 对各个属性设置setter和getter， 在数据改变的时候发布消息给订阅者， 触发相应的监听回调
+
+// vue响应式原理数组是通过重写数组的方法来实现
