@@ -4,13 +4,41 @@
 
 // 什么是Object.defineProperty()
 // Object.defineProperty()定义新属性和修改原有的属性
-let obj = {}
-Object.defineProperty(obj, 'name', {
-    get: function () {
-        console.log('我被获取了');
-        return val
-    },
-    set: function (newVal) {
-        console.log('我被设置了');
-    }
-})
+// let obj = {}
+// Object.defineProperty(obj, 'name', {
+//     get: function () {
+//         console.log('我被获取了');
+//         return val
+//     },
+//     set: function (newVal) {
+//         console.log('我被设置了');
+//     }
+// })
+
+// Vue双向数据绑定原理v-model
+
+// 在input上面监听数据 :value='value' @input = "handleInput"
+
+// handleInput(e) {
+//         this.$emit('input', e.target.value)
+//     }
+
+//     <
+//     component: value = "value"
+// @input = "value = arguments[0]" / >
+// v-model Vue的语法糖等价于绑定了 @input: value
+
+// model: {
+//     props: value,
+//     evet: InputChange
+// }
+
+// 监听器:
+// 解析器:
+// 订阅者:
+// 订阅器:
+
+// Proxy代替Object.defineProperty
+
+// Proxy的优点可以直接监听对象而不是监听对象的属性
+// Proxy可以直接监听数组,Proxy返回的是一个新对象，可以直接操作这个新对象
