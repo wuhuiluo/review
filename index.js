@@ -7023,32 +7023,65 @@ const arr = [1, [2, [3]]]
 
 // print.myApply(obj, [1, 2, 3])
 
-Function.prototype.myBind = function (context) {
-    if (typeof this !== 'function') {
-        throw new ErrorType('Error')
-    }
-    // 获取传递的参数
-    const args = Array.from(arguments).slice(1)
-    // _this指向调用的函数
-    const _this = this
-    return function F() {
-        if (this instanceof F) {
-            return new _this(...args, ...arguments)
-        } else {
-            return _this.apply(context, args.concat(...arguments))
-        }
-    }
-}
+// Function.prototype.myBind = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new ErrorType('Error')
+//     }
+//     // 获取传递的参数
+//     const args = Array.from(arguments).slice(1)
+//     // _this指向调用的函数
+//     const _this = this
+//     return function F() {
+//         if (this instanceof F) {
+//             return new _this(...args, ...arguments)
+//         } else {
+//             return _this.apply(context, args.concat(...arguments))
+//         }
+//     }
+// }
 
-function print(age1, age2, age3) {
-    console.log(this.name, age1, age2, age3);
-}
+// function print(age1, age2, age3) {
+//     console.log(this.name, age1, age2, age3);
+// }
 
-let obj = {
-    name: 'whl'
-}
+// let obj = {
+//     name: 'whl'
+// }
 
-let F = print.myBind(obj, 1, 2, 3)
-let obj1 = new F()
-obj1.name = 'qwe'
-console.log(obj1);
+// let F = print.myBind(obj, 1, 2, 3)
+// let obj1 = new F()
+// obj1.name = 'qwe'
+// console.log(obj1);
+
+// let obj = {}
+// Object.defineProperty(obj, 'name', {
+//     get: function () {
+//         console.log('我被获取了');
+//     },
+//     set: function (newVal) {
+//         console.log('我被设置了');
+//     }
+// })
+// obj.name = 'whl'
+// // 在给obj设置name属性的时候，触发了set方法
+// let val = obj.name
+
+// Vue双向数据绑定采用数据劫持结合发布/订阅模式，通过Object.defineProperty()来劫持各个属性的setter和getter，在数据变动的时候发布消息给订阅者，触发相应的监听回调
+
+// Compile解析模板指令，将模板中的变量替换成数据
+// 解析模板指令，将变量替换成数据
+// 每个指令对应的节点绑定更新函数，添加监听数据的订阅者
+
+// Dep Compiler Observer Watcher
+
+// comiler添加订阅者 
+
+// Dep负责维护依赖，
+// 订阅者来自Compiler，
+// 数据改变的时候，
+// 通过Wacher绑定更新函数，
+// Watcher向Dep中添加订阅者，
+// 一旦Dep接到Observer的通知，
+// 他就会再去通知wacher
+// ，watcher调用自身的update方法，
+// 触发Compiler中绑定的回调，更新试图

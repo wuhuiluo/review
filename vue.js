@@ -14,7 +14,10 @@
 //         console.log('我被设置了');
 //     }
 // })
-
+// obj.name = 'whl'
+// // 在给obj设置name属性的时候，触发了set方法
+// let val = obj.name
+// 在得到obj的name属性，会触发set方法
 // Vue双向数据绑定原理v-model
 
 // 在input上面监听数据 :value='value' @input = "handleInput"
