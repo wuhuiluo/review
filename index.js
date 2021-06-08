@@ -6973,3 +6973,25 @@ const arr = [1, [2, [3]]]
 // TRACE: 追踪请求对应的传输路径
 // DELETE: 删除资源
 // OPTIONS: 列出可对资源实行的请求方法
+
+// this: 调用的函数
+// context: 参数对象
+Function.prototype.myCall = function (context) {
+    // 不传参的话默认是window
+    context = context || window
+    const key = Symbol('key')
+    context[key] = this
+    let args = Array.from(arguments).slice(1)
+    const result = context[key](..args)
+    delete context[key]
+    return result
+}
+
+function print(age, a, b) {
+    console.log(this.name + a + b + age);
+}
+var obj = {
+    name: 'whl'
+}
+
+print.myCall(obj,1,2,3)
