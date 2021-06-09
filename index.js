@@ -7237,7 +7237,61 @@ const arr = [1, [2, [3]]]
 // beforeMount: 挂载前调用
 // Mounted: 挂载后调用，真正的DOM挂载完成，数据完成双向绑定，可以访问真实的DOM
 // beforeUpdate: 在数据更新时候调用
-// updated: 在数据更新后带哦用
+// updated: 在数据更新后调用
 // beforeDestroy: 实例销毁之前调用，此时的实例还是可以使用的
 // destroy: 实例销毁后调用，所有的事件监听被清除
 
+// 异步请求哪里发起?
+
+// 可以在钩子函数created beforeMoute mouted,这三个钩子函数中data已经被创建了
+// 可以在created中发起异步请求,有下面两个优点
+// 可以更快获取服务端的数据，减少加载的事件
+// display: none不占据空间
+// visibility：hidden 占据位置
+
+// vue内置指令
+
+// v-bind: 绑定属性
+// v-on: 监听DOM事件
+// v-Text
+// v-html:防止XSS攻击
+// v-model: value和input的语法糖
+// v-show: 通过display来进行显示和隐藏
+
+// 怎么理解Vue单项数据流
+
+// 数据总是从父组件传到子组件，子组件没有权力修改父组件传过来的值,这也可以防止子组件意外改变父组件的状态
+
+// Vue的父子组件生命周期钩子函数执行顺序
+
+// 渲染过程
+// F beforeCreate Fcreated F beforeMount S beforeCreate S created S beforeMount S moutned F mounted
+// // 更新过程
+// S的更新
+// F.beforeUpdate S.beforeUpdate S updated F.updated
+// F的更新
+// F.beforeUpdate updated
+// // 销毁过程
+
+// F.beforeDestroy S.beforeDestroy S.destroyed F.destroyed
+
+// Vue路由的实现: hash模式和history模式
+// hash模式中#以及#后面的字符称之为hash，用window.location.hash读取，即使没有做到对路由的全覆盖，也不会返回404
+
+// history模式：如果缺少对路由的处理将会返回404
+
+// BFC
+// 什么是BFC
+
+BFC是块级格式化上下下文，是一个拥有独立渲染区域的盒子，盒子内部的元素与盒子外部的元素不会互相影响
+
+// BFC渲染规则
+
+// 内部的盒子会在垂直方向上一个接一个的排列
+// 属于同一个BFC的两个相邻盒子的margin会发生重叠
+// 计算BFC高度的时，浮动的元素也会参与计算
+// BFC就是一个隔离的独立容器，里面的元素和外面的元素不会互相影响
+
+// BFC解决了什么问题 margin边距重叠
+
+// 两栏布局 清除浮动
