@@ -13,7 +13,6 @@
 //     }
 //     return arr
 // }
-
 // console.log(BubbleSort(arr));
 
 // function SelectSort(arr) {
@@ -7400,11 +7399,11 @@ const arr = [1, [2, [3]]]
 
 // function Myinstanceof(L, R) {
 //     if (typeof L !== 'object' || L === null) return false
-//     let proto = Object.getPrototypeOf(L)
+//     let proto = L.__proto__
 //     while (true) {
 //         if (proto === null) return false
 //         if (proto === R.prototype) return true
-//         proto = Object.getPrototypeOf(proto)
+//         proto = proto.__proto__
 //     }
 // }
 
@@ -7442,3 +7441,208 @@ const arr = [1, [2, [3]]]
 // 该对象是否在构造函数的原型链上
 // 继承
 // 原型链继承
+// snow.prototype = new Father() // 将父类实例作为子类的原型对象
+// 构造函数继承: 不能使用原型上的方法和属性
+
+// function Son(a, b) {
+//     Father.call(this)
+//     this.a = a
+//     this.b = b
+// }
+
+// 组合继承 Father会被调用两次 一次是Son.prototype = new Father() Father.call(this)
+// Son.prototype.constructor = Son
+
+// 原型式继承
+
+// 寄生式继承
+
+// 寄生组合继承
+// var person = {
+//     name: 'whl',
+//     array: [1, 2, 3]
+// }
+// var person1 = Object.create(person, {
+//     name: {
+//         value: 'qwe'
+//     }
+// })
+
+// console.log(person1);
+
+// 寄生组合式继承
+// function inheritPrototype(Son, Father) {
+//     const prototype = Object.create(Father.prototype) // 创建父类原型的副本
+//     prototype.construcotr = Son
+//     Son.prototype = prototype
+// }
+
+// function prototype(Son, Father) {
+//     const prototype = Object.create(Father.prototype)
+//     prototype.construcotr = Son
+//     Son.prototype = prototype
+// }
+
+// Father.call(this, xx)
+// ES6继承
+// class One {
+//     constructor(name, age) {
+
+//     }
+// }
+
+// class Two extends One {
+//     consrut(x, y, gender) {
+//         super(x, y)
+//     }
+// }
+
+// all、 allsetteld、 race、 any
+// race promise实例状态最先改变的那个
+
+// resolved状态时候为{status: 'fulfilled',value: '同意给终止'}
+// rejected状态的时候为{status: 'reject', reason:'巨阴'}
+
+// function all(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve((item, index)).then(res => {
+//                 result[index] = res
+//                 num++
+//                 check()
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+// function allSetteld(promises) {
+//     if (promises.length === 0) return Promise.resolve([])
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             if (num === promises.length) {
+//                 resolve(result)
+//             }
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 result[index] = {
+//                     status: ''
+//                 }
+//                 num++
+//                 check()
+//             }, err => {
+//                 result[index] = {
+//                     status:
+//                 }
+//                 num++
+//                 check()
+//             })
+//         })
+//     })
+// }
+
+// function any(promises) {
+//     return new Promise((resolve, reject) => {
+//         let result = []
+//         let num = 0
+//         const check = () => {
+//             reject()
+//         }
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 resolve(res)
+//             }, err => {
+//                 result[index] = err
+//                 num++
+//                 check()
+//             })
+//         })
+//     })
+// }
+
+// function race(promises) {
+//     if (promises.length === 0) return Promise.resolve()
+//     return new Promise((resolve, reject) => {
+//         promises.forEach((item, index) => {
+//             Promise.resolve(item).then(res => {
+//                 resolve(res)
+//             }, err => {
+//                 reject(err)
+//             })
+//         })
+//     })
+// }
+
+// XSS和XSRF
+
+// XSS跨站脚本
+
+
+
+
+
+
+
+
+
+
+
+
+// XSS跨站脚本攻击
+
+// 浏览器中执行恶意脚本，然后拿到用户的信息进行操作,主要分为三种类型反射型存储型文档型，防范错失
+// 反射性： XSS代码在请求URL中攻击
+// 存储行： 将攻击脚本存储到服务端， 从而传播
+// dom型： 通过DOM修改页面内容
+
+
+// 反射型、 存储型、 dom型
+// 反射型： xss代码在请求URL中攻击
+// 存储型： 将攻击脚本存入服务端， 从而传播
+// DOM型： 通过dom修改页面内容
+// 如何预防
+
+// 反射型：XSS代码在请求URL中攻击
+// 存储型：将攻击脚本存入服务端，从而传播
+// DOM型：通过DOM修改页面内容
+
+// 反射型：XSS代码在请求URL中攻击
+// 存储型：将攻击脚本存入服务端，从而传播
+// DOM型：通过DOM修改页面内容
+// 输入过滤
+// 如何预防
+// 1.输入过滤： 过滤<script>等
+// 2.输出转义 例如将<>,/等字符利用转义符号转换
+// 3.使用HTTPonly：让JS脚本无法访问cookie
+// 4.使用验证码：防止脚本冒充用户做一些危险操作
+// CSRF跨站请求伪造
+// 用户登陆一个网站之后，产生一个cookie，这时候打开了一个新的网址，该网址返回了一些恶意的请求就属于CSRF攻击,cookie并不能获取到只是使用cookie
+// 用户登陆一个网站之后，残生了一个cookie，这时候打开了一个新网站，该网站返回了一些恶意的请求这就属于CSRF攻击
+
+// 防范措施
+
+// 利用Cookie设置SameSite属性
+// strict: 禁止第三方携带cookie
+// lax: get方法和a标签可以携带cookie
+// none: 默认会自动携带上cookie
+// 验证来源站点两个请求字段origin header referer header
+
+// CSRF Token
+// 页面提交请求的时候携带这个token进行验证不合法不给相应
+
+// 预防
+// 不要相信用户的输入，对于输入内容进行转码或者过滤
+// 使用httponly让js脚本无法访问cookie
+// 开启CSP阻止白名单以外的资源加载或者运行
