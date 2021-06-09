@@ -7209,3 +7209,35 @@ const arr = [1, [2, [3]]]
 // data函数返回一个对象
 // 作为组件的状态
 
+// {/* <input type="text" :value="username" @input="username = $event.target.value"/> */}
+
+// 说说你对Vue生命周期的理解
+
+// 创建 初始化数据 编译模板 挂载DOM -》 渲染 -》 更新 -》 渲染 -》 销毁 
+// 初始化 挂载 更新 销毁
+// 说说你对Vue生命周期的理解
+
+// 创建、初始化数据、编译模板、挂载DOM、渲染、更新、渲染、卸载
+// 初始化和创建完成
+// beforeCreate: 在实例初始化之后，数据监测，事件配置之前被调用，data、methods、computed、watch上的数据不能访问
+// created: 实例创建完成之后被调用，完成数据检测和事件配置，这里没有$el,如果需要和DOM交互可以使用vm.$nextTick来访问DOM
+// beforeMount: 挂载开始前调用
+// mounted: 挂载后调用，真正的DOM挂载完毕，数据完成双向绑定，可以访问到DOM节点
+// beforeUpdate: 数据更新时调用
+// updated: 数据更新后调用
+// beforeDestroy: 实例销毁之前调用，这时候的实例还能使用
+// destroyed: 实例销毁之后调用，所有的事件监听都会被清除
+
+// 我对vue生命周期的理解
+
+// 创建 初始化数据 模板编译 挂载DOM  渲染 更新 渲染 销毁
+
+// beforeCreate: 在实例初始化之后，事件配置之前被调用，这时候data、methods、computed、watch上的方法和属性都不能被访问
+// created: 实例创建完成之后调用，完成数据检测和事件配置，这里没有$el,如果想要访问DOM，可以使用vm.$nextTick来访问DOM
+// beforeMount: 挂载前调用
+// Mounted: 挂载后调用，真正的DOM挂载完成，数据完成双向绑定，可以访问真实的DOM
+// beforeUpdate: 在数据更新时候调用
+// updated: 在数据更新后带哦用
+// beforeDestroy: 实例销毁之前调用，此时的实例还是可以使用的
+// destroy: 实例销毁后调用，所有的事件监听被清除
+
