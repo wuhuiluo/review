@@ -7368,31 +7368,77 @@ const arr = [1, [2, [3]]]
 
 // print.myApply(obj, [1, 2, 3])
 
-Function.prototype.myBind = function (context) {
-    if (typeof this !== 'function') {
-        throw new TypeError('Error')
-    }
-    const _this = this
-    const args = Array.from(arguments).slice(1)
-    return function F() {
-        if (_this instanceof F) {
-            // new方式不会被任何方式改变this
-            return new _this(...args, ...arguments)
-        } else {
-            return _this.apply(context, args.concat(...arguments))
-        }
-    }
-}
-function print(age1, age2, age3) {
-    console.log(this.name, age1, age2, age3);
-}
+// Function.prototype.myBind = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new TypeError('Error')
+//     }
+//     const _this = this
+//     const args = Array.from(arguments).slice(1)
+//     return function F() {
+//         if (_this instanceof F) {
+//             // new方式不会被任何方式改变this
+//             return new _this(...args, ...arguments)
+//         } else {
+//             return _this.apply(context, args.concat(...arguments))
+//         }
+//     }
+// }
+// function print(age1, age2, age3) {
+//     console.log(this.name, age1, age2, age3);
+// }
 
-var obj = {
-    name: 'whl'
-}
+// var obj = {
+//     name: 'whl'
+// }
 
-let F = print.myBind(obj, 1, 2, 3)
+// let F = print.myBind(obj, 1, 2, 3)
+// console.log(F);
 
-let obj1 = new F()
-obj1.name = 'qwe'
-console.log(obj1);
+// Number String Boolean null undefined Symbol bigInt 栈中
+
+// Object Function Array RegExp Date 引用类型存放在堆中
+
+// function Myinstanceof(L, R) {
+//     if (typeof L !== 'object' || L === null) return false
+//     let proto = Object.getPrototypeOf(L)
+//     while (true) {
+//         if (proto === null) return false
+//         if (proto === R.prototype) return true
+//         proto = Object.getPrototypeOf(proto)
+//     }
+// }
+
+// let arr1 = [1, 2]
+// console.log(Myinstanceof(arr1, Array));
+// console.log(Object.prototype.toString.call(arr1) === '[object Array]');
+
+// call、apply、bind改变this的指向
+// bind会返回一个新的函数，需要再次调用
+// prototype上添加一个constructor属性
+
+
+// 实现一个new操作符
+// 如果该构造函数没有返回其他对象的话，就返回这个新对象
+// function myNew(fn) {
+//     // 创建一个新对象
+//     let obj = {}
+//     obj.__proto__ = fn.prototype
+//     let args = Array.prototype.slice.call(arguments, 1)
+//     // 执行构造函数，将this指向新对象
+//     let result = fn.call(obj, ...args)
+//     return result instanceof Object ? result : obj
+// }
+
+// function foo() {
+//     this.name = 'ciel'
+// }
+// foo.prototype.callName = function () {
+//     console.log(this.name)
+// }
+// // 测试
+// let test = myNew(foo, 'hhh', '123', 'saf')
+// test.callName()
+
+// 该对象是否在构造函数的原型链上
+// 继承
+// 原型链继承
