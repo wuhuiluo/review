@@ -4,19 +4,19 @@
 
 // 什么是Object.defineProperty()
 // Object.defineProperty()定义新属性和修改原有的属性
-// let obj = {}
-// Object.defineProperty(obj, 'name', {
-//     get: function () {
-//         console.log('我被获取了');
-//         return val
-//     },
-//     set: function (newVal) {
-//         console.log('我被设置了');
-//     }
-// })
-// obj.name = 'whl'
-// // 在给obj设置name属性的时候，触发了set方法
-// let val = obj.name
+let obj = {}
+Object.defineProperty(obj, 'name', {
+    get: function () {
+        console.log('我被获取了');
+        return val
+    },
+    set: function (newVal) {
+        console.log('我被设置了');
+    }
+})
+obj.name = 'whl'
+// 在给obj设置name属性的时候，触发了set方法
+let val = obj.name
 // 在得到obj的name属性，会触发set方法
 // Vue双向数据绑定原理v-model
 
