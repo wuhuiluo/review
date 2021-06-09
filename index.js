@@ -7283,7 +7283,7 @@ const arr = [1, [2, [3]]]
 // BFC
 // 什么是BFC
 
-BFC是块级格式化上下下文，是一个拥有独立渲染区域的盒子，盒子内部的元素与盒子外部的元素不会互相影响
+// BFC是块级格式化上下下文，是一个拥有独立渲染区域的盒子，盒子内部的元素与盒子外部的元素不会互相影响
 
 // BFC渲染规则
 
@@ -7294,4 +7294,105 @@ BFC是块级格式化上下下文，是一个拥有独立渲染区域的盒子�
 
 // BFC解决了什么问题 margin边距重叠
 
-// 两栏布局 清除浮动
+// 两栏布局: 使用float脱离文档流，造成高度塌陷 
+// 清除浮动
+
+// BFC如何触发
+
+// 根元素HTML
+// display为inline-block和flex
+// overflow不为visible
+// position为fixed和absolute
+// float不为none
+
+// 实现call、apply、bind
+// context: 参数对象
+// this: 被调用的函数
+// Function.prototype.myCall = function (context) {
+//     // 不传参默认window
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     let args = Array.from(arguments).slice(1) // 将类数组转换成数组
+//     // let args = Array.prototype.slice.call(aruments,1)
+//     // let args = [...arguments].slice(1)
+//     let result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+// function print(a, b, c) {
+//     console.log(this.name + '' + a + b + c);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myCall(obj, 1, 2, 3)
+
+// function print(age, b, c) {
+//     console.log(this.name + '' + age + b + c);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myCall(obj, 1, 2, 3)
+// context: 参数对象
+// this：被调用的函数
+// Function.prototype.myApply = function (context) {
+//     if (typeof this !== 'function') {
+//         throw new TypeError('Error')
+//     }
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     if (arguments[1]) {
+//         result = context[key](...arguments[1])
+//     } else {
+//         result = context[key]()
+//     }
+//     delete context[key]
+//     return result
+// }
+
+// function print(age, b, c) {
+//     console.log(this.name + '' + age + b + c);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myApply(obj, [1, 2, 3])
+
+Function.prototype.myBind = function (context) {
+    if (typeof this !== 'function') {
+        throw new TypeError('Error')
+    }
+    const _this = this
+    const args = Array.from(arguments).slice(1)
+    return function F() {
+        if (_this instanceof F) {
+            // new方式不会被任何方式改变this
+            return new _this(...args, ...arguments)
+        } else {
+            return _this.apply(context, args.concat(...arguments))
+        }
+    }
+}
+function print(age1, age2, age3) {
+    console.log(this.name, age1, age2, age3);
+}
+
+var obj = {
+    name: 'whl'
+}
+
+let F = print.myBind(obj, 1, 2, 3)
+
+let obj1 = new F()
+obj1.name = 'qwe'
+console.log(obj1);

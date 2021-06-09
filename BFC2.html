@@ -8,15 +8,19 @@
     <title>Document</title>
     <style>
         .box {
-            margin: 100px;
+            margin: 10px;
             width: 100px;
             height: 100px;
-            float: left;
             background: red;
         }
-        .container {
-            background: #000;
+
+        /* .contain {
             overflow: hidden;
+        } */
+        .container {
+            /* background: #000; */
+            overflow: hidden;
+            /* overflow: hidden; */
         }
     </style>
 </head>
@@ -24,7 +28,9 @@
 <body>
     <div class="container">
         <div class="box"></div>
-        <div class="box"></div>
+        <div class="contain">
+            <div class="box"></div>
+        </div>
     </div>
 </body>
 
