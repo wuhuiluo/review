@@ -7100,11 +7100,11 @@ const arr = [1, [2, [3]]]
 
 
 // Vue双向数据绑定是通过数据劫持结合发布订阅模式，
-通过Object.defineProperty()
-对各个属性设置setter和getter，
-在数据改变的时候发布消息给订阅者， 触发相应的监听回调
+// 通过Object.defineProperty()
+// 对各个属性设置setter和getter，
+// 在数据改变的时候发布消息给订阅者， 触发相应的监听回调
 
-Vue双向数据绑定是通过数据劫持结合订阅发布模式， 通过Object.defineProperty() 设置各个属性的setter和getter， 当数据更新的时候， 发布消息给订阅者， 触发相应的监听回调
+// Vue双向数据绑定是通过数据劫持结合订阅发布模式， 通过Object.defineProperty() 设置各个属性的setter和getter， 当数据更新的时候， 发布消息给订阅者， 触发相应的监听回调
 
 // vue响应式原理数组是通过重写数组的方法来实现
 // push pop shift unshift splice sort reverse
@@ -7174,6 +7174,38 @@ Vue双向数据绑定是通过数据劫持结合订阅发布模式， 通过Obje
 
 // computed: 计算属性，依赖其他属性值，具有缓存，只有他依赖的属性改变，才会重新计算computed的值，一份数据受到多份数据影响的时候使用computed
 
-// watch： 更多的是管擦和的作用，每当监听的数据变化的时候都会执行回调进行后面的操作,immediate: true,立即调用，deep: true深度监听对象内部的变化
-// 使用场景数据变化执行异步或者开销较大的操作的时候，watch允许我们执行异步操作，限制执行该操作的频率，并在拿到结果前，设置中甲你状态，一个数据影响多个数据的时候使用
+// watch：没有缓存性，更多的是管擦和的作用，每当监听的数据变化的时候都会执行回调进行后面的操作,immediate: true,立即调用，deep: true深度监听对象内部的变化 deep: true监听对象内部的变化
+// 使用场景数据变化时执行异步或者开销较大的操作的时候，watch允许我们执行异步操作，限制执行该操作的频率，并在拿到结果前，设置中间状态，一个数据影响多个数据的时候使用
+
+// 初始化阶段 beforeCreate create
+
+// this.$el拿不到这个 this.$data能拿到这个
+// mouted中两个都能拿到this.$el this.$data 挂载阶段
+// beforeUpdate updated 更新阶段
+
+// MVC和MVVM的区别
+
+// MVC: model：模型 view 视图 c：conllter控制器
+
+// 一句话描述: 控制器负责将把model的数据给view
+// MVC：控制器负责把model的数据给view
+
+// MVVM新增VM层 数据绑定 DOM事件监听 === 双向数据绑定
+// MVVM 当model的属性变化时，不用操作DOM元素，来改变view，而是改变了属性之后对应的view会自动变化（）Vue数据驱动视图
+
+
+// 为什么data是一个函数
+// 避免组件中的数据互相影响，
+// 如果data是一个对象的话，
+// 会影响到其他组件，
+// 为了保证数据独立，要通过data函数返回一个对象作为组件的状态
+
+// 为什么data是一个函数
+
+// 避免组件中的数据互相影响，
+// 如果data是一个对象的话
+// 会影响到其他组件，
+// 为了保证数据的独立性，
+// data函数返回一个对象
+// 作为组件的状态
 
