@@ -6734,7 +6734,9 @@ const arr = [1, [2, [3]]]
 // 4.BFC就是一个隔离独立的容器，里面的子元素不会影响到外面的元素
 
 // float脱离文档流，高度塌陷
-
+// overflow: hidden
+// text-overflow: elipises
+// white-space: no-wrap
 // overflow: hidden
 // text - overflow: elippises
 // white - space: nowrap
@@ -7595,20 +7597,22 @@ const arr = [1, [2, [3]]]
 
 // 闭包：有权访问另一个函数作用域中的变量的函数
 // 表现形式：返回一个函数，作为函数的参数
-function demo() {
-    var x = 2
-    function demo2() {
-        console.log(x);
-    }
-    bar(demo2)
-}
+// function demo() {
+//     var x = 2
+//     function demo2() {
+//         console.log(x);
+//     }
+//     bar(demo2)
+// }
 
-function bar(fn) {
-    fn()
-}
+// function bar(fn) {
+//     fn()
+// }
 
-demo()
+// demo()
 
+// 行内text-align-center
+// 块级margin: 0 auto
 
 
 
