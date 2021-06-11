@@ -7164,6 +7164,25 @@ const arr = [1, [2, [3]]]
 
 
 
+// 创建、初始化数据、编译模板、挂载DOM、渲染、更新、渲染、卸载
+// 初始化和创建完成
+// beforeCreate: 在实例初始化之后，数据监测，事件配置之前被调用，data、methods、computed、watch上的数据不能访问
+// created: 实例创建完成之后被调用，完成数据检测和事件配置，这里没有$el,如果需要和DOM交互可以使用vm.$nextTick来访问DOM
+// beforeMount: 挂载开始前调用
+// mounted: 挂载后调用，真正的DOM挂载完毕，数据完成双向绑定，可以访问到DOM节点
+// beforeUpdate: 数据更新时调用
+// updated: 数据更新后调用
+// beforeDestroy: 实例销毁之前调用，这时候的实例还能使用
+// destroyed: 实例销毁之后调用，所有的事件监听都会被清除
+
+// beforeCreate: 在实例初始化之后，数据监测，事件配置之前，data methods computed watch上的数据和方法都不能访问
+// created: 在实例创建完成之后，完成数据检测和事件配置，这里拿不到$el，如果需要操作dom，需要是vm.$nextTick来访问DOM
+// beforeMount: 挂载开始前调用
+// mouted: 挂载后调用，真正的DOM已经挂载完毕，完成双向数据绑定可以操作真实的DOM
+// beforeUpdate: 数据更新时调用
+// updated: 数据更新后调用
+// beforeDestroy: 实例销毁前调用，这时候还可以使用实例
+// destroyed: 实例销毁后调用，所有的事件监听被移除
 
 
 
@@ -7186,7 +7205,7 @@ const arr = [1, [2, [3]]]
 
 // vue响应式原理数组是通过重写数组的方法来实现
 // push pop shift unshift splice sort reverse
-
+// 重写数组方法 push pop shift unshift splice sort reverse
 // 监听器属性变化触发setter，监听到数据的变化
 // 解析器: 解析Vue模板指令，将模板中的变量替换成数据
 // 订阅者
