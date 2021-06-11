@@ -7163,6 +7163,45 @@ const arr = [1, [2, [3]]]
 // Vue面试题: Vue双向绑定原理，diff算法，v-model、MVVM、vuex、vue-router Vue3 Vue生命周期函数
 
 
+
+
+
+
+
+
+// Vue双向数据绑定采用数据劫持结合发布订阅模式，通过Object.defineProperty劫持各个属性的setter和getter，在数据变化的时候发布消息给订阅者，触发相应的监听回调
+
+// getter负责获取值 
+// setter负责设置值
+
+// Compiler负责解析模板指令，将模板中的变量替换成数据
+
+
+// Vue双向数据绑定是通过数据劫持结合发布订阅模式，
+// 通过Object.defineProperty()
+// 对各个属性设置setter和getter，
+// 在数据改变的时候发布消息给订阅者， 触发相应的监听回调
+
+// Vue双向数据绑定是通过数据劫持结合订阅发布模式， 通过Object.defineProperty() 设置各个属性的setter和getter， 当数据更新的时候， 发布消息给订阅者， 触发相应的监听回调
+
+// vue响应式原理数组是通过重写数组的方法来实现
+// push pop shift unshift splice sort reverse
+
+// 监听器属性变化触发setter，监听到数据的变化
+// 解析器: 解析Vue模板指令，将模板中的变量替换成数据
+// 订阅者
+// 订阅器
+// 明天复习 CSS基础、JS手写、vue原理、TCP、浏览器原理
+
+// 监听器observer：对数据对象进行遍历，包括子属性对象的属性，利用Object.defineProperty()对属性都加上getter和setter，监听数据变化
+// 解析器compiler：解析Vue模板指令，将变量替换成数据，每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据改变，调用更新函数进行数据更新
+// 订阅者：是监听器和解析器通信的桥梁，主要是订阅监听器中属性的变化，当属性变化的时候，调用自身的update方法，触发解析器中的更新函数，更新视图
+// 订阅器：订阅器采用发布订阅模式，用来收集订阅者，对监听器和订阅者进行管理
+
+// 监听器：对数据对象进行遍历，包括子对象的属性，通过Object.definePropertY()对属性都加上setter和getter，监听数据变化
+// 解析器：解析Vue模板指令，将变量中的变量替换成数据，每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据改变，调用更新函数进行数据更新
+// 订阅者：是监听器和解析器的通信桥梁，主要是订阅监听器中属性的变化，当属性变化的时候，调用自身的update方法，触发解析器中的更新哈桑农户，更新试图
+// 订阅器：订阅器采用发布-订阅模式，用来收集订阅者，对监听器和订阅者统一管理
 // Computed和Watch的区别和应用场景
 
 // computed: 计算属性， 依赖其他属性值， 具有缓存， 只有它依赖的属性值改变， 才会重新计算computed的值， 简称别人变化影响我自己， 所以是一份数据受到多份数据影响
@@ -7211,7 +7250,7 @@ const arr = [1, [2, [3]]]
 // 为了保证数据的独立性，
 // data函数返回一个对象
 // 作为组件的状态
-
+// $nextTick
 // {/* <input type="text" :value="username" @input="username = $event.target.value"/> */}
 
 // 说说你对Vue生命周期的理解
@@ -7713,7 +7752,10 @@ const arr = [1, [2, [3]]]
 
 
 
-
+// 浏览器中执行恶意代码拿到用户信息进行相关操作
+// 在请求URL中进行XSS攻击
+// 将攻击脚本存入服务器，一便春波
+// 通过操作DOM修改页面内容
 
 
 // 跨站脚本攻击，浏览器中执行恶意代码，拿到用户信息进行相关操作
@@ -7773,7 +7815,13 @@ const arr = [1, [2, [3]]]
 // 使用httponly让js脚本无法访问cookie
 // 开启CSP阻止白名单以外的资源加载或者运行
 
+// async和defer都是异步的，async是乱序执行，defer是按照加载顺序执行
 
 
+// 返回一个函数 作为函数参数传递
 
-!im
+// JS对象通过__proto__指向父类对象， 直到指向Object的原型对象的__proto__ null 为止
+
+// Person.__proto__ === Function.prototype === Function.proottype.__proto__ == object.prototype ==== object.prototype_proto__ = null
+
+// 原型对象上也有自己的__proto__属性
