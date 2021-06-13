@@ -1,11 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
 <body>
-    <!-- 写一个callback函数 来得到数据 -->
     <script>
-        function callback(data){
+        let jsonp = (url, data = {}, callback = 'callback') => {
+            console.log(url);
+            let dataStr = url.indexOf('?') === '-1' ? '?' : '&'
+            console.log(dataStr);
+            for (let key in data) {
+                console.log(key);
+                dataStr += `${key}=${data[key]}&`
+            }
+            console.log(dataStr);
+            dataStr += `callback=` + callback
+            console.log(dataStr);
+            let oScript = document.createElement('script')
+            oScript.src = url + dataStr
+            document.body.appendChild(oScript)
+            // window[callback] = data => {
+            //     console.log(data);
+            // }
+            return new Promise((resolve, reject) => {
+                window[callback] = data => {
+                    try {
+                        resolve(data)
+                    } catch (e) {
+                        reject(e)
+                    } finally {
+                        oScript.parentNode.removeChild(oScript)
+                    }
+                }
+            })
+        }
+
+        jsonp('https://photo.sina.cn/aj/index?a=1', {
+            page: 1,
+            cate: 'recommend'
+        }).then(res => {
+            console.log(res);
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+    <!-- 写一个callback函数 来得到数据 -->
+    <!-- <script>
+        function callback(data) {
             console.log(data);
         }
     </script>
     <!-- 通过src 可以访问到外源网址 -->
     <!-- 需要在网址后面加上 &callback=函数名 ;用一个函数来得到外源数据-->
-    <script src="https://photo.sina.cn/aj/index?page=1&cate=recommend&callback=callback"></script>
+    <!-- <script src="https://photo.sina.cn/aj/index?page=1&cate=recommend&callback=callback"></script> --> -->
 </body>
+
+</html>
