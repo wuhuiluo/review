@@ -7844,3 +7844,7 @@ const arr = [1, [2, [3]]]
 // Person.__proto__ === Function.prototype === Function.proottype.__proto__ == object.prototype ==== object.prototype_proto__ = null
 
 // 原型对象上也有自己的__proto__属性
+
+
+// 说说跨域
+
