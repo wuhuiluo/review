@@ -1,0 +1,11 @@
+<body>
+    <!-- 写一个callback函数 来得到数据 -->
+    <script>
+        function callback(data){
+            console.log(data);
+        }
+    </script>
+    <!-- 通过src 可以访问到外源网址 -->
+    <!-- 需要在网址后面加上 &callback=函数名 ;用一个函数来得到外源数据-->
+    <script src="https://photo.sina.cn/aj/index?page=1&cate=recommend&callback=callback"></script>
+</body>
