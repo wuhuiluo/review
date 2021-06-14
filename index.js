@@ -7996,6 +7996,8 @@ const arr = [1, [2, [3]]]
 // 使用下列的方法之一： get head post
 // content-type的值：text/plain multipart/form-data application/x-www-form-urlencoded
 
-text/plain
-multipart/form-data
-application/x-www-form-urlencoded
+// text/plain
+// multipart/form-data
+// application/x-www-form-urlencoded
+
+// Nginx： 原理，首先搭建一个代理服务器，接受客户端的请求，然后将请求转发给服务器，拿到响应后，再将响应转发给客户端
