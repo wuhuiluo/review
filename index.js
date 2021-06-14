@@ -7981,10 +7981,10 @@ const arr = [1, [2, [3]]]
 
 // 非简单请求
 
-会在正式通信之前，发送一个预检请求，目的在于访问服务器，当前网页所在的域名是否在服务器许可的名单之中，以及可以使用哪些HTTP动词和头信息字段，只有得到肯定的答复，浏览器才会发出正式的请求，否则就会报错
+// 会在正式通信之前，发送一个预检请求，目的在于访问服务器，当前网页所在的域名是否在服务器许可的名单之中，以及可以使用哪些HTTP动词和头信息字段，只有得到肯定的答复，浏览器才会发出正式的请求，否则就会报错
 
 // GET HEAD POST
-content-type: text/plain multipart/form-data  application/x-www-form-urlencoded
+// content-type: text/plain multipart/form-data  application/x-www-form-urlencoded
 
 // text-plain
 // application/x-www-form-urlencoded
@@ -7995,3 +7995,7 @@ content-type: text/plain multipart/form-data  application/x-www-form-urlencoded
 
 // 使用下列的方法之一： get head post
 // content-type的值：text/plain multipart/form-data application/x-www-form-urlencoded
+
+text/plain
+multipart/form-data
+application/x-www-form-urlencoded
