@@ -8215,3 +8215,13 @@ const arr = [1, [2, [3]]]
 // 首先检查强缓存，expires是过期事件，没有超过这个过期事件的话直接从缓存重获取数据 cache-control ：max-age 过期市场 标识在这个事件内可以使用缓存，优先使用cache-control，符合强缓存就返回200，从缓存重获取、
 
 // 强缓存失效的时候，走协商缓存，浏览器携带缓存标识发送请求，协商缓存生效返回304，不生效i就返回新的资源和状态吗200，比较的是 last modifyed 和 if modify SVGElementInstance(资源修改修改事件),Etag(唯一标识)和if nonematch 是否一直
+
+// 微任务八廓promise的回调,mutationObserver
+// 宏任务script脚本，setTimeout，setInterval，
+
+// BFC：块级格式化上下文，是一个拥有独立渲染区域的盒子，规定内部元素如何布局，内部元素与外部元素不会互相影响
+
+// BFC的规则， BFC会在垂直方向上一个一个的放置
+// 计算BFC高度的时候，浮动的元素也参与计算
+// 属于同一个BFC的两个盒子的margin会重叠
+// BFC就是一个拥有独立渲染区域的盒子，内部元素与外部元素互补影响
