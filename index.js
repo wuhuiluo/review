@@ -8079,7 +8079,7 @@ const arr = [1, [2, [3]]]
 
 // XSS: 跨站脚本攻击：浏览器中执行恶意脚本， 拿到用户的信息进行操作
 
-三种类型
+// 三种类型
 // 反射型：XSS代码在请求URL中进行攻击
 // 存储型：攻击脚本存储到服务器，进行传播
 // DOM型：通过DOM修改页面内容
@@ -8237,3 +8237,100 @@ const arr = [1, [2, [3]]]
 // no-store:不使用缓存
 // max-age： 缓存保质期
 // no-cache: 客户端缓存资源，但是是否缓存需要经过协商缓存 就直接进入协商缓存
+
+// IE: 内容大小content+padding+border W3C: 内容大小:content
+
+// 选择器优先级: !important > 行内 > id > 类 伪类 > 标签 > 通配符选择器
+
+// !important > 行内 > id > 类 伪类 > 标签 > 通配符
+
+// flex-direction: 决定主轴的方向
+// justify-content: 主轴的对齐方式
+// align-items: 交叉轴的对其方式
+// flex-grow
+// flex-shrink
+// flex-basis
+
+// 弹性布局由父容器和自容器组成，通过设置主轴和交叉周的来控制子元素的排列方式
+
+// XSS： 跨站脚本攻击: 浏览器中执行恶意脚本，获取用户信息进行相关操作
+
+// 反射性：XSS代码在请求URL中攻击
+// 存储型：讲攻击脚本存储到服务器，进行传播
+// DOM型：通过操作DOM修改页面内容
+
+// 输入过滤，输出转义，使用HTTPonly：是JS无法访问COOkie
+// 开启CSP，阻止白名单意外的资源加载或者允许
+
+// 用户登陆了一个网站之后，产生了一个cookie，这时候打开了另一个网站，这个网站返回了一些恶意的请求
+
+// 利用Cookie设置SameSite属性
+// 验证来源站点 origin header referer header
+// CSRF TOKEN： 页面提交请求的时候验证token是否合法
+
+// 构造函数的prototype是否出现在某个实例对象的原型链上
+
+// 构造函数的prototype是否出现在实例对象的原型链上
+
+// function myInstanceof(L, R) {
+//     if (typeof L !== 'object' || typeof L === null) return false
+//     let proto = L.__proto__
+//     while (true) {
+//         if (proto === null) return false
+//         if (proto === R.prototype) return true
+//         proto = proto.__proto__
+//     }
+// }
+// // Object.prototype.toString.call(arr2)
+// let arr2 = [1, 2]
+// console.log(Object.prototype.toString.call(arr2) === '[object Array]') // true
+// console.log(arr2 instanceof Array) // true
+// console.log(arr2 instanceof Object) // true
+// console.log(myInstanceof(arr2, Array));
+// console.log(myInstanceof(arr2, Object));
+
+
+// 实现一个new操作符
+// 如果该构造函数没有返回其他对象的话，就返回这个新对象
+// function myNew(fn) {
+//     // 创建一个新对象
+//     let obj = {}
+//     obj.__proto__ = fn.prototype
+//     let args = Array.prototype.slice.call(arguments, 1)
+//     // 执行构造函数，将this指向新对象
+//     let result = fn.call(obj, ...args)
+//     return result instanceof Object ? result : obj
+// }
+
+// function myNew(fn) {
+//     // 创建一个新对象
+//     // 创建一个新对象
+//     // 将构造函数的原型对象赋值给新对象的隐士原型
+//     // 执行构造函数将this指向新对象
+//     let obj = {}
+//     obj.__proto__ = fn.prototype
+//     let args = Array.prototype.slice.call(arguments, 1)
+//     // 执行构造函数，将this指向新对象
+//     let result = fn.call(obj, ...args)
+//     return result instanceof Object ? result : obj
+// }
+
+// function foo() {
+//     this.name = 'ciel'
+// }
+// foo.prototype.callName = function () {
+//     console.log(this.name)
+// }
+// // 测试
+// let test = myNew(foo, 'hhh', '123', 'saf')
+// test.callName()
+
+// 原型链继承
+
+// 将父类的实例给子类的原型对象
+
+// Son.prototype = new Father()
+
+// 构造函数式
+
+Father.call(this)

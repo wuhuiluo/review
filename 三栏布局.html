@@ -7,13 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        #header {
-            text-align: center;
+        .container div {
+            float: left;
         }
 
         .container {
@@ -21,21 +16,17 @@
             padding-right: 150px;
         }
 
-        .container div {
-            float: left;
-        }
-
         .center {
-            background: #ccc;
             width: 100%;
+            background: yellow;
         }
 
         .left {
             position: relative;
-            background: yellow;
-            width: 200px;
+            background: blue;
             margin-left: -100%;
             right: 200px;
+            width: 200px;
         }
 
         .right {
@@ -43,20 +34,14 @@
             width: 150px;
             margin-right: -150px;
         }
-
-        #footer {
-            clear: both;
-            background-color: #f1f1f1;
-            text-align: center;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="center">this is center</div>
-        <div class="left">this is left</div>
-        <div class="right">this is right</div>
+        <div class="center">center</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
     </div>
 </body>
 
