@@ -8225,3 +8225,15 @@ const arr = [1, [2, [3]]]
 // 计算BFC高度的时候，浮动的元素也参与计算
 // 属于同一个BFC的两个盒子的margin会重叠
 // BFC就是一个拥有独立渲染区域的盒子，内部元素与外部元素互补影响
+
+// 根元素HTML
+// float不为none
+// overflow不为visible
+// flex为inline-block和flex
+// position为fixed或者absolute
+
+// cache-control
+
+// no-store:不使用缓存
+// max-age： 缓存保质期
+// no-cache: 客户端缓存资源，但是是否缓存需要经过协商缓存 就直接进入协商缓存
