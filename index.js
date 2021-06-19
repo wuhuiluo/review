@@ -15,6 +15,7 @@
 // }
 // console.log(BubbleSort(arr));
 
+
 // function SelectSort(arr) {
 //     let minIndex, temp;
 //     for (let i = 0; i < arr.length; i++) {
@@ -8333,4 +8334,63 @@ const arr = [1, [2, [3]]]
 
 // 构造函数式
 
-Father.call(this)
+// Father.call(this)
+
+// 组合继承
+
+// Son.prototype = new Father()
+
+// Father.call(this)
+
+// 原型式继承
+// 作为新对象的原型对象
+// var person = {
+//     name: 'whl',
+//     array: [1, 2, 3]
+// }
+// // 作为新对象的原型对象
+// var person1 = Object.create(person)
+// person1.array.push(4)
+// console.log(person1.name);
+// console.log(person1.array);
+
+// var person2 = Object.create(person, {
+//     name: {
+//         value: 'qwe'
+//     }
+// })
+
+// Son.prototype.constructor = Son
+
+// 寄生组合式继承
+
+// function inheritPrototype(Son, Father) {
+//     const prototype = Object.create(Father.prototype) // 创建父类原型的副本
+//     prototype.constructor = prototype
+//     Son.prototype = prototype
+// }   
+
+// function Prototype(Son, Father) {
+//     const prototype = Object.create(Son.prototype)
+//     prototype.constructor = prototype
+//     Son.prototype = prototype
+// }
+
+class One {
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+        this.jn = 'shuijiao'
+    }
+
+    getInfo() {
+        return `我交`
+    }
+}
+
+class Two extends One {
+    construcotr(x, y, gender) {
+        super(x, y)
+        this.gender = gender
+    }
+}
