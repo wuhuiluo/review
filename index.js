@@ -8376,21 +8376,223 @@ const arr = [1, [2, [3]]]
 //     Son.prototype = prototype
 // }
 
-class One {
-    constructor(name, age) {
-        this.name = name
-        this.age = age
-        this.jn = 'shuijiao'
-    }
+// class One {
+//     constructor(name, age) {
+//         this.name = name
+//         this.age = age
+//         this.jn = 'shuijiao'
+//     }
 
-    getInfo() {
-        return `我交`
+//     getInfo() {
+//         return `我交`
+//     }
+// }
+
+// class Two extends One {
+//     construcotr(x, y, gender) {
+//         super(x, y)
+//         this.gender = gender
+//     }
+// }
+
+// 数组去重
+
+// var arr1 = [1, 2, 3, 3, 4, 4]
+// let result = new Set(arr1)
+// console.log([...result]);
+
+// var arr1 = [2,3,4,2]
+// let result = new Set(arr1)
+// console.log(Array.from(result));
+
+// var arr1 = [2,3,4,2]
+
+// let result = arr1.filter((item,index) => {
+//     return arr1.indexOf(item) === index
+// })
+// console.log(result);
+
+// var arr1 = [1, 2, 3, [3, 2], 1]
+// let result = []
+// arr1.forEach((item,index) => {
+//     if(!result.includes(arr1[index])) {
+//         result.push(item)
+//     }
+// })
+
+// console.log(result);
+
+// 扁平化
+
+// const arr1 = [1, 2, [3, 4, [5, 6]]];
+// console.log(arr1.flat(Infinity));
+
+// function flatten(arr) {
+//     var result = [];
+//     for (var i = 0, len = arr.length; i < len; i++) {
+//         if (Array.isArray(arr[i])) {
+//             result = result.concat(flatten(arr[i]))
+//         }
+//         else {
+//             result.push(arr[i])
+//         }
+//     }
+//     return result;
+// }
+
+// const arr1 = [1, 2, [3, 4, [5, 6]]];
+// function flatten(arr) {
+//     var result = []
+//     for (var i = 0; i < arr.length; i++) {
+//         if(Array.isArray(arr[i])) {
+//             console.log(arr[i]);
+//             result = result.concat(flatten(arr[i]))
+//         }else {
+//             result.push(arr[i])
+//         }
+//     } 
+//     return result  
+// }
+
+// console.log(flatten(arr1));
+
+// const arr1 = [1, 2, [3, 4, [5, 6]]]
+// console.log(arr1.flat(Infinity));
+// function flatten(arr) {
+//     let result = []
+//     for (let i = 0; i < arr.length; i++) {
+//         if (Array.isArray(arr[i])) {
+//             result = result.concat(flatten(arr[i]))
+//         } else {
+//             result.push(arr[i])
+//         }
+//     }
+//     return result
+// }
+
+// console.log(flatten(arr1));
+// const arr2 = [1, 2, 3, 2, 3]
+// let result = new Set(arr2)
+// console.log([...result]);
+
+// const arr2 = [1,2,3,2,3]
+// let result = new Set(arr2)
+// console.log(Array.from(result));
+
+// const arr2 = [1,2,3,2,3]
+
+// function unique(arr) {
+//    let result = []
+//    for(let i = 0; i < arr.length ; i++) {
+//        if(!result.includes(arr[i])) {
+//            result.push(arr[i])
+//        }
+//    }
+//    return result
+// }
+
+// console.log(unique(arr2));
+// const arr2 = [1,2,3,2,3]
+// function unique(arr) {
+//     var res = arr.filter((item, index) => {
+//         return arr.indexOf(item) === index
+//     })
+//     return res
+// }
+// console.log(unique(arr2));
+
+// this、call、apply、bind
+
+// 最后调用它的那个对象
+
+// ES5重 this永远指向最后调用它的那个对象
+
+// var name = 'windowsName'
+
+// var a = {
+//     fn: function() {
+//         console.log(this.name);
+//     }
+// }
+
+// window.a.fn()
+
+// var a = {
+//     name: 'cherry',
+
+//     func1: function () {
+//         console.log(this.name);
+//     },
+
+//     func2: function () {
+//         setTimeout(() => {
+//             console.log(this);
+//             this.func1()
+//         }, 100)
+//     }
+// }
+
+// a.func2()
+// call传递的是参数列表，apply传递的是数组
+// call和apply都是更改this指向后直接调用，而bind是返回响应的函数，之后才会调用
+// 创建一个空对象
+// 调用构造函数this执行指向新对象
+// 如果返回值是一个新对象的话就返回新对象，没有就返回这个对象
+
+// this：被调用的函数
+// context 参数对象
+// Function.prototype.myCall = function (context) {
+//     context = context || window // 不传参的话默认为dinwo
+//     const key = Symbol('key')
+//     context[key] = this
+//     let args = Array.from(arguments).slice(1)
+//     const result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+// this: 被调用的函数
+// context: 参数对象
+// Function.prototype.myCall = function (context) {
+//     context = context || window
+//     const key = Symbol('key')
+//     context[key] = this
+//     let args = Array.from(arguments).slice(1)
+//     const result = context[key](...args)
+//     delete context[key]
+//     return result
+// }
+
+
+// function print(a, b, c) {
+//     console.log(this.name + '' + a + b + c);
+// }
+
+// var obj = {
+//     name: 'whl'
+// }
+
+// print.myCall(obj, 1, 2, 3)
+
+Function.prototype.myApply = context => {
+    context = context || window
+    const key = Symbol('key')
+    context[key] = this
+    let result
+    if (arguments[1]) {
+        result = context[key](...arguments[1])
+    } else {
+        result = context[key]()
     }
+    delete context[key]
+    return result
 }
 
-class Two extends One {
-    construcotr(x, y, gender) {
-        super(x, y)
-        this.gender = gender
-    }
+function print(a, b, c) {
+    console.log(this.name + '' + a + b + c);
 }
+
+var obj = {
+    name: 'whl'
+}
+
+print.myApply(obj, [1, 2, 3])
